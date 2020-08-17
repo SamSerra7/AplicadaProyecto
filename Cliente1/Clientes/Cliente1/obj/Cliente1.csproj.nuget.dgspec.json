@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Jahanel\\source\\repos\\Clientes\\Cliente1\\Cliente1.csproj": {}
+    "C:\\Users\\User\\Documents\\Universidad\\Cursos\\Informática Aplicada a los Negocios\\Proyecto\\ProyectoAplicada\\AplicadaProyecto\\Cliente1\\Clientes\\Cliente1\\Cliente1.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Jahanel\\source\\repos\\Clientes\\Cliente1\\Cliente1.csproj": {
+    "C:\\Users\\User\\Documents\\Universidad\\Cursos\\Informática Aplicada a los Negocios\\Proyecto\\ProyectoAplicada\\AplicadaProyecto\\Cliente1\\Clientes\\Cliente1\\Cliente1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Jahanel\\source\\repos\\Clientes\\Cliente1\\Cliente1.csproj",
+        "projectUniqueName": "C:\\Users\\User\\Documents\\Universidad\\Cursos\\Informática Aplicada a los Negocios\\Proyecto\\ProyectoAplicada\\AplicadaProyecto\\Cliente1\\Clientes\\Cliente1\\Cliente1.csproj",
         "projectName": "Cliente1",
-        "projectPath": "C:\\Users\\Jahanel\\source\\repos\\Clientes\\Cliente1\\Cliente1.csproj",
-        "packagesPath": "C:\\Users\\Jahanel\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Jahanel\\source\\repos\\Clientes\\Cliente1\\obj\\",
+        "projectPath": "C:\\Users\\User\\Documents\\Universidad\\Cursos\\Informática Aplicada a los Negocios\\Proyecto\\ProyectoAplicada\\AplicadaProyecto\\Cliente1\\Clientes\\Cliente1\\Cliente1.csproj",
+        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\User\\Documents\\Universidad\\Cursos\\Informática Aplicada a los Negocios\\Proyecto\\ProyectoAplicada\\AplicadaProyecto\\Cliente1\\Clientes\\Cliente1\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Jahanel\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -47,6 +47,24 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[3.0.1, 3.0.1]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[3.0.3, 3.0.3]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[3.0.0, 3.0.0]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[3.0.0, 3.0.0]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -55,7 +73,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
         }
       }
     }
