@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "FrontEndVentR"
+    }
+  },
+  "defaultProject": "FrontEndVentR",
+  "cli": {
+    "analytics": "fc92390f-07f5-4b13-a827-cde96161b54a"
+  }
 }
