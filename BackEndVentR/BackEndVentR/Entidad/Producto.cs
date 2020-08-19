@@ -14,7 +14,7 @@ namespace Entidad
         {
             get { return id_producto; }
             set {
-                if (id_producto < 0) throw new Exception("El id no puede ser negativo"); 
+                if (value < 0) throw new Exception("El id no puede ser negativo"); 
                 id_producto = value; 
             }
         }
@@ -25,7 +25,7 @@ namespace Entidad
         {
             get { return nombre; }
             set {
-                if (string.IsNullOrEmpty(nombre) || string.IsNullOrWhiteSpace(nombre)) throw new Exception("El nombre no puede ser vacío");
+                if (string.IsNullOrEmpty(value) || string.IsNullOrWhiteSpace(value)) throw new Exception("El nombre no puede ser vacío");
                 nombre = value; 
             }
         }
@@ -35,7 +35,7 @@ namespace Entidad
         public SqlMoney Precio
         {
             get { return precio; }
-            set { if (precio < 0) throw new Exception("El precio no puede ser negativo"); 
+            set { if (value < 0) throw new Exception("El precio no puede ser negativo"); 
                 precio = value; 
             }
         }
@@ -47,7 +47,7 @@ namespace Entidad
             get { return urlImg; }
             set
             {
-                if (string.IsNullOrEmpty(urlImg) || string.IsNullOrWhiteSpace(urlImg)) throw new Exception("Cada producto debe tener una imagen");
+                if (string.IsNullOrEmpty(value) || string.IsNullOrWhiteSpace(value)) throw new Exception("Cada producto debe tener una imagen");
                 urlImg = value;
             }
         }
@@ -62,12 +62,31 @@ namespace Entidad
         {
             get { return cantidad; }
             set {
-                if (cantidad > 0) throw new Exception("La cantidad no puede ser negativa");
+                if (value < 0) throw new Exception("La cantidad no puede ser negativa");
                     cantidad = value; 
             }
         }
 
+        public Producto(int id_producto, string nombre, SqlMoney precio, string urlImg, 
+            string detalle, bool activo, int cantidad)
+        {
+            IdProducto = id_producto;
+            Nombre = nombre;
+            Precio = precio;
+            UrlImg = urlImg;
+            Detalle = detalle;
+            Activo = activo;
+            Cantidad = cantidad;
+        }
 
-
+        public Producto(string nombre, SqlMoney precio, string urlImg, string detalle, bool activo, int cantidad)
+        {
+            Nombre = nombre;
+            Precio = precio;
+            UrlImg = urlImg;
+            Detalle = detalle;
+            Activo = activo;
+            Cantidad = cantidad;
+        }
     }
 }
