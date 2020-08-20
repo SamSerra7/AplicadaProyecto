@@ -1,1 +1,48 @@
-<p>sign-up works!</p>
+<div class="limiter limiter animated fadeInRight">
+    <div class="container-login100">
+        <div class="wrap-login100 p-t-50 p-b-90">
+            <form (ngSubmit)="login()" [formGroup]="form" autocomplete="off" class="login100-form validate-form flex-sb flex-w">
+
+                <span class="login100-form-title p-b-51">
+                    Iniciar Sesión
+                </span>
+
+                <span *ngIf="emailValid" class="text-danger">Correo inválido</span>
+                <div class="wrap-input100 m-b-16">
+                    <input formControlName="email" class="input100" type="text" name="email" placeholder="Correo electrónico">
+                    <span class="focus-input100"></span>
+
+                </div>
+
+                <span *ngIf="passwordValid" class="text-danger">La contraseña debe de ser más de 8 dígitos</span>
+                <div class="wrap-input100 m-b-16" data-validate="Password is required">
+                    <input formControlName="password" class="input100" type="password" name="pass" placeholder="Clave">
+                    <span class="focus-input100"></span>
+
+                </div>
+
+                <div class="flex-sb-m w-full p-t-3 p-b-24">
+                    <div class="contact100-form-checkbox">
+                        <input formControlName="rememberme" class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+                        <label class="label-checkbox100" for="ckb1">
+                            Recordar mi usuario
+                        </label>
+                    </div>
+
+                    <div>
+                        <a routerLink="/sign-up" class="txt1">
+                            ¿No tienes cuenta?
+                        </a>
+                    </div>
+                </div>
+
+                <div class="container-login100-form-btn m-t-17">
+                    <button class="login100-form-btn" type="submit">
+                        Ingresar
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
