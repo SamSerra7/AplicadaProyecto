@@ -26,10 +26,10 @@ namespace BackEndVentR.Controllers
         }
 
         // GET api/<ProductoController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("{idProducto}")]
+        public Producto Get(int idProducto)
         {
-            return "value";
+                return productoNegocio.buscarProducto(idProducto);
         }
 
         // POST api/<ProductoController>

@@ -15,6 +15,7 @@ namespace Dato
 
         ///Variables globales
         private Conexion conexion = new Conexion();
+        private ProveedorDatos proveedorDatos = new ProveedorDatos();
 
         /// <summary>
         /// Samuel Serrano 
@@ -29,7 +30,8 @@ namespace Dato
             using(NpgsqlConnection con = conexion.GetConexion())
             {
                 con.Open();
-                string sql = "SELECT id_producto,nombre,precio,url_img,detalle,activo,cantidad FROM products.\"Producto\"";
+                string sql = "SELECT id_producto,nombre,precio,url_img,detalle,activo,cantidad,id_proveedor FROM products.\"Producto\" WHERE activo<>false";
+                
                 
                 using(var command = new NpgsqlCommand(sql, con))
                 {
@@ -40,7 +42,7 @@ namespace Dato
                             productos.Add( new Producto(reader.GetInt32(0), reader.GetString(1),
                                                             reader.GetDecimal(2), reader.GetString(3), 
                                                                 reader.GetString(4),reader.GetBoolean(5),
-                                                                    reader.GetInt32(6))
+                                                                    reader.GetInt32(6), proveedorDatos.buscarProveedor(reader.GetInt32(7)))
                             );
                         }
 
@@ -51,6 +53,44 @@ namespace Dato
         }
 
 
+        /// <summary>
+        /// Samuel Serrano
+        /// Método que obtiene un producto específico de la base de datos (por ID)
+        /// </summary>
+        /// <param name="idProducto"></param>
+        /// <returns>objeto Producto</returns>
+        public Producto buscarProducto(int idProducto)
+        {
+            Producto producto = new Producto();
 
+            using (NpgsqlConnection con = conexion.GetConexion())
+            {
+                con.Open();
+                string sql = "SELECT id_producto,nombre,precio,url_img,detalle,activo,cantidad,id_proveedor FROM products.\"Producto\" " 
+                                + " WHERE activo<>false AND id_producto = @idProducto";
+
+                using (var command = new NpgsqlCommand(sql, con))
+                {
+
+                    command.Parameters.AddWithValue("@idProducto", idProducto);
+
+
+                    using (NpgsqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            producto = new Producto(reader.GetInt32(0), reader.GetString(1),
+                                                    reader.GetDecimal(2), reader.GetString(3),
+                                                    reader.GetString(4), reader.GetBoolean(5),
+                                                    reader.GetInt32(6), proveedorDatos.buscarProveedor(reader.GetInt32(7)));
+                        }
+
+
+                    }
+                }
+            }
+
+            return producto;
+        }
     }
 }
