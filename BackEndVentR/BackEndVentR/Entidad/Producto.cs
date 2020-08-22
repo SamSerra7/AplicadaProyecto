@@ -67,8 +67,17 @@ namespace Entidad
             }
         }
 
-        public Producto(int id_producto, string nombre, SqlMoney precio, string urlImg, 
-            string detalle, bool activo, int cantidad)
+        private Proveedor proveedor;
+
+        public Proveedor Proveedor
+        {
+            get { return proveedor; }
+            set { proveedor = value ?? throw new Exception("Debe tener un proveedor"); }
+        }
+
+
+        public Producto(int id_producto, string nombre, SqlMoney precio, string urlImg,
+            string detalle, bool activo, int cantidad, Proveedor proveedor)
         {
             IdProducto = id_producto;
             Nombre = nombre;
@@ -77,9 +86,10 @@ namespace Entidad
             Detalle = detalle;
             Activo = activo;
             Cantidad = cantidad;
+            Proveedor = proveedor;
         }
 
-        public Producto(string nombre, SqlMoney precio, string urlImg, string detalle, bool activo, int cantidad)
+        public Producto(string nombre, SqlMoney precio, string urlImg, string detalle, bool activo, int cantidad, Proveedor proveedor)
         {
             Nombre = nombre;
             Precio = precio;
@@ -87,6 +97,10 @@ namespace Entidad
             Detalle = detalle;
             Activo = activo;
             Cantidad = cantidad;
+            Proveedor = proveedor;
         }
+
+        public Producto(){}
+
     }
 }

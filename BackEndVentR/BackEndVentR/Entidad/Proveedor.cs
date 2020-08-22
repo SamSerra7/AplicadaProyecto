@@ -6,24 +6,46 @@ namespace Entidad
 {
   public  class Proveedor{
 
-        public int id_proveedor { get; set; }
+        private int id_proveedor;
+        public int IdProveedor
+        {
+            get { return id_proveedor; }
+            set
+            {
+                if (value < 0) throw new Exception("El id no puede ser negativo");
+                id_proveedor = value;
+            }
+        }
 
-        public string nombre { get; set; }
+        private string nombre;
+        public string Nombre
+        {
+            get { return nombre; }
+            set
+            {
+                if (string.IsNullOrEmpty(value) || string.IsNullOrWhiteSpace(value)) throw new Exception("El nombre no puede ser vacío");
+                nombre = value;
+            }
+        }
 
-        public string cedula { get; set; }
 
-        public int activo { get; set; }
+        public bool activo { get; set; }
 
         public Proveedor()
         {
         }
 
-        public Proveedor(int id_proveedor, string nombre, string cedula, int activo)
+        public Proveedor(int id_proveedor, string nombre, bool activo)
         {
             this.id_proveedor = id_proveedor;
             this.nombre = nombre;
-            this.cedula = cedula;
             this.activo = activo;
+        }
+
+        public Proveedor(int id_proveedor)
+        {
+            this.id_proveedor = id_proveedor;
+          
         }
     }
 }
