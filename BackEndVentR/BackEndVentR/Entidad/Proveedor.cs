@@ -41,5 +41,11 @@ namespace Entidad
             this.nombre = nombre;
             this.activo = activo;
         }
+
+        public Proveedor(int id_proveedor)
+        {
+            this.id_proveedor = id_proveedor;
+          
+        }
     }
 }
