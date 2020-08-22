@@ -26,6 +26,17 @@ namespace BackEndVentR
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            //Policies
+            services.AddCors(options =>
+            {
+                options.AddPolicy("GetAllPolicy",
+                  builder =>
+                  {
+                      builder.WithOrigins("http://localhost:4200", "http://localhost:4200/api")
+                                          .AllowAnyHeader()
+                                          .AllowAnyMethod();//PUT, PATCH, GET, DELETE
+                  });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -35,6 +46,8 @@ namespace BackEndVentR
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors("GetAllPolicy");
 
             app.UseHttpsRedirection();
 
