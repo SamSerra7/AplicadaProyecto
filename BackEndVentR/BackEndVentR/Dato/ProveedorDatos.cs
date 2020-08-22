@@ -11,35 +11,33 @@ namespace Dato
     {
 
         private Conexion conexion = new Conexion();
-        public List<Proveedor> buscarProveedor(Proveedor provee)
+        public Proveedor buscarProveedor(int idProveedor)
         {
 
-            List<Proveedor> proveedor = new List<Proveedor>();
+            Proveedor proveedor = new Proveedor();
 
             using (NpgsqlConnection con = conexion.GetConexion())
             {
                 con.Open();
-                string sql = "Select id_proveedor,nombre,activo from products.Proveedor where activo<>false and id_proveedor=@idProveedor";
+                string sql = "Select id_proveedor,nombre,activo from products.proveedor where activo<>false and id_proveedor=@idProveedor";
 
                 using (var command = new NpgsqlCommand(sql, con))
                 {
 
-                    command.CommandType = CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@idProveedor", provee.IdProveedor);
-                  
+                    //command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@idProveedor", idProveedor);
+                    //command.Prepare();
                    
 
                     using (NpgsqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            proveedor.Add(new Proveedor(reader.GetInt32(0), reader.GetString(1), reader.GetBoolean(2))
-                            );
+                            proveedor = new Proveedor(reader.GetInt32(0), reader.GetString(1), reader.GetBoolean(2));
                         }
 
                        
                     }
-                    command.Prepare();
                 }
             }
             return proveedor;
