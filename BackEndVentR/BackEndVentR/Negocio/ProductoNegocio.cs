@@ -28,5 +28,16 @@ namespace Negocio
 
         }
 
+        /// <summary>
+        /// Samuel Serrano 
+        /// Método que retorna un producto buscado por ID
+        /// </summary>
+        /// <param name="idProducto"></param>
+        /// <returns>objeto Producto</returns>
+        public Producto buscarProducto(int idProducto)
+        {
+            //TODO revisar que esté activo 
+            return productoDatos.buscarProducto(idProducto);
+        }
     }
 }

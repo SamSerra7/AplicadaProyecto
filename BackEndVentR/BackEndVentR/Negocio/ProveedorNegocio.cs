@@ -19,12 +19,12 @@ namespace Negocio
             return proveedors;
 
         }
-        public IEnumerable<Proveedor> buscarProveedor(Proveedor proveedoor)
+        public Proveedor buscarProveedor(int idProveedor)
         {
-            List<Proveedor> proveedors = proveedorDatos.buscarProveedor(proveedoor);
+            Proveedor proveedor = proveedorDatos.buscarProveedor(idProveedor);
 
             //TODO: verificar que solo retorne productos y proveedores activos 
-            return proveedors;
+            return proveedor;
 
         }
 
