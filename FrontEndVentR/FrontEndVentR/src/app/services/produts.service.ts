@@ -19,6 +19,7 @@ export class ProdutsService {
 
   products:any=[];
 
+
   constructor(private http: HttpClient) { }
 
   getAll(): Observable<any> {
@@ -38,31 +39,21 @@ export class ProdutsService {
   
   findProduct(textToFind:string){
 
-    this.products = this.http.get(endpoint).pipe(
-      map(this.extractData),
-      catchError(this.handleError<any>('getAll'))
-      );
+    this.products =  JSON.parse(localStorage.getItem('products'));
 
-      console.log(this.products);
-    
-
-    let newProducts:ProductModel[]=[];
-    
     textToFind = textToFind.toLowerCase();
+
+    let newProducts:any[]=[];
 
     for(let product of this.products){
       let nombre = product.nombre.toLowerCase();
       let detalle = product.detalle.toLowerCase();
 
       if( nombre.indexOf(textToFind) >= 0 || detalle.indexOf(textToFind) >= 0 ){
-
-        newProducts.push(product )
+        newProducts.push(product)
       }
-
     }
-
     return newProducts;
-
   }
 
   private extractData(res: Response) {

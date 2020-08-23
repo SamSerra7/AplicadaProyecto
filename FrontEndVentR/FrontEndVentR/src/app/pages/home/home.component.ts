@@ -28,8 +28,8 @@ export class HomeComponent implements OnInit {
 
     this.produtsService.getAll().subscribe((data:{})=>{
       this.products=data;
+      localStorage.setItem('products', JSON.stringify(this.products));
     });
-
   }
 
   viewProduct(id:number){

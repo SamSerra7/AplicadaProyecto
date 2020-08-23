@@ -1,1 +1,19 @@
-<p>search works!</p>
+<div class="container">
+    <hr>
+    <h1>Productos disponibles</h1>
+    <br>
+    <h2 *ngIf="textTofind">Buscando: <small>{{textTofind}}</small> </h2>
+    <h2 style="color: red;" *ngIf="products.length == 0">Ninguna considencia</h2>
+    <hr>
+    <div class="card-columns animated fadeInUp">
+        <div *ngFor="let product of products" class="card">
+            <img [src]="product.urlImg" class="card-img-top" [alt]="product.nombre">
+            <div class="card-body">
+                <h5 class="card-title">{{product.nombre}}</h5>
+                <p class="card-text">{{product.detalle}}</p>
+                <p class="card-text">Disponibles:<small class="text-muted"> {{product.cantidad}}</small></p>
+                <h4 style="color: red;">{{product.precio.value | currency: '¢'}}</h4>
+            </div>
+        </div>
+
+    </div>
