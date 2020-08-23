@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-
+import { ActivatedRoute, Router } from '@angular/router';
 
 //services
 import { ProdutsService } from '../../services/produts.service';
@@ -16,7 +15,8 @@ export class SearchComponent implements OnInit {
   textTofind:string;
 
   constructor(  private activatedRoute:ActivatedRoute,
-                private produtsService:ProdutsService) { }
+                private produtsService:ProdutsService,
+                private router: Router) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {    
@@ -24,6 +24,9 @@ export class SearchComponent implements OnInit {
       this.products = this.produtsService.findProduct(this.textTofind);   
       console.log(this.products.length)   
     });
+  }
+  viewProduct(id:number){
+    this.router.navigate(['product',id]);
   }
 
 }

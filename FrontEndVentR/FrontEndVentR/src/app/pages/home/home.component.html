@@ -1,19 +1,28 @@
 <app-carousel></app-carousel>
+<hr>
 
-<div class="container">
-    <hr>
-    <h1>Productos disponibles</h1>
-    <hr>
-    <div class="card-columns animated fadeInUp">
-        <div *ngFor="let product of products" class="card">
-            <img [src]="product.urlImg" class="card-img-top" [alt]="product.nombre">
-            <div class="card-body">
-                <h5 class="card-title">{{product.nombre}}</h5>
-                <p class="card-text">{{product.detalle}}</p>
-                <p class="card-text">Disponibles:<small class="text-muted"> {{product.cantidad}}</small></p>
-                <h4 style="color: red;">{{product.precio.value | currency: '¢'}}</h4>
-                <button (click)="viewProduct(product.idProducto)" class="btn btn-outline-primary btn-block"> Ver más...</button>
+<div class="btn-group" role="group" aria-label="Basic example">
+    <button type="button" class="btn btn-secondary">Inicio</button>
+    <button type="button" class="btn btn-secondary">Medio</button>
+    <button type="button" class="btn btn-secondary">Final</button>
+</div>
+
+<cdk-virtual-scroll-viewport itemSize="100" class="viewport">
+    <div class="container">
+        <hr>
+        <h1>Productos disponibles</h1>
+        <hr>
+        <div class="card-columns animated fadeInUp">
+            <div *cdkVirtualFor="let product of products" class="card">
+                <img [src]="product.urlImg" class="card-img-top" [alt]="product.nombre">
+                <div class="card-body">
+                    <h5 class="card-title">{{product.nombre}}</h5>
+                    <p class="card-text">{{product.detalle}}</p>
+                    <p class="card-text">Disponibles:<small class="text-muted"> {{product.cantidad}}</small></p>
+                    <h4 style="color: red;">{{product.precio.value | currency: '¢'}}</h4>
+                    <button (click)="viewProduct(product.idProducto)" class="btn btn-outline-primary btn-block"> Ver más...</button>
+                </div>
             </div>
         </div>
-
     </div>
+</cdk-virtual-scroll-viewport>
