@@ -7,7 +7,12 @@ import { SignInComponent } from './pages/sign-in/sign-in.component';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { ShopcartComponent } from './pages/shopcart/shopcart.component';
+import { BuyComponent } from './pages/buy/buy.component';
+import { ProductComponent } from './components/product/product.component';
 
+//Guards
+import { AuthGuard } from './guards/auth.guard';
+import { SearchComponent } from './components/search/search.component';
 
 
 const routes: Routes = [
@@ -16,6 +21,10 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent},
   { path: 'profile', component: ProfileComponent},
   { path: 'shopcart', component: ShopcartComponent},
+  { path: 'buy', component: BuyComponent,canActivate:[ AuthGuard]},
+  { path: 'product/:id', component: ProductComponent},
+  { path: 'results/:text', component: SearchComponent},
+  
   { path: '**', pathMatch: 'full', redirectTo: 'home' }
 
 ];
