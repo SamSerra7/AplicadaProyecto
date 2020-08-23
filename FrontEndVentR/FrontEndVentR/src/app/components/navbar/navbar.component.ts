@@ -29,6 +29,10 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {   
   }
 
+  findProduct(textToFind:string){    
+    this.router.navigate(['/results',textToFind]);
+  }
+
    logout(){
     this.auth.logout();
     this.router.navigate(['/login']);
