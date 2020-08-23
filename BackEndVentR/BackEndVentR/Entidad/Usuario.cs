@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Entidad
 {
-    class Usuario
+    public class Usuario
     {
         public int Id_Usuario { get; set; }
         public string Correo { get; set; }
@@ -21,6 +21,13 @@ namespace Entidad
             this.Id_Usuario = id_Usuario;
             this.Correo = correo;
             this.Contrasennia = contrasennia;
+            this.Id_Rol = rol;
+        }
+
+        public Usuario(int id_Usuario, string correo, int rol)
+        {
+            this.Id_Usuario = id_Usuario;
+            this.Correo = correo;
             this.Id_Rol = rol;
         }
     }
