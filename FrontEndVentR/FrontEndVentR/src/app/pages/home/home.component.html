@@ -1,17 +1,17 @@
 <app-carousel></app-carousel>
-<hr>
 
-<div class="btn-group" role="group" aria-label="Basic example">
-    <button type="button" class="btn btn-secondary">Inicio</button>
-    <button type="button" class="btn btn-secondary">Medio</button>
-    <button type="button" class="btn btn-secondary">Final</button>
+<div class="container m-2">
+    <hr>
+    <h1>Productos disponibles</h1>
+    <hr>
+    <div class="btn-group m-2" role="group" aria-label="Basic example">
+        <button (click)="goStart()" type="button" class="btn btn-primary">Inicio</button>
+        <button (click)="goMedium()" type="button" class="btn btn-primary">Medio</button>
+        <button (click)="goEnd()" type="button" class="btn btn-primary">Final</button>
+    </div>
 </div>
-
 <cdk-virtual-scroll-viewport itemSize="100" class="viewport">
     <div class="container">
-        <hr>
-        <h1>Productos disponibles</h1>
-        <hr>
         <div class="card-columns animated fadeInUp">
             <div *cdkVirtualFor="let product of products" class="card">
                 <img [src]="product.urlImg" class="card-img-top" [alt]="product.nombre">
@@ -26,3 +26,11 @@
         </div>
     </div>
 </cdk-virtual-scroll-viewport>
+
+<div class="container m-2">
+    <div class="btn-group m-2" role="group" aria-label="Basic example">
+        <button (click)="goStart()" type="button" class="btn btn-primary">Inicio</button>
+        <button (click)="goMedium()" type="button" class="btn btn-primary">Medio</button>
+        <button (click)="goEnd()" type="button" class="btn btn-primary">Final</button>
+    </div>
+</div>
