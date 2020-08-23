@@ -3,26 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Negocio;
 using Entidad;
+using Negocio;
 
 
 namespace BackEndVentR.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RolController : ControllerBase
+    public class UsuarioController : ControllerBase
     {
-
-        private RolNegocio rolNegocio = new RolNegocio();
-        
+        private UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
 
         [HttpGet]
-        public IEnumerable<Rol> ListarRoles()
+        public IEnumerable<Usuario> ListarUsuarios()
         {
-            return rolNegocio.listarRoles();
+            return usuarioNegocio.listarUsuarios();
         }
 
-       
     }
 }
