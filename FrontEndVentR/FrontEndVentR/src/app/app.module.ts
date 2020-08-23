@@ -15,6 +15,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { BuyComponent } from './pages/buy/buy.component';
+import { ProductComponent } from './components/product/product.component';
+import { SearchComponent } from './components/search/search.component';
 
 
 @NgModule({
@@ -27,7 +30,10 @@ import { HttpClientModule } from '@angular/common/http';
     ProfileComponent,
     SignInComponent,
     SignUpComponent,
-    ShopcartComponent
+    ShopcartComponent,
+    BuyComponent,
+    ProductComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

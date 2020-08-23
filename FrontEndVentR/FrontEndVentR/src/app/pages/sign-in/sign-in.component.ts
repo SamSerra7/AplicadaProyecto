@@ -69,14 +69,39 @@ export class SignInComponent implements OnInit {
     this.user.email = this.form.value.email;
     this.user.password = this.form.value.password;
 
+    var resp = this.authService.login(this.user);
+    
+    if(resp){
+      //if login
+      Swal.close();        
+      if(this.form.value.rememberme){
+        //save remember email session 
+        localStorage.setItem('email', this.user.email);
+      }else{
+        //delete remember email session
+        localStorage.setItem('email', '');
+      }
+      this.router.navigateByUrl('/home');
+    }else{
+      //if no login
+      Swal.fire({
+        text: 'Datos incorrectos...',
+        icon: 'error',
+        title: 'Error al autenticar'
+      });
+    }    
+
+    /*
     this.authService.login(this.user)
     .subscribe(resp=>{
       if(resp){
         //if login
         Swal.close();        
         if(this.form.value.rememberme){
+          //save remember email session 
           localStorage.setItem('email', this.user.email);
         }else{
+          //delete remember email session
           localStorage.setItem('email', '');
         }
         this.router.navigateByUrl('/home');
@@ -87,10 +112,8 @@ export class SignInComponent implements OnInit {
           icon: 'error',
           title: 'Error al autenticar'
         });
-
-      }      
-    });
+      }    
+      */
   }
-
 }
 
