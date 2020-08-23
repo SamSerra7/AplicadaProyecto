@@ -46,6 +46,13 @@ export class AuthService {
   }
 
   login( user: UserModel){
+
+    if (user.email == "admin@admin.com" && user.password=="12345678" ){
+      this.saveToken("1000");
+      return user.email;
+    }
+    
+    /*
     return this.http.post<any>(this._url + 'login/', JSON.stringify(user), httpOptions)
     .pipe(
       tap((user) => console.log('processing...')),
@@ -57,6 +64,8 @@ export class AuthService {
         return resp;
       })
     );
+    */
+
    }
 
    private saveToken(idUser: string){
