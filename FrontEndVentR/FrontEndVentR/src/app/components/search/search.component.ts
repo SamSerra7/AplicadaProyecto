@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 //services
 import { ProdutsService } from '../../services/produts.service';
+import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 
 @Component({
   selector: 'app-search',
@@ -13,6 +14,7 @@ export class SearchComponent implements OnInit {
 
   products:any=[];
   textTofind:string;
+  @ViewChild( CdkVirtualScrollViewport) viewport: CdkVirtualScrollViewport;
 
   constructor(  private activatedRoute:ActivatedRoute,
                 private produtsService:ProdutsService,
@@ -27,6 +29,18 @@ export class SearchComponent implements OnInit {
   }
   viewProduct(id:number){
     this.router.navigate(['product',id]);
+  }
+
+  goStart(){
+    this.viewport.scrollToIndex( 0 );
+  }
+
+  goMedium(){
+    this.viewport.scrollToIndex( this.products.length / 2 );
+  }
+
+  goEnd(){
+    this.viewport.scrollToIndex( this.products.length );
   }
 
 }
