@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+
 
 //Services
 import { ProdutsService } from '../../services/produts.service';
 import { ProductModel } from '../../models/products.model';
+import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 
 @Component({
   selector: 'app-home',
@@ -14,8 +16,11 @@ export class HomeComponent implements OnInit {
 
   //variables
   products:any=[];
+  @ViewChild( CdkVirtualScrollViewport) viewport: CdkVirtualScrollViewport;
 
-  constructor( public produtsService: ProdutsService,private route: ActivatedRoute, private router: Router) { 
+  constructor(  public produtsService: ProdutsService,
+                private route: ActivatedRoute,
+                private router: Router) { 
 
     this.getAllProducts();
     this.products = new ProductModel();
@@ -28,13 +33,25 @@ export class HomeComponent implements OnInit {
 
     this.produtsService.getAll().subscribe((data:{})=>{
       this.products=data;
+      localStorage.setItem('products', JSON.stringify(this.products));
     });
-
   }
 
   viewProduct(id:number){
 
     this.router.navigate(['product',id]);
+  }
+
+  goStart(){
+    this.viewport.scrollToIndex( 0 );
+  }
+
+  goMedium(){
+    this.viewport.scrollToIndex( this.products.length / 2 );
+  }
+
+  goEnd(){
+    this.viewport.scrollToIndex( this.products.length );
   }
 
 }

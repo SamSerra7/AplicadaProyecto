@@ -1,3 +1,19 @@
 body {
     margin-bottom: 50px;
 }
+
+.viewport {
+    height: 1100px;
+}
+
+.viewport-content {
+    display: flex;
+    height: 1200px;
+    margin: 5px;
+}
+
+.card img {
+    height: 150px;
+    width: auto;
+    padding: 10px;
+}
