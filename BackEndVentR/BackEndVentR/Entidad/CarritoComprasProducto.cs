@@ -79,12 +79,7 @@ namespace Entidad
             this.Cantidad = cantidad;
         }
 
-        public CarritoComprasProducto(Producto producto)
-        {
-
-            this.producto = producto;
-        
-        }
+      
         public CarritoComprasProducto()
         {
         }

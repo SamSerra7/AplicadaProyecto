@@ -40,11 +40,7 @@ namespace Entidad
         {
 
         }
-        //public ProductoCantidad(Producto producto, int cantidad)
-        //{
-        //    this.productos = producto;
-        //    this.Cantidad = cantidad;
-        //}
+      
 
         public ProductoCantidad(int producto, int cantidad,Producto productos)
         {
@@ -54,13 +50,7 @@ namespace Entidad
         }
 
 
-        //si sirve para lista 2
-        //public ProductoCantidad(int producto, int cantidad)
-        //{
-        //    this.producto = producto;
-        //    this.Cantidad = cantidad;
-        //}
-
+     
 
 
     }

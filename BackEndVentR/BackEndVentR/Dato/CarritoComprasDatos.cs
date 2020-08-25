@@ -20,7 +20,7 @@ namespace Dato
                 try
                 {
                     con.Open();
-                    string sql = "call pa_insertar_producto_carrito_compras(idCarritoCompras,idProducto,Cantidad); ";
+                    string sql = "call pa_insertar_producto_carrito_compras(@idCarritoCompras,@idProducto,@Cantidad); ";
 
                     using (var command = new NpgsqlCommand(sql, con))
                     {
@@ -76,7 +76,6 @@ namespace Dato
 
 
 
-        //De este metodo obtendo el id_producto
         public List <ProductoCantidad> buscar_carrito_compras_producto(int id_carrito_compras)
         {
 
@@ -99,8 +98,7 @@ namespace Dato
                             Producto  obtener_Producto= productoDato.buscarProducto(reader.GetInt32(0));
                            
                            lista_producto_cantidad.Add( new ProductoCantidad(reader.GetInt32(0), reader.GetInt32(1),obtener_Producto));
-                          //  lista_producto_cantidad.Add( new ProductoCantidad(reader.GetInt32(0), reader.GetInt32(1)));
-
+                          
 
                         }
 
