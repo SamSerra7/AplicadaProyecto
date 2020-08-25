@@ -17,7 +17,7 @@ namespace Cliente1.Controllers
         {
             pd = new PriductoData();
             ModelState.Clear();
-            return View(pd.obtenerProductos());
+            return View(pd.ObtenerProductos());
         }
 
         [HttpGet]
@@ -37,18 +37,54 @@ namespace Cliente1.Controllers
                     pd = new PriductoData();
                     if (pd.Add(producto))
                     {
-                        ViewBag.Mensagen = " ingresado con exito ";
+                        ViewBag.Mensagem = " ingresado con exito ";
                     }
 
                 }
                 return View();
             }
-            catch (Exception) 
+            catch (Exception)
             {
                 return View("ObtenerLista");
             }
         }
 
+        public ActionResult Actualizar(int id)
+        {
+            pd = new PriductoData();
+            return View(pd.ObtenerProductos().Find(t => t.id_produto == id));
+        }
+
+        public ActionResult Actualizar(int id, Producto producto)
+        {
+            try
+            {
+                pd = new PriductoData();
+                pd.Actualizar(producto);
+                return RedirectToAction("ObtenerLista");
+            }
+            catch (Exception)
+            {
+                return View("ObtenerLista");
+            }
+        }
+
+        public ActionResult Eliminar(int id)
+        {
+            try
+            {
+                pd = new PriductoData();
+                if (pd.Eliminar(id))
+                {
+                    ViewBag.Mensagem = "Eliminado con exito";
+                }
+                return RedirectToAction("ObtenerLista");
+            }
+            catch (Exception)
+            {
+                return View("ObtenerLista");
+            }
+        }
 
     }
 }
