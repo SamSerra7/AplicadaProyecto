@@ -99,6 +99,10 @@ namespace Entidad
             Cantidad = cantidad;
             Proveedor = proveedor;
         }
+        public Producto(int id_producto)
+        {
+            this.id_producto=id_producto;
+        }
 
         public Producto(){}
 
