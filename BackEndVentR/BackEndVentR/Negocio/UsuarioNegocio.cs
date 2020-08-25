@@ -10,12 +10,31 @@ namespace Negocio
     {
         private UsuarioDatos usuarioDatos = new UsuarioDatos();
 
-        public IEnumerable<Usuario> listarUsuarios()
+
+        public String AgregarUsuario(Usuario usuario)
         {
-            List<Usuario> usuarios = usuarioDatos.listarUsuarios();
+            return usuarioDatos.AgregarUsuario(usuario);
+        }
+
+        public Usuario BuscarUsuarioEspecifico(int Id_U)
+        {
+            return usuarioDatos.BuscarUsuarioEspecifico(Id_U);
+        }
+
+        public IEnumerable<Usuario> ListarUsuarios()
+        {
+            List<Usuario> usuarios = usuarioDatos.ListarUsuarios();
 
             return usuarios;
 
         }
+
+        
+
+        public Boolean VerificarUsuario(Usuario usuario)
+        {
+            return usuarioDatos.VerificarUsuario(usuario.Correo, usuario.Contrasennia);
+        }
     }
 }
+
