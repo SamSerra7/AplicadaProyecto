@@ -18,7 +18,7 @@ namespace Dato
             using (NpgsqlConnection con = conexion.GetConexion())
             {
                 con.Open();
-                string sql = "SELECT id_rol,nombre FROM users.Rol";
+                string sql = "SELECT id_rol,nombre FROM users.rol";
 
                 using (var command = new NpgsqlCommand(sql, con))
                 {
