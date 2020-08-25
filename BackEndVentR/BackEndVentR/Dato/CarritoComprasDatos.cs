@@ -97,7 +97,7 @@ namespace Dato
                         {
                             Producto  obtener_Producto= productoDato.buscarProducto(reader.GetInt32(0));
                            
-                           lista_producto_cantidad.Add( new ProductoCantidad(reader.GetInt32(0), reader.GetInt32(1),obtener_Producto));
+                           lista_producto_cantidad.Add( new ProductoCantidad(obtener_Producto,reader.GetInt32(1)));
                           
 
                         }

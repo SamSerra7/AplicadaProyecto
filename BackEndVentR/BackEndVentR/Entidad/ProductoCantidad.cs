@@ -6,8 +6,8 @@ namespace Entidad
 {
     public class ProductoCantidad
     {
-        private int id_producto;
-        private int cantidad;
+       // private int id_producto;
+        private int cantidad_solicitada;
        
         private Producto productos;
 
@@ -17,23 +17,15 @@ namespace Entidad
             set { productos = value ?? throw new Exception("Debe tener un producto"); }
         }
 
-        public int Producto
-        {
-            get { return id_producto; }
-            set
-            {
-                if (value < 0) throw new Exception("El producto no puede ser negativo");
-                id_producto = value;
-            }
-        }
+   
 
-        public int Cantidad
+        public int Cantidad_Solicitada
         {
-            get { return cantidad; }
+            get { return cantidad_solicitada; }
             set
             {
                 if (value < 0) throw new Exception("La cantidad no puede ser negativo");
-                cantidad = value;
+                cantidad_solicitada = value;
             }
         }
         public ProductoCantidad()
@@ -42,11 +34,10 @@ namespace Entidad
         }
       
 
-        public ProductoCantidad(int producto, int cantidad,Producto productos)
+        public ProductoCantidad(Producto productos,int cantidad)
         {
-            this.id_producto = producto;
-            this.Cantidad = cantidad;
             this.productos = productos;
+            this.Cantidad_Solicitada = cantidad;
         }
 
 

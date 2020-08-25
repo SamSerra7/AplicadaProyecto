@@ -25,8 +25,6 @@ namespace BackEndVentR.Controllers
         public List<ProductoCantidad> Get(int id_usuario)
         {
             return carrito_compras_negocio.buscar_carrito_compras(id_usuario);
-
-
         }
 
 
