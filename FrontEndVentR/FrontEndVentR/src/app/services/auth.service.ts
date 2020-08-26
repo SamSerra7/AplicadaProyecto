@@ -21,6 +21,7 @@ export class AuthService {
   userToken: string;
   date: any;
   user: any;
+  responseStatus: number;
 
   constructor(  private usersService: UsersService,
                 private http: HttpClient) {
@@ -74,18 +75,32 @@ export class AuthService {
     }
     return this.userToken;
    }
-
+  
+   /*
+   adduser( user: UserModel){
+     return this.http.post(endpoint, JSON.stringify(user), httpOptions)
+     .pipe(
+       map((resp:any) => {
+        console.log("Map");
+        return resp;
+       }),
+       catchError((err: any)=>{
+        return err.error.text;
+       })
+     );
+   } 
+   */
+   
   adduser( user: UserModel){
-    return this.http.post<any>(endpoint, JSON.stringify(user), httpOptions)
-    .pipe(
+    return this.http.post<any>(endpoint, JSON.stringify(user), httpOptions).pipe(
       tap((user) => console.log('added user')),
       catchError(this.handleError<any>('error add user')),
       map(resp =>{
         return resp;
       })
     );
-
    }
+   
 
   isLogin(): boolean{
     

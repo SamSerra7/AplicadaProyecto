@@ -65,10 +65,12 @@ export class SignUpComponent implements OnInit {
       this.user.id_Usuario = 0;
       this.user.correo = this.form.value.email;
       this.user.contrasennia = this.form.value.password;
+      this.user.id_Rol = 1;
 
       this.authService.adduser(this.user)
       .subscribe(resp=>{
 
+        console.log(resp);
          if(resp){
            
           Swal.close();
@@ -77,7 +79,7 @@ export class SignUpComponent implements OnInit {
             'Tu solicitud está en trámite',
             'success'
           )
-          this.router.navigate(['/login']);
+          this.router.navigate(['/sign-in']);
         }else{
           Swal.fire({
             text: 'Correo no válido...',
