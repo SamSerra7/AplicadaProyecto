@@ -5,6 +5,7 @@ import { map, catchError, tap } from 'rxjs/operators';
 import { UserModel } from '../models/user.model';
 import { UsersService } from './users.service';
 
+const endpoint = 'http://localhost:59292/api/Usuario/';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -17,13 +18,12 @@ const httpOptions = {
 })
 export class AuthService {
 
-  private _url = '';
-
   userToken: string;
   date: any;
   user: any;
 
-  constructor( private usersService: UsersService, private http: HttpClient) {
+  constructor(  private usersService: UsersService,
+                private http: HttpClient) {
     this.user = new UserModel() ;
     this.readToken();
     this.getUser();
@@ -33,6 +33,21 @@ export class AuthService {
     let body = res;
     return body || { };
   }
+
+  login( user: UserModel){
+    return this.http.post<any>(endpoint + 'VerificarUsuario/', JSON.stringify(user), httpOptions)
+    .pipe(
+      tap((user) => console.log('processing...')),
+      catchError(this.handleError<any>('error login user')),
+      map(resp =>{
+        console.log("Login service:"+resp);
+        if(resp){
+          this.saveToken(user.correo);
+        }
+        return resp;
+      })
+    );
+   }
 
   getUser(){
     this.usersService.getById(parseInt(this.userToken))
@@ -45,31 +60,8 @@ export class AuthService {
     localStorage.removeItem('token')
   }
 
-  login( user: UserModel){
-
-    if (user.email == "admin@admin.com" && user.password=="12345678" ){
-      this.saveToken("1000");
-      return user.email;
-    }
-    
-    /*
-    return this.http.post<any>(this._url + 'login/', JSON.stringify(user), httpOptions)
-    .pipe(
-      tap((user) => console.log('processing...')),
-      catchError(this.handleError<any>('error login user')),
-      map(resp =>{
-        if(resp){
-          this.saveToken(resp.usersId);
-        }
-        return resp;
-      })
-    );
-    */
-
-   }
-
-   private saveToken(idUser: string){
-      this.userToken = idUser;
+   private saveToken(correo: string){
+      this.userToken = correo;
       localStorage.setItem('token', this.userToken);
    }
 
@@ -84,8 +76,7 @@ export class AuthService {
    }
 
   adduser( user: UserModel){
-
-    return this.http.post<any>(this._url, JSON.stringify(user), httpOptions)
+    return this.http.post<any>(endpoint, JSON.stringify(user), httpOptions)
     .pipe(
       tap((user) => console.log('added user')),
       catchError(this.handleError<any>('error add user')),
@@ -97,7 +88,11 @@ export class AuthService {
    }
 
   isLogin(): boolean{
-    return parseInt( this.userToken) > 0;
+    
+    if(this.userToken){
+      return true;
+    }
+    return false;    
   }
 
   haveRole(role:string): boolean{

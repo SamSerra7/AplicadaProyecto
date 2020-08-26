@@ -62,11 +62,9 @@ export class SignUpComponent implements OnInit {
         allowOutsideClick: false
       });
   
-      this.user.usersId = 0;
-      this.user.name = this.form.value.name;
-      this.user.lastname = this.form.value.lastname;
-      this.user.email = this.form.value.email;
-      this.user.password = this.form.value.password;
+      this.user.id_Usuario = 0;
+      this.user.correo = this.form.value.email;
+      this.user.contrasennia = this.form.value.password;
 
       this.authService.adduser(this.user)
       .subscribe(resp=>{
