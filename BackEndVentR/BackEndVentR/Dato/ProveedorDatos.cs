@@ -24,9 +24,8 @@ namespace Dato
                 using (var command = new NpgsqlCommand(sql, con))
                 {
 
-                    //command.CommandType = CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@idProveedor", idProveedor);
-                    //command.Prepare();
+                   command.Parameters.AddWithValue("@idProveedor", idProveedor);
+                  
                    
 
                     using (NpgsqlDataReader reader = command.ExecuteReader())

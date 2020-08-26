@@ -37,14 +37,14 @@ namespace Entidad
 
         public Proveedor(int id_proveedor, string nombre, bool activo)
         {
-            this.id_proveedor = id_proveedor;
-            this.nombre = nombre;
+            this.IdProveedor = id_proveedor;
+            this.Nombre = nombre;
             this.activo = activo;
         }
 
         public Proveedor(int id_proveedor)
         {
-            this.id_proveedor = id_proveedor;
+            this.IdProveedor = id_proveedor;
           
         }
     }

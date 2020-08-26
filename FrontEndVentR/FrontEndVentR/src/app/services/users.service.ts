@@ -6,6 +6,7 @@ import { map, catchError, tap } from 'rxjs/operators';
 import { UserModel } from '../models/user.model';
 import { UserRoleModel } from '../models/user-role.model';
 
+const endpoint = 'http://localhost:59292/api/Usuario/';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -19,8 +20,6 @@ const httpOptions = {
 })
 export class UsersService {
 
-  private _url = '';
-  private _urlrole = '';
   constructor(private http: HttpClient) { }
 
   private extractData(res: Response) {
@@ -28,62 +27,40 @@ export class UsersService {
     return body || { };
   }
 
-  approveUser(userrole: UserRoleModel): Observable<any>{
-    return this.http.post<any>(this._urlrole , JSON.stringify(userrole), httpOptions).pipe(
-      tap((inquiry) => console.log('approved student')),
-      catchError(this.handleError<any>('error approved student'))
-    );
-  }
-  
-  addTeacher(teacher: UserModel): Observable<any>{
-    return this.http.post<any>(this._url + 'teacher/', JSON.stringify(teacher), httpOptions).pipe(
-      tap((inquiry) => console.log('added teacher')),
-      catchError(this.handleError<any>('error add teacher'))
-    );
-  }
-
-  updateuser(users: UserModel): Observable<any>{
-    return this.http.put<any>(this._url + 'put/', JSON.stringify(users), httpOptions).pipe(
-      tap((inquiry) => console.log('updated user')),
-      catchError(this.handleError<any>('error update user'))
-    );
-  }
-
-  getById(id): Observable<any> {
-    return this.http.get(this._url + 'id/' + id).pipe(
-      map(this.extractData),
-      catchError(this.handleError<any>('no user by id'))
-      );
-  }
-
-  delete(id): Observable<any> {
-    return this.http.delete(this._url + 'delete/' + id).pipe(
-      map(this.extractData),
-      catchError(this.handleError<any>('no user deletedby id'))
-      );
-  }
-
-  deleteRole(id): Observable<any> {
-    return this.http.delete(this._urlrole + 'delete/' + id).pipe(
-      map(this.extractData),
-      catchError(this.handleError<any>('no user deletedby id'))
-      );
-  }
-
   getAll(): Observable<any> {
-    return this.http.get(this._url + 'getAll').pipe(
+    return this.http.get(endpoint).pipe(
       map(this.extractData),
       catchError(this.handleError<any>('getAll'))
       );
   }
 
-  getNewUsers(): Observable<any> {
-    return this.http.get(this._url + 'getNewUser').pipe(
+
+  getById(id): Observable<any> {
+    return this.http.get(endpoint + id).pipe(
       map(this.extractData),
-      catchError(this.handleError<any>('getNewUser'))
+      catchError(this.handleError<any>('no user by id'))
+      );
+  }
+  
+
+
+  /*----------------------------------------------*/
+  updateuser(users: UserModel): Observable<any>{
+    return this.http.put<any>(endpoint + 'put/', JSON.stringify(users), httpOptions).pipe(
+      tap((inquiry) => console.log('updated user')),
+      catchError(this.handleError<any>('error update user'))
+    );
+  } 
+
+  delete(id): Observable<any> {
+    return this.http.delete(endpoint+ 'delete/' + id).pipe(
+      map(this.extractData),
+      catchError(this.handleError<any>('no user deletedby id'))
       );
   }
 
+
+   /*----------------------------------------------*/ 
   private handleError<T> (operation = 'operation', result?: T) {
 		return (error: any): Observable<T> => {
 	  
