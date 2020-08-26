@@ -33,9 +33,7 @@
             <a class="nav-link" routerLink="/sign-in" style="color: white;" title="Sign In">Sign In </a>
         </span>
 
-        <span *ngIf="isLogin" class="m-auto">
-            <button (click)="logout()" class="nav-link" style="color: white;" title="Sign Out">Sign Out</button>
-        </span>
+
 
         <span *ngIf="isLogin" class="m-auto">
             <a routerLink="/profile" style="color: white;" title="Profile">
@@ -46,9 +44,13 @@
             </a>
         </span>
 
-        <span *ngIf="isLogin" class="navbar-text m-2">
-            Bienvenido: <small>{{user.name}}</small>
-        </span>
-
+        <li *ngIf="isLogin" class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" style="color: white;" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Bienvenido: <small>{{user.correo}}</small>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <button (click)="logout()" class="nav-link btn-sm" style="color: black;" title="Sign Out">Salir</button>
+            </div>
+        </li>
     </div>
 </nav>

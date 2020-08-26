@@ -1,7 +1,7 @@
 
 export class UserRoleModel{
 
-    usersid: number;
-    roleid: number;
+    id_Rol: number;
+    nombre: string;
     
 }
