@@ -1,9 +1,8 @@
 export class UserModel{
 
-    usersId: number;
-    name: string;   
-    lastname:string; 
-    email: string;    
-    password: string;
+    id_Usuario: number;
+    id_Rol:number; 
+    correo: string;    
+    contrasennia: string;
 
 }

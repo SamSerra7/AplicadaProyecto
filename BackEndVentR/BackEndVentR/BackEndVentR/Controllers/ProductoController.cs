@@ -18,36 +18,35 @@ namespace BackEndVentR.Controllers
         private ProductoNegocio productoNegocio = new ProductoNegocio();
 
 
-        // GET: api/<ProductoController>
+        // GET: api/<ProductoController> listar sin usuario
         [HttpGet]
-        public IEnumerable<Producto> Get()
+        public IEnumerable<Producto> listarProductos()
         {
             return productoNegocio.listarProductos();
         }
 
-        // GET api/<ProductoController>/5
+        // PUT api/<ProductoController> listar para un usuario específico
+        [HttpPut]
+        public IEnumerable<Producto> listarProductosUsuario([FromBody] int idUsuario)
+        {
+            return productoNegocio.listarProductosPorUsuario(idUsuario);
+        }
+
+
+        // GET api/<ProductoController>/5   buscar sin usuario
         [HttpGet("{idProducto}")]
-        public Producto Get(int idProducto)
+        public Producto buscarProducto(int idProducto)
         {
-                return productoNegocio.buscarProducto(idProducto);
+            return productoNegocio.buscarProducto(idProducto);
         }
 
-        // POST api/<ProductoController>
-        [HttpPost]
-        public void Post([FromBody] string value)
+        // PUT api/<ProductoController>/5   buscar algún producto, para un usuario específico
+        [HttpPut("{idProducto}")]
+        public Producto buscarProductoUsuario(int idProducto, [FromBody] int idUsuario)
         {
+            return productoNegocio.buscarProductoUsuario(idProducto,idUsuario);
         }
 
-        // PUT api/<ProductoController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
 
-        // DELETE api/<ProductoController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }

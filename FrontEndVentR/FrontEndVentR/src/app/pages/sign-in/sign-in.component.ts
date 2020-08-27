@@ -27,7 +27,7 @@ export class SignInComponent implements OnInit {
   ngOnInit(): void {
 
     if( localStorage.getItem('email')){
-      this.user.email = localStorage.getItem('email');
+      this.user.contrasennia = localStorage.getItem('email');
       this.rememberme = true;
     }
     this.doForm();
@@ -45,7 +45,7 @@ export class SignInComponent implements OnInit {
 
     this.form = this.fb.group({
       password: ['', [Validators.required, Validators.minLength(8)]],
-      email:    [this.user.email, [Validators.required, Validators.email]],
+      email:    [this.user.contrasennia, [Validators.required, Validators.email]],
       rememberme: [this.rememberme]
     });
   }
@@ -66,42 +66,18 @@ export class SignInComponent implements OnInit {
 
     Swal.showLoading();
 
-    this.user.email = this.form.value.email;
-    this.user.password = this.form.value.password;
+    this.user.correo = this.form.value.email;
+    this.user.contrasennia = this.form.value.password;
 
-    var resp = this.authService.login(this.user);
-    
-    if(resp){
-      //if login
-      Swal.close();        
-      if(this.form.value.rememberme){
-        //save remember email session 
-        localStorage.setItem('email', this.user.email);
-      }else{
-        //delete remember email session
-        localStorage.setItem('email', '');
-      }
-      this.router.navigateByUrl('/home');
-    }else{
-      //if no login
-      Swal.fire({
-        text: 'Datos incorrectos...',
-        icon: 'error',
-        title: 'Error al autenticar'
-      });
-    }    
-
-    /*
     this.authService.login(this.user)
     .subscribe(resp=>{
+      console.log("Login:"+resp);
       if(resp){
         //if login
         Swal.close();        
         if(this.form.value.rememberme){
-          //save remember email session 
-          localStorage.setItem('email', this.user.email);
+          localStorage.setItem('email', this.user.correo);
         }else{
-          //delete remember email session
           localStorage.setItem('email', '');
         }
         this.router.navigateByUrl('/home');
@@ -112,8 +88,9 @@ export class SignInComponent implements OnInit {
           icon: 'error',
           title: 'Error al autenticar'
         });
-      }    
-      */
+
+      }      
+    });
   }
 }
 
