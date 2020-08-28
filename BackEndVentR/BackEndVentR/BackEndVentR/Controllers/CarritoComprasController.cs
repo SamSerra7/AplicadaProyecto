@@ -17,18 +17,15 @@ namespace BackEndVentR.Controllers
        
         private CarritoComprasNegocio carrito_compras_negocio = new CarritoComprasNegocio();
 
-        // GET api/<CarritoComprasController>/5
+        // GET api/CarritoComprasController/get
         [HttpGet("{id_usuario}")]
-
-
-
         public List<ProductoCantidad> Get(int id_usuario)
         {
             return carrito_compras_negocio.buscar_carrito_compras(id_usuario);
         }
 
 
-        // POST api/<CarritoComprasController>
+        // POST api/CarritoComprasController/Post
         [HttpPost("{CarritoCompra}")]
         public bool Post([FromBody] CarritoComprasProducto carrito_compras_producto)
         {
