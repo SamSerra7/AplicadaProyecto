@@ -37,7 +37,34 @@ namespace Negocio
         public Producto buscarProducto(int idProducto)
         {
             //TODO revisar que esté activo 
+            
+            return productoDatos.buscarProducto(idProducto);
+        }
+
+
+        /// <summary>
+        /// Lista los productos según la preferencia de el usuario
+        /// </summary>
+        /// <param name="idUsuario"></param>
+        /// <returns>Lista de Productos</returns>
+        public IEnumerable<Producto> listarProductosPorUsuario(int idUsuario)
+        {
+            return productoDatos.listarProductosPorUsuario(idUsuario);
+        }
+
+
+        /// <summary>
+        /// Busca un producto por USUARIO específico
+        /// </summary>
+        /// <param name="idProducto"></param>
+        /// <param name="idUsuario"></param>
+        /// <returns>objeto Producto</returns>
+        public Producto buscarProductoUsuario(int idProducto, int idUsuario)
+        {
+            productoDatos.AgregarBusquedaProductoUsuario(idProducto,idUsuario);
             return productoDatos.buscarProducto(idProducto);
         }
     }
+
+
 }

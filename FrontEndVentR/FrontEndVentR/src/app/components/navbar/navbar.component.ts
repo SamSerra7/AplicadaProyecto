@@ -11,8 +11,7 @@ import { UserModel } from '../../models/user.model';
 
 @Component({
   selector: 'app-navbar',
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  templateUrl: './navbar.component.html'
 })
 export class NavbarComponent implements OnInit {
 
@@ -21,7 +20,9 @@ export class NavbarComponent implements OnInit {
   user: any;
   userId: number;
 
-  constructor(private auth: AuthService, private router:Router,private profile: UsersService) {
+  constructor(private auth: AuthService, 
+              private router:Router,
+              private profile: UsersService) {
     this.user = new UserModel();   
     this.loadProfile();    
    }
@@ -35,28 +36,14 @@ export class NavbarComponent implements OnInit {
 
    logout(){
     this.auth.logout();
-    this.router.navigate(['/login']);
+    this.router.navigate(['/sign-in']);
   }
 
   loadProfile(){
+    this.isLogin =  this.auth.isLogin();    
+    if(this.isLogin){
+      this.user.correo = localStorage.getItem('token');
+    }    
 
-    this.userId = parseInt(localStorage.getItem('token'));
-    console.log(this.userId);
-
-    if(this.userId > 0){
-      this.isLogin == true;
-    }
-    this.user.email="admin@admin.com";
-    this.user.name="Admin";
-
-    console.log(this.user);
-
-    /*
-    this.profile.getById(parseInt(localStorage.getItem('token')))
-    .subscribe( resp=>{
-      this.user=resp;
-    });
-*/
   }
-
 }

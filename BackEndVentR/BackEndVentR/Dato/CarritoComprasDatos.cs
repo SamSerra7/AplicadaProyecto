@@ -108,6 +108,28 @@ namespace Dato
             return lista_producto_cantidad;
         }
 
-     
+
+        public Decimal venderProductoCarrito(int idUsuario)
+        {
+
+
+            using (NpgsqlConnection con = conexion.GetConexion())
+            {
+                con.Open();
+                string sql = "Select pa_venderProductoCarrito(@idUsuario)";
+
+                using (var command = new NpgsqlCommand(sql, con))
+                {
+
+                    command.Parameters.AddWithValue("@idUsuario", idUsuario);
+
+                    Decimal total = (decimal)command.ExecuteScalar();
+                    command.ExecuteNonQuery();
+                    return total;
+
+                }
+            }
+        }
+
     }
 }

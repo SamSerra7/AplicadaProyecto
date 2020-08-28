@@ -15,10 +15,45 @@ namespace BackEndVentR.Controllers
     {
         private UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
 
+        //GET : api/Usuario"
         [HttpGet]
         public IEnumerable<Usuario> ListarUsuarios()
         {
-            return usuarioNegocio.listarUsuarios();
+            return usuarioNegocio.ListarUsuarios();
+        }
+
+
+        //GET : api/Usuario/1
+        [HttpGet("{id_usuario}")]
+        public Usuario Get(int id_usuario)
+        {
+            return usuarioNegocio.BuscarUsuarioEspecifico(id_usuario);
+        }
+
+        //POST : api/Usuario
+
+        [HttpPost]
+        public string Post([FromBody] Usuario u)
+        {
+            return usuarioNegocio.AgregarUsuario(u);
+        }
+
+        //POST : api/Usuario/VerificarUsuario
+        [HttpPost]
+        [Route("[action]")]
+        public Boolean VerificarUsuario([FromBody] Usuario u)
+        {
+            return usuarioNegocio.VerificarUsuario(u);
+        }
+
+
+        //GET  http://localhost:59292/api/usuario/venta/3
+
+        //Get : api/usuario/venta
+        [HttpGet("venta/{idUsuario}")]
+        public Boolean realizarVenta(int idUsuario)
+        {
+            return usuarioNegocio.registrarVenta(idUsuario);
         }
 
     }
