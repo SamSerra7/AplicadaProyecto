@@ -11,6 +11,7 @@ namespace Negocio
         private UsuarioDatos usuarioDatos = new UsuarioDatos();
 
 
+        
         public String AgregarUsuario(Usuario usuario)
         {
             return usuarioDatos.AgregarUsuario(usuario);
@@ -34,6 +35,12 @@ namespace Negocio
         public Boolean VerificarUsuario(Usuario usuario)
         {
             return usuarioDatos.VerificarUsuario(usuario.Correo, usuario.Contrasennia);
+        }
+
+
+        public Boolean registrarVenta(int idUsuario)
+        {
+            return usuarioDatos.registrarVenta(idUsuario);
         }
     }
 }
