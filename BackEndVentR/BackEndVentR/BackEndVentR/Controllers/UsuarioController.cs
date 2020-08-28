@@ -46,5 +46,15 @@ namespace BackEndVentR.Controllers
             return usuarioNegocio.VerificarUsuario(u);
         }
 
+
+        //GET  http://localhost:59292/api/usuario/venta/3
+
+        //Get : api/usuario/venta
+        [HttpGet("venta/{idUsuario}")]
+        public Boolean realizarVenta(int idUsuario)
+        {
+            return usuarioNegocio.registrarVenta(idUsuario);
+        }
+
     }
 }

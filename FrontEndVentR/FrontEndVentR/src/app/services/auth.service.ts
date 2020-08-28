@@ -5,6 +5,7 @@ import { map, catchError, tap } from 'rxjs/operators';
 import { UserModel } from '../models/user.model';
 import { UsersService } from './users.service';
 
+const endpoint = 'http://localhost:59292/api/Usuario/';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -17,16 +18,17 @@ const httpOptions = {
 })
 export class AuthService {
 
-  private _url = '';
-
-  userToken: string;
+  userTokenEmail: string;
+  userTokenId: number;
   date: any;
   user: any;
+  responseStatus: number;
+  users:any=[];
 
-  constructor( private usersService: UsersService, private http: HttpClient) {
+  constructor(  private usersService: UsersService,
+                private http: HttpClient) {
     this.user = new UserModel() ;
     this.readToken();
-    this.getUser();
   }
 
   private extractData(res: Response) {
@@ -34,70 +36,87 @@ export class AuthService {
     return body || { };
   }
 
-  getUser(){
-    this.usersService.getById(parseInt(this.userToken))
-    .subscribe( resp=>{
-      this.user=resp;
-    });
-  }
-
-  logout(){
-    localStorage.removeItem('token')
-  }
-
   login( user: UserModel){
-
-    if (user.email == "admin@admin.com" && user.password=="12345678" ){
-      this.saveToken("1000");
-      return user.email;
-    }
-    
-    /*
-    return this.http.post<any>(this._url + 'login/', JSON.stringify(user), httpOptions)
+    return this.http.post<any>(endpoint + 'VerificarUsuario/', JSON.stringify(user), httpOptions)
     .pipe(
       tap((user) => console.log('processing...')),
       catchError(this.handleError<any>('error login user')),
       map(resp =>{
+        console.log("Login service:"+resp);
         if(resp){
-          this.saveToken(resp.usersId);
+          //save email an id in token
+          this.saveToken(user.correo);
         }
         return resp;
       })
     );
-    */
-
    }
 
-   private saveToken(idUser: string){
-      this.userToken = idUser;
-      localStorage.setItem('token', this.userToken);
+   saveUserId(){
+    this.usersService.getAll()
+    .subscribe(resp=>{
+      this.users=resp;      
+      for(let user of this.users){
+        if( user.correo == localStorage.getItem("token")){
+          localStorage.setItem('userId',user.id_Usuario)
+          return this.user=user;
+        }
+      }
+    })
+  }
+
+  logout(){
+    localStorage.removeItem('token');
+    localStorage.removeItem('userId');
+  }
+
+   private saveToken(correo: string){
+      this.userTokenEmail = correo;
+      localStorage.setItem('token', this.userTokenEmail);
+      this.saveUserId();
    }
 
-   readToken(){
-     
+   readToken(){     
     if(localStorage.getItem('token')){
-      this.userToken = localStorage.getItem('token');
+      this.userTokenEmail = localStorage.getItem('token');
     }else{
-      this.userToken = '';
+      this.userTokenEmail = '';
     }
-    return this.userToken;
+    return this.userTokenEmail;
    }
-
+  
+   /*
+   adduser( user: UserModel){
+     return this.http.post(endpoint, JSON.stringify(user), httpOptions)
+     .pipe(
+       map((resp:any) => {
+        console.log("Map");
+        return resp;
+       }),
+       catchError((err: any)=>{
+        return err.error.text;
+       })
+     );
+   } 
+   */
+   
   adduser( user: UserModel){
-
-    return this.http.post<any>(this._url, JSON.stringify(user), httpOptions)
-    .pipe(
+    return this.http.post<any>(endpoint, JSON.stringify(user), httpOptions).pipe(
       tap((user) => console.log('added user')),
       catchError(this.handleError<any>('error add user')),
       map(resp =>{
         return resp;
       })
     );
-
    }
+   
 
   isLogin(): boolean{
-    return parseInt( this.userToken) > 0;
+    
+    if(this.userTokenEmail){
+      return true;
+    }
+    return false;    
   }
 
   haveRole(role:string): boolean{

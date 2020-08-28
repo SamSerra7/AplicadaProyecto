@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Entidad
 {
-    public class CarritoComprasProducto
+    public class CarritoComprasProducto : CarritoCompras
     {
 
         private int id_carrito_compras_producto;

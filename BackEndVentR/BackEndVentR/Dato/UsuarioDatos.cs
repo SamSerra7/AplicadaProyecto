@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlTypes;
 using System.Text;
 using Entidad;
 using Npgsql;
+using NpgsqlTypes;
 
 namespace Dato
 {
     public class UsuarioDatos
     {
         private Conexion conexion = new Conexion();
+        private CarritoComprasDatos carritoCompraDatos = new CarritoComprasDatos();
 
         public List<Usuario> ListarUsuarios()
         {
@@ -116,6 +120,31 @@ namespace Dato
                 con.Close();
             }
             return false;
+        }
+
+
+        public Boolean registrarVenta(int idUsuario)
+        {
+            Decimal facturaTotal = carritoCompraDatos.venderProductoCarrito(idUsuario);
+            using (NpgsqlConnection con = conexion.GetConexion())
+            {
+                con.Open();
+                string sql = "call pa_registrar_venta(@idUsuario, @totalFactura)";
+
+                using (var command = new NpgsqlCommand(sql, con))
+                {
+                    command.Parameters.AddWithValue("@idUsuario", idUsuario);
+                    command.Parameters.AddWithValue("@totalFactura", facturaTotal);
+                    int result = command.ExecuteNonQuery();
+
+                    if (result == -1)
+                        return true;
+                    else
+                        return false;
+
+
+                }
+            }
         }
 
     }
