@@ -18,16 +18,17 @@ const httpOptions = {
 })
 export class AuthService {
 
-  userToken: string;
+  userTokenEmail: string;
+  userTokenId: number;
   date: any;
   user: any;
   responseStatus: number;
+  users:any=[];
 
   constructor(  private usersService: UsersService,
                 private http: HttpClient) {
     this.user = new UserModel() ;
     this.readToken();
-    this.getUser();
   }
 
   private extractData(res: Response) {
@@ -43,6 +44,7 @@ export class AuthService {
       map(resp =>{
         console.log("Login service:"+resp);
         if(resp){
+          //save email an id in token
           this.saveToken(user.correo);
         }
         return resp;
@@ -50,30 +52,37 @@ export class AuthService {
     );
    }
 
-  getUser(){
-    this.usersService.getById(parseInt(this.userToken))
-    .subscribe( resp=>{
-      this.user=resp;
-    });
+   saveUserId(){
+    this.usersService.getAll()
+    .subscribe(resp=>{
+      this.users=resp;      
+      for(let user of this.users){
+        if( user.correo == localStorage.getItem("token")){
+          localStorage.setItem('userId',user.id_Usuario)
+          return this.user=user;
+        }
+      }
+    })
   }
 
   logout(){
-    localStorage.removeItem('token')
+    localStorage.removeItem('token');
+    localStorage.removeItem('userId');
   }
 
    private saveToken(correo: string){
-      this.userToken = correo;
-      localStorage.setItem('token', this.userToken);
+      this.userTokenEmail = correo;
+      localStorage.setItem('token', this.userTokenEmail);
+      this.saveUserId();
    }
 
-   readToken(){
-     
+   readToken(){     
     if(localStorage.getItem('token')){
-      this.userToken = localStorage.getItem('token');
+      this.userTokenEmail = localStorage.getItem('token');
     }else{
-      this.userToken = '';
+      this.userTokenEmail = '';
     }
-    return this.userToken;
+    return this.userTokenEmail;
    }
   
    /*
@@ -104,7 +113,7 @@ export class AuthService {
 
   isLogin(): boolean{
     
-    if(this.userToken){
+    if(this.userTokenEmail){
       return true;
     }
     return false;    
