@@ -14,6 +14,7 @@ namespace BackEndVentR.Controllers
     public class UsuarioController : ControllerBase
     {
         private UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
+        private ProductoNegocio productoNegocio = new ProductoNegocio();
 
         //GET : api/Usuario"
         [HttpGet]
@@ -55,6 +56,26 @@ namespace BackEndVentR.Controllers
         {
             return usuarioNegocio.registrarVenta(idUsuario);
         }
+
+        //PRODUCTO
+
+
+
+
+        // PUT api/<ProductoController> listar para un usuario específico
+        [HttpGet("{idUsuario}")]
+        public IEnumerable<Producto> listarProductosUsuario(int idUsuario)
+        {
+            return productoNegocio.listarProductosPorUsuario(idUsuario);
+        }
+
+        // PUT api/<ProductoController>/5   buscar algún producto, para un usuario específico
+        [HttpGet("{idUsuario}/producto/{idProducto}")]
+        public Producto buscarProductoUsuario(int idProducto, int idUsuario)
+        {
+            return productoNegocio.buscarProductoUsuario(idProducto, idUsuario);
+        }
+
 
     }
 }
