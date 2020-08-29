@@ -39,9 +39,6 @@ export class NavbarComponent implements OnInit {
 
     this.shopcartService.getByUserId(this.userId)
     .subscribe(productsResp =>{
-
-      console.log(productsResp);
-
       if(!productsResp){
         return false;
       }

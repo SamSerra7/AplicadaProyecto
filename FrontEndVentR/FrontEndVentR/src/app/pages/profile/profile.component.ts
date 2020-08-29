@@ -15,7 +15,6 @@ export class ProfileComponent implements OnInit {
     this.usersService.getById(parseInt(localStorage.getItem("userId")))
     .subscribe(user => {
       this.user = user;
-      console.log(this.user);
     });
    }
 
