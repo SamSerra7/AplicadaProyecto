@@ -1,11 +1,11 @@
 <app-navbar></app-navbar>
 
-<div class="container mb-5">
+<div class="container mb-5 animated fadeInDown">
     <br>
     <br>
 
     <h1>Carrito de compras</h1>
-    <div class="row">
+    <div *ngIf="shopcart.length > 0" class="row">
         <div class="col-12">
             <table class="table">
                 <thead>
@@ -72,6 +72,13 @@
         </div>
         <div class="col-12">
             <button style="width: 50%;" class="float-right btn btn-outline-danger btn-block m-2">Pagar</button>
+        </div>
+    </div>
+
+    <div *ngIf="shopcart.length == 0" class="row text-center">
+        <div class="col-12">
+            <h3 style="color: red;">Carrito vacio</h3>
+            <a routerLink="['/home']" class="m-5 btn btn-outline-primary btn-block">Ir a comprar...</a>
         </div>
     </div>
 </div>

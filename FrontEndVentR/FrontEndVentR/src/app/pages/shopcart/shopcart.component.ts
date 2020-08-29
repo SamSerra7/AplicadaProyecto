@@ -37,6 +37,7 @@ export class ShopcartComponent implements OnInit {
     this.shopcartService.getByUserId(this.userId)
     .subscribe(productsResp =>{
       this.shopcart = productsResp;
+      console.log(this.shopcart);
       this.getCalculations();
     })
 
