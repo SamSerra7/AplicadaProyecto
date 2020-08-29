@@ -10,9 +10,9 @@ namespace Negocio
     {
 
         private CarritoComprasDatos carrito_compras_datos = new CarritoComprasDatos();
-        public bool agregar_producto_carrito(CarritoComprasProducto carrito)
+        public bool agregar_producto_carrito(int idUsuario, CarritoComprasProducto carrito)
         {
-            return carrito_compras_datos.agregar_producto_carrito(carrito); 
+            return carrito_compras_datos.agregar_producto_carrito(idUsuario,carrito); 
         }
 
         
