@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
 
   //variables
   products:any=[];
+  loading=true;
   @ViewChild( CdkVirtualScrollViewport) viewport: CdkVirtualScrollViewport;
 
   constructor(  public produtsService: ProdutsService,
@@ -34,6 +35,7 @@ export class HomeComponent implements OnInit {
     this.produtsService.getAll().subscribe((data:{})=>{
       this.products=data;
       localStorage.setItem('products', JSON.stringify(this.products));
+      this.loading=false;
     });
   }
 
