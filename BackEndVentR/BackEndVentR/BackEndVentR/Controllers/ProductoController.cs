@@ -25,12 +25,7 @@ namespace BackEndVentR.Controllers
             return productoNegocio.listarProductos();
         }
 
-        // PUT api/<ProductoController> listar para un usuario específico
-        [HttpPut]
-        public IEnumerable<Producto> listarProductosUsuario([FromBody] int idUsuario)
-        {
-            return productoNegocio.listarProductosPorUsuario(idUsuario);
-        }
+        
 
 
         // GET api/<ProductoController>/5   buscar sin usuario
@@ -40,12 +35,6 @@ namespace BackEndVentR.Controllers
             return productoNegocio.buscarProducto(idProducto);
         }
 
-        // PUT api/<ProductoController>/5   buscar algún producto, para un usuario específico
-        [HttpPut("{idProducto}")]
-        public Producto buscarProductoUsuario(int idProducto, [FromBody] int idUsuario)
-        {
-            return productoNegocio.buscarProductoUsuario(idProducto,idUsuario);
-        }
 
 
     }
