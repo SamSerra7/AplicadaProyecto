@@ -20,6 +20,7 @@ export class ProductComponent implements OnInit {
   shopcart:ShopCartModel;
   shopcarts:any=[];
   newProduct=true;
+  userId:number;
 
   constructor(  private activatedRoute:ActivatedRoute, 
                 private produtsService:ProdutsService,
@@ -32,7 +33,7 @@ export class ProductComponent implements OnInit {
         this.product=data;
       });
     });
-
+    this.userId = parseInt(localStorage.getItem("userId"));
     this.shopcart=new ShopCartModel();
    }
 
@@ -40,13 +41,27 @@ export class ProductComponent implements OnInit {
   }
 
   addShopcart(idProduct:number){
-    
-      console.log(this.product);
-      this.shopcart.precio=this.product.precio.value;
-      this.shopcart.detalle = this.product.detalle;
-      this.shopcart.nombre= this.product.nombre;
-      this.shopcart.urlImg = this.product.urlImg;
 
+    this.shopcart.id_usuario=this.userId;
+    this.shopcart.idProducto=idProduct;
+    this.shopcartService.addProductShopCart(this.shopcart)
+    .subscribe( resp => {
+      if(resp){
+        console.log("agregado");
+      }else{
+        console.log("NO agregado");
+
+      }
+    } )
+
+  }
+  /*
+  addShopcart(idProduct:number){
+
+    this.shopcart.precio=this.product.precio.value;
+    this.shopcart.detalle = this.product.detalle;
+    this.shopcart.nombre= this.product.nombre;
+    this.shopcart.urlImg = this.product.urlImg;
     this.shopcart.id_producto=idProduct;
     this.shopcart.id_usuario=parseInt( localStorage.getItem("userId"));
     
@@ -83,5 +98,6 @@ export class ProductComponent implements OnInit {
     return true;
     
   }
+  */
 
 }

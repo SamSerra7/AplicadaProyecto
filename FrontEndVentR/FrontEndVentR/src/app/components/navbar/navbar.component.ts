@@ -7,6 +7,7 @@ import { UsersService } from '../../services/users.service';
 
 //Models
 import { UserModel } from '../../models/user.model';
+import { ShopcartService } from '../../services/shopcart.service';
 
 
 @Component({
@@ -23,7 +24,9 @@ export class NavbarComponent implements OnInit {
 
   constructor(private auth: AuthService, 
               private router:Router,
-              private profile: UsersService) {
+              private profile: UsersService,
+              private shopcartService:ShopcartService) {
+    this.userId= parseInt(localStorage.getItem("userId"));
     this.user = new UserModel();   
     this.loadProfile();  
     this.countProducts();
@@ -34,16 +37,22 @@ export class NavbarComponent implements OnInit {
 
   countProducts(){
 
-    this.shopcarts =  JSON.parse(localStorage.getItem('shopcart'));
+    this.shopcartService.getByUserId(this.userId)
+    .subscribe(productsResp =>{
 
-    if(!this.shopcarts){
-      return false;
-    }
-    for(let shopcart of this.shopcarts){
-      this.cantItems+=shopcart.cantidad;    
-    }  
+      console.log(productsResp);
 
-  }
+      if(!productsResp){
+        return false;
+      }
+      for(let shopcart of productsResp){
+        this.cantItems += shopcart.cantidad_Solicitada;    
+      } 
+    })
+
+    /*this.shopcarts =  JSON.parse(localStorage.getItem('shopcart'));*/
+
+  }  
 
   findProduct(textToFind:string){    
     this.router.navigate(['/results',textToFind]);
