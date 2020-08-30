@@ -30,7 +30,7 @@ namespace Dato
             using(NpgsqlConnection con = conexion.GetConexion())
             {
                 con.Open();
-                string sql = "SELECT id_producto,nombre,precio,url_img,detalle,activo,cantidad,id_proveedor FROM products.\"Producto\" WHERE activo<>false";
+                string sql = "SELECT id_producto,nombre,precio,url_img,detalle,activo,cantidad,id_proveedor FROM products.producto WHERE activo<>false";
                 
                 
                 using(var command = new NpgsqlCommand(sql, con))
@@ -66,7 +66,7 @@ namespace Dato
             using (NpgsqlConnection con = conexion.GetConexion())
             {
                 con.Open();
-                string sql = "SELECT id_producto,nombre,precio,url_img,detalle,activo,cantidad,id_proveedor FROM products.\"Producto\" " 
+                string sql = "SELECT id_producto,nombre,precio,url_img,detalle,activo,cantidad,id_proveedor FROM products.producto " 
                                 + " WHERE activo<>false AND id_producto = @idProducto";
 
                 using (var command = new NpgsqlCommand(sql, con))

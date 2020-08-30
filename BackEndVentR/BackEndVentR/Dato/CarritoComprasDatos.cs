@@ -12,7 +12,7 @@ namespace Dato
         private ProductoDatos productoDato = new ProductoDatos();
 
 
-        public bool agregar_producto_carrito(CarritoComprasProducto carrito)
+        public bool agregar_producto_carrito(int idUsuario, CarritoComprasProducto carrito)
         {
             
             using (NpgsqlConnection con = conexion.GetConexion())
@@ -24,7 +24,7 @@ namespace Dato
 
                     using (var command = new NpgsqlCommand(sql, con))
                     {
-                        command.Parameters.AddWithValue("@idUsuario", carrito.idUsuario);
+                        command.Parameters.AddWithValue("@idUsuario", idUsuario);
                         command.Parameters.AddWithValue("@idProducto", carrito.idProducto);
                         command.Parameters.AddWithValue("@cantidad_agregada", carrito.Cantidad);
 

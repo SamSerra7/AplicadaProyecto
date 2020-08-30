@@ -26,11 +26,11 @@ namespace BackEndVentR.Controllers
 
 
         // POST api/carritocompras/post
-        [HttpPost ("{carritocompras}")]
-        public bool Post([FromBody] CarritoComprasProducto carrito)
+        [HttpPost ("{idUsuario}")]
+        public bool Post(int idUsuario, [FromBody]  CarritoComprasProducto carrito)
         {
 
-            bool respuesta = carrito_compras_negocio.agregar_producto_carrito(carrito);
+            bool respuesta = carrito_compras_negocio.agregar_producto_carrito(idUsuario,carrito);
             return respuesta;
         }
 
