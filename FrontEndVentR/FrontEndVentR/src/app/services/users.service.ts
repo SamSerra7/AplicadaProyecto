@@ -41,8 +41,6 @@ export class UsersService {
       catchError(this.handleError<any>('no user by id'))
       );
   }
-  
-
 
   /*----------------------------------------------*/
   updateuser(users: UserModel): Observable<any>{
