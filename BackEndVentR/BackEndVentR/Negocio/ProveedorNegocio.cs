@@ -11,6 +11,10 @@ namespace Negocio
 
         private ProveedorDatos proveedorDatos = new ProveedorDatos();
 
+        public bool AgregarProveedor(Proveedor proveedor) {
+            return proveedorDatos.AgregarProveedor(proveedor);
+        }
+
         public IEnumerable<Proveedor> listarProveedores()
         {
             List<Proveedor> proveedors = proveedorDatos.listarProveedores();
@@ -26,6 +30,17 @@ namespace Negocio
             //TODO: verificar que solo retorne productos y proveedores activos 
             return proveedor;
 
+        }
+
+        //Activa un proveedor por su ID
+        public Boolean ActivarProveedor(int IdProveedor)
+        {
+            return proveedorDatos.ActivarProveedor(IdProveedor);
+        }
+        //Desactiva un proveedor por su ID
+        public Boolean DesactivarProveedor(int IdProveedor)
+        {
+            return proveedorDatos.DesactivarProveedor(IdProveedor);
         }
 
     }
