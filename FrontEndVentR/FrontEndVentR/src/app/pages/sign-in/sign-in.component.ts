@@ -42,7 +42,6 @@ export class SignInComponent implements OnInit {
   
 
   doForm(){
-
     this.form = this.fb.group({
       password: ['', [Validators.required, Validators.minLength(8)]],
       email:    [this.user.contrasennia, [Validators.required, Validators.email]],
@@ -71,7 +70,6 @@ export class SignInComponent implements OnInit {
 
     this.authService.login(this.user)
     .subscribe(resp=>{
-      console.log("Login:"+resp);
       if(resp){
         //if login
         Swal.close();        
