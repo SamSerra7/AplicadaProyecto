@@ -24,8 +24,8 @@ export class ShopcartService {
 
   constructor(private http: HttpClient) { }
 
-  getByUserId(id:number): Observable<any> {
-    return this.http.get(endpoint +id).pipe(
+  getByUserId(id:number){
+    return this.http.get(endpoint + id).pipe(
       map(this.extractData),
       catchError(this.handleError<any>('getById'))
       );

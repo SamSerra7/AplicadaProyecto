@@ -18,16 +18,15 @@ export class NavbarComponent implements OnInit {
 
   cantItems:number=0;
   isLogin = false;
-  user: any;
-  userId: number;
+  user: UserModel;
   shopcarts:any=[];
 
   constructor(private auth: AuthService, 
               private router:Router,
               private profile: UsersService,
               private shopcartService:ShopcartService) {
-    this.userId= parseInt(localStorage.getItem("userId"));
-    this.user = new UserModel();   
+    this.user = new UserModel(); 
+    this.user.id_Usuario = parseInt(localStorage.getItem("userId"));
     this.loadProfile();  
     this.countProducts();
    }
@@ -37,7 +36,7 @@ export class NavbarComponent implements OnInit {
 
   countProducts(){
 
-    this.shopcartService.getByUserId(this.userId)
+    this.shopcartService.getByUserId(this.user.id_Usuario)
     .subscribe(productsResp =>{
       if(!productsResp){
         return false;

@@ -26,7 +26,7 @@
                         <td>{{newShopcart.productos.detalle}}</td>
                         <td>{{newShopcart.productos.precio.value | currency:'¢'}}</td>
                         <td>{{newShopcart.cantidad_Solicitada}}</td>
-                        <td>{{newShopcart.productos.cantidad * newShopcart.productos.precio.value | currency:'¢'}}</td>
+                        <td>{{newShopcart.cantidad_Solicitada * newShopcart.productos.precio.value | currency:'¢'}}</td>
                         <td>
                             <a class="m-1 btn" (click)="delete(newShopcart.productos.idProducto)" style="color: red;" title="Borrar">
                                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-x-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">

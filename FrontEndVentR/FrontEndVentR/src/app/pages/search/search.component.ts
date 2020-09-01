@@ -15,6 +15,7 @@ export class SearchComponent implements OnInit {
   products:any=[];
   textTofind:string;
   @ViewChild( CdkVirtualScrollViewport) viewport: CdkVirtualScrollViewport;
+  loading=true;
 
   constructor(  private activatedRoute:ActivatedRoute,
                 private produtsService:ProdutsService,
@@ -24,7 +25,7 @@ export class SearchComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {    
       this.textTofind = params['text'];
       this.products = this.produtsService.findProduct(this.textTofind);   
-      console.log(this.products.length)   
+      this.loading=false;      
     });
   }
   viewProduct(id:number){

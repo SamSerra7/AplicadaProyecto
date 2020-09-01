@@ -21,6 +21,7 @@ export class ProductComponent implements OnInit {
   shopcarts:any=[];
   newProduct=true;
   userId:number;
+  
 
   constructor(  private activatedRoute:ActivatedRoute, 
                 private produtsService:ProdutsService,

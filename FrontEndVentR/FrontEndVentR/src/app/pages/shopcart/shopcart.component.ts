@@ -37,7 +37,6 @@ export class ShopcartComponent implements OnInit {
     this.shopcartService.getByUserId(this.userId)
     .subscribe(productsResp =>{
       this.shopcart = productsResp;
-      console.log(this.shopcart);
       this.getCalculations();
     })
 
@@ -46,7 +45,7 @@ export class ShopcartComponent implements OnInit {
 
   getCalculations(){
     for(let newShopcart of this.shopcart ){
-      this.subTotal += newShopcart.productos.precio.value * newShopcart.productos.cantidad;
+      this.subTotal += newShopcart.productos.precio.value * newShopcart.cantidad_Solicitada;
     }
 
     this.iva = this.subTotal * 0.13;

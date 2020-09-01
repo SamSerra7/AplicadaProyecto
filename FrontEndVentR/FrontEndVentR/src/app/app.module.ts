@@ -19,6 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BuyComponent } from './pages/buy/buy.component';
 import { SearchComponent } from './pages/search/search.component';
 import { ProductComponent } from './pages/product/product.component';
+import { LoadingComponent } from './components/loading/loading.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { ProductComponent } from './pages/product/product.component';
     ShopcartComponent,
     BuyComponent,
     ProductComponent,
-    SearchComponent
+    SearchComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
