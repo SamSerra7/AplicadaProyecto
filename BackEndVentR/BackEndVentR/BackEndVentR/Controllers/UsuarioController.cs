@@ -63,7 +63,7 @@ namespace BackEndVentR.Controllers
 
 
         // PUT api/<ProductoController> listar para un usuario específico
-        [HttpGet("{idUsuario}")]
+        [HttpGet("{idUsuario}/producto")]
         public IEnumerable<Producto> listarProductosUsuario(int idUsuario)
         {
             return productoNegocio.listarProductosPorUsuario(idUsuario);
