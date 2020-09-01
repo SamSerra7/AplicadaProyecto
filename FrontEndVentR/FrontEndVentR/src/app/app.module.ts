@@ -20,6 +20,7 @@ import { BuyComponent } from './pages/buy/buy.component';
 import { SearchComponent } from './pages/search/search.component';
 import { ProductComponent } from './pages/product/product.component';
 import { LoadingComponent } from './components/loading/loading.component';
+import { ProductListComponent } from './components/product-list/product-list.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { LoadingComponent } from './components/loading/loading.component';
     BuyComponent,
     ProductComponent,
     SearchComponent,
-    LoadingComponent
+    LoadingComponent,
+    ProductListComponent
   ],
   imports: [
     BrowserModule,

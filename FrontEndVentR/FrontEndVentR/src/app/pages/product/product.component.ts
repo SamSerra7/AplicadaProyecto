@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 //Services
 import { ProdutsService } from '../../services/produts.service';
 //Models
 import { ProductModel } from '../../models/products.model';
 import { ShopcartService } from '../../services/shopcart.service';
-import { ShopCartModel } from 'src/app/models/shopcart.model';
 
+import Swal from 'sweetalert2';
+import { ShopCartModel } from '../../models/shopcart.model';
 
 @Component({
   selector: 'app-product',
@@ -25,11 +26,11 @@ export class ProductComponent implements OnInit {
 
   constructor(  private activatedRoute:ActivatedRoute, 
                 private produtsService:ProdutsService,
-                private shopcartService:ShopcartService
+                private shopcartService:ShopcartService,
+                private router: Router
                 ) {
 
     this.activatedRoute.params.subscribe( params =>{
-      console.log(params['id']);
       produtsService.getById(params['id']).subscribe((data:{})=>{
         this.product=data;
       });
@@ -48,10 +49,18 @@ export class ProductComponent implements OnInit {
     this.shopcartService.addProductShopCart(this.shopcart)
     .subscribe( resp => {
       if(resp){
-        console.log("agregado");
+        Swal.fire(
+          'Agregado al carrito',
+          'OK para continuar',
+          'success'
+        )
+        this.router.navigateByUrl('/shopcart');
       }else{
-        console.log("NO agregado");
-
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Algo salio mal; intenta otra vez',
+        })
       }
     } )
 
