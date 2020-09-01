@@ -13,8 +13,8 @@ namespace BackEndVentR.Controllers
     [Route("api/[controller]")]
     [ApiController]
 
-   
-    public class ProveedorController : ControllerBase 
+
+    public class ProveedorController : ControllerBase
     {
 
         private ProveedorNegocio proveedorNegocio = new ProveedorNegocio();
@@ -23,7 +23,7 @@ namespace BackEndVentR.Controllers
         public IEnumerable<Proveedor> Get()
         {
             return proveedorNegocio.listarProveedores();
-            
+
         }
 
         // GET api/<ProveedorController>/5
@@ -33,10 +33,27 @@ namespace BackEndVentR.Controllers
             return proveedorNegocio.buscarProveedor(idProveedor);
         }
 
-        // POST api/<ProveedorController>
-        [HttpPost]
-        public void Post([FromBody] string value)
+        //GET api/Proveedor/ActivarProveedor/1    Activa un proveedor especifico por su id
+        [HttpGet("ActivarProveedor/{IdProveedor}")]
+        public Boolean ActivarProveedor(int IdProveedor)
         {
+            return proveedorNegocio.ActivarProveedor(IdProveedor);
+        }
+
+        //GET api/Proveedor/DesactivarProveedor/1      Desactiva un proveedor especifico por su id
+        [HttpGet("DesactivarProveedor/{IdProveedor}")]
+        public Boolean DesactivarProveedor(int IdProveedor)
+        {
+            return proveedorNegocio.DesactivarProveedor(IdProveedor);
+        }
+
+        //Recibe y Agrega un nuevo proveedor, recibe en el modelo solo el Nombre, el id lo genera la base y 
+        //el estado es default true
+        // POST api/Proveedor
+        [HttpPost]
+        public bool Post([FromBody] Proveedor proveedor)
+        {
+            return proveedorNegocio.AgregarProveedor(proveedor);
         }
 
         // PUT api/<ProveedorController>/5
@@ -51,4 +68,6 @@ namespace BackEndVentR.Controllers
         {
         }
     }
+
+
 }

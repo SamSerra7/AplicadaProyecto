@@ -155,5 +155,51 @@ namespace Dato
             return productos;
         }
 
+
+        //Desactiva un producto por su id
+        public Boolean DesactivarProducto(int IdProducto)
+        {
+
+            using (NpgsqlConnection con = conexion.GetConexion())
+            {
+                con.Open();
+                string sql = "Call products.pa_desactivar_producto(@p_idProducto);";
+
+                using (var command = new NpgsqlCommand(sql, con))
+                {
+                    
+
+                        command.Parameters.AddWithValue(":p_idProducto", IdProducto);
+                        command.ExecuteNonQuery();
+                   
+                }
+
+                return true;
+            }
+
+        }
+
+
+        //Activa un producto por su id
+        public Boolean ActivarProducto(int IdProducto)
+        {
+
+            using (NpgsqlConnection con = conexion.GetConexion())
+            {
+                con.Open();
+                string sql = "Call products.pa_activar_producto(@p_idProducto);";
+
+                using (var command = new NpgsqlCommand(sql, con))
+                {
+                   
+                        command.Parameters.AddWithValue(":p_idProducto", IdProducto);
+                        command.ExecuteNonQuery();
+                    
+                }
+
+                return true;
+            }
+
+        }
     }
 }

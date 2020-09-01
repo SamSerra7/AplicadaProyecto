@@ -35,6 +35,11 @@ namespace Entidad
         {
         }
 
+        public Proveedor(string nombre)
+        {
+            this.Nombre = nombre;
+        }
+
         public Proveedor(int id_proveedor, string nombre, bool activo)
         {
             this.IdProveedor = id_proveedor;
