@@ -68,8 +68,6 @@ export class AuthService {
   logout(){
     localStorage.removeItem('token');
     localStorage.removeItem('userId');
-    /*localStorage.removeItem('shopcart');*/
-    
   }
 
    private saveToken(correo: string){
@@ -113,12 +111,12 @@ export class AuthService {
    }
    
 
-  isLogin(): boolean{
-    
-    if(this.userTokenEmail){
-      return true;
+  isLogin(): boolean{ 
+
+    if(this.userTokenEmail == ""){
+      return false;
     }
-    return false;    
+    return true;    
   }
 
   haveRole(role:string): boolean{
