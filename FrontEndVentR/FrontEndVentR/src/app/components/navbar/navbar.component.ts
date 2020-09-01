@@ -3,10 +3,10 @@ import { Router } from '@angular/router';
 
 //Services
 import { AuthService } from '../../services/auth.service';
-import { UsersService } from '../../services/users.service';
 
 //Models
 import { UserModel } from '../../models/user.model';
+import { ShopcartService } from '../../services/shopcart.service';
 
 
 @Component({
@@ -17,14 +17,14 @@ export class NavbarComponent implements OnInit {
 
   cantItems:number=0;
   isLogin = false;
-  user: any;
-  userId: number;
+  user: UserModel;
   shopcarts:any=[];
 
   constructor(private auth: AuthService, 
               private router:Router,
-              private profile: UsersService) {
-    this.user = new UserModel();   
+              private shopcartService:ShopcartService) {
+    this.user = new UserModel(); 
+    this.user.id_Usuario = parseInt(localStorage.getItem("userId"));
     this.loadProfile();  
     this.countProducts();
    }
@@ -33,17 +33,17 @@ export class NavbarComponent implements OnInit {
   }
 
   countProducts(){
-
-    this.shopcarts =  JSON.parse(localStorage.getItem('shopcart'));
-
-    if(!this.shopcarts){
-      return false;
+    if(this.user.id_Usuario){
+      this.shopcartService.getByUserId(this.user.id_Usuario)
+      .subscribe(productsResp =>{
+        if(productsResp){
+          for(let shopcart of productsResp){
+            this.cantItems += shopcart.cantidad_Solicitada;    
+          }
+        }
+      })
     }
-    for(let shopcart of this.shopcarts){
-      this.cantItems+=shopcart.cantidad;    
-    }  
-
-  }
+  }  
 
   findProduct(textToFind:string){    
     this.router.navigate(['/results',textToFind]);

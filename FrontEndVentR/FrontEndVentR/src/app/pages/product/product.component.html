@@ -1,27 +1,24 @@
 <app-navbar></app-navbar>
-
-<div class="container">
-    <h1>Detalle Producto</h1>
-    <div class="row animated fadeInDown">
-        <div class="col-md-4 mt-2">
-            <h5 class="card-title">{{product.nombre}}</h5>
-            <img width="100%" [src]="product.urlImg" [alt]="product.nombre">
-            <a routerLink="['/home']" class="m-5 btn btn-outline-danger btn-block">Seguir comprando</a>
-        </div>
-        <div class="col-md-8">
-            <div class="card-body">
-                <h6>Detalles:</h6>
-                <p class="card-text">{{product.detalle}}</p>
-                <h6>Precio:</h6>
-                <h4 style="color: red;">{{product.precio.value | currency: '¢'}}</h4>
-                <p class="card-text">Disponibles:<small class="text-muted"> {{product.cantidad}}</small></p>
-                <button (click)="addShopcart(product.idProducto)" class="btn btn-outline-primary btn-block"> Agregar al carrito</button>
+<section>
+    <div class="container">
+        <h1>Detalle Producto</h1>
+        <div class="row animated fadeInDown">
+            <div class="col-md-4 mt-2">
+                <h5 class="card-title">{{product.nombre}}</h5>
+                <img width="100%" [src]="product.urlImg" [alt]="product.nombre">
+                <a routerLink="['/home']" class="m-5 btn btn-outline-danger">Seguir comprando</a>
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h6>Detalles:</h6>
+                    <p class="card-text">{{product.detalle}}</p>
+                    <h6>Precio:</h6>
+                    <h4 style="color: red;">{{product.precio.value | currency: '¢'}}</h4>
+                    <p class="card-text">Disponibles:<small class="text-muted"> {{product.cantidad}}</small></p>
+                    <button *ngIf="userId" (click)="addShopcart(product.idProducto)" class="btn btn-outline-primary btn-block"> Agregar al carrito </button>
+                    <button *ngIf="!userId" routerLink="/sign-in" class="btn btn-outline-primary btn-block"> Agregar al carrito </button>
+                </div>
             </div>
         </div>
     </div>
-</div>
-
-<hr>
-<pre>
-    {{product | json}}
-</pre>
+</section>
