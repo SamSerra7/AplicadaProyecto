@@ -25,6 +25,8 @@ export class NavbarComponent implements OnInit {
               private shopcartService:ShopcartService) {
     this.user = new UserModel(); 
     this.user.id_Usuario = parseInt(localStorage.getItem("userId"));
+    this.isLogin =  this.auth.isLogin(); 
+    console.log("logiado:"+this.isLogin);
     this.loadProfile();  
     this.countProducts();
    }
@@ -33,7 +35,7 @@ export class NavbarComponent implements OnInit {
   }
 
   countProducts(){
-    if(this.user.id_Usuario){
+    if(this.user.id_Usuario > 0){
       this.shopcartService.getByUserId(this.user.id_Usuario)
       .subscribe(productsResp =>{
         if(productsResp){
@@ -49,16 +51,14 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['/results',textToFind]);
   }
 
-   logout(){
+   logout(){     
     this.auth.logout();
-    this.router.navigate(['/sign-in']);
+    window.location.replace('/sign-in');
   }
 
   loadProfile(){
-    this.isLogin =  this.auth.isLogin();    
     if(this.isLogin){
       this.user.correo = localStorage.getItem('token');
-    }    
-
+    }  
   }
 }
