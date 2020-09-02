@@ -1,0 +1,47 @@
+﻿@model IEnumerable<PresentacionVentR.Models.Proveedor>
+
+@{
+    ViewData["Title"] = "listarProveedores";
+}
+
+<center> <h3>Lista de todos los proveedores</h3> </center>
+
+<p>
+    <a asp-action="RegistrarProveedor"  >Registrar Proveedor</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdProveedor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.activo)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+           @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdProveedor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.activo)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "FiltrarProveedor", new { idProveedor = item.IdProveedor }) |
+                @Html.ActionLink("Details", "DetalleProveedor", new { idProveedor = item.IdProveedor }) |
+                @Html.ActionLink("Eliminar", "EliminarProveedor", new { idProveedor = item.IdProveedor })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
