@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dato", "Dato\Dato.csproj", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentacion", "Presentacion", "{01B3C938-7D43-46CA-A012-6E19C2F7AE52}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PresentacionVentR", "PresentacionVentR\PresentacionVentR.csproj", "{C3ACAD5E-A4B9-40DF-A2F4-06018EE20853}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PresentacionVentR", "PresentacionVentR\PresentacionVentR.csproj", "{C3ACAD5E-A4B9-40DF-A2F4-06018EE20853}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
