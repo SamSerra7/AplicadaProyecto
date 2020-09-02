@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\User\\Documents\\Universidad\\Cursos\\Informática Aplicada a los Negocios\\Proyecto\\ProyectoAplicada\\AplicadaProyecto\\BackEndVentR\\BackEndVentR\\BackEndVentR\\BackEndVentR.csproj": {}
+    "D:\\Usuario\\Karo\\Source\\Repo\\AplicadaProyecto\\BackEndVentR\\BackEndVentR\\BackEndVentR\\BackEndVentR.csproj": {}
   },
   "projects": {
-    "C:\\Users\\User\\Documents\\Universidad\\Cursos\\Informática Aplicada a los Negocios\\Proyecto\\ProyectoAplicada\\AplicadaProyecto\\BackEndVentR\\BackEndVentR\\BackEndVentR\\BackEndVentR.csproj": {
+    "D:\\Usuario\\Karo\\Source\\Repo\\AplicadaProyecto\\BackEndVentR\\BackEndVentR\\BackEndVentR\\BackEndVentR.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Documents\\Universidad\\Cursos\\Informática Aplicada a los Negocios\\Proyecto\\ProyectoAplicada\\AplicadaProyecto\\BackEndVentR\\BackEndVentR\\BackEndVentR\\BackEndVentR.csproj",
+        "projectUniqueName": "D:\\Usuario\\Karo\\Source\\Repo\\AplicadaProyecto\\BackEndVentR\\BackEndVentR\\BackEndVentR\\BackEndVentR.csproj",
         "projectName": "BackEndVentR",
-        "projectPath": "C:\\Users\\User\\Documents\\Universidad\\Cursos\\Informática Aplicada a los Negocios\\Proyecto\\ProyectoAplicada\\AplicadaProyecto\\BackEndVentR\\BackEndVentR\\BackEndVentR\\BackEndVentR.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Documents\\Universidad\\Cursos\\Informática Aplicada a los Negocios\\Proyecto\\ProyectoAplicada\\AplicadaProyecto\\BackEndVentR\\BackEndVentR\\BackEndVentR\\obj\\",
+        "projectPath": "D:\\Usuario\\Karo\\Source\\Repo\\AplicadaProyecto\\BackEndVentR\\BackEndVentR\\BackEndVentR\\BackEndVentR.csproj",
+        "packagesPath": "C:\\Users\\Karol\\.nuget\\packages\\",
+        "outputPath": "D:\\Usuario\\Karo\\Source\\Repo\\AplicadaProyecto\\BackEndVentR\\BackEndVentR\\BackEndVentR\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Karol\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -27,11 +27,11 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\User\\Documents\\Universidad\\Cursos\\Informática Aplicada a los Negocios\\Proyecto\\ProyectoAplicada\\AplicadaProyecto\\BackEndVentR\\BackEndVentR\\Entidad\\Entidad.csproj": {
-                "projectPath": "C:\\Users\\User\\Documents\\Universidad\\Cursos\\Informática Aplicada a los Negocios\\Proyecto\\ProyectoAplicada\\AplicadaProyecto\\BackEndVentR\\BackEndVentR\\Entidad\\Entidad.csproj"
+              "D:\\Usuario\\Karo\\Source\\Repo\\AplicadaProyecto\\BackEndVentR\\BackEndVentR\\Entidad\\Entidad.csproj": {
+                "projectPath": "D:\\Usuario\\Karo\\Source\\Repo\\AplicadaProyecto\\BackEndVentR\\BackEndVentR\\Entidad\\Entidad.csproj"
               },
-              "C:\\Users\\User\\Documents\\Universidad\\Cursos\\Informática Aplicada a los Negocios\\Proyecto\\ProyectoAplicada\\AplicadaProyecto\\BackEndVentR\\BackEndVentR\\Negocio\\Negocio.csproj": {
-                "projectPath": "C:\\Users\\User\\Documents\\Universidad\\Cursos\\Informática Aplicada a los Negocios\\Proyecto\\ProyectoAplicada\\AplicadaProyecto\\BackEndVentR\\BackEndVentR\\Negocio\\Negocio.csproj"
+              "D:\\Usuario\\Karo\\Source\\Repo\\AplicadaProyecto\\BackEndVentR\\BackEndVentR\\Negocio\\Negocio.csproj": {
+                "projectPath": "D:\\Usuario\\Karo\\Source\\Repo\\AplicadaProyecto\\BackEndVentR\\BackEndVentR\\Negocio\\Negocio.csproj"
               }
             }
           }
@@ -62,21 +62,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\User\\Documents\\Universidad\\Cursos\\Informática Aplicada a los Negocios\\Proyecto\\ProyectoAplicada\\AplicadaProyecto\\BackEndVentR\\BackEndVentR\\Dato\\Dato.csproj": {
+    "D:\\Usuario\\Karo\\Source\\Repo\\AplicadaProyecto\\BackEndVentR\\BackEndVentR\\Dato\\Dato.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Documents\\Universidad\\Cursos\\Informática Aplicada a los Negocios\\Proyecto\\ProyectoAplicada\\AplicadaProyecto\\BackEndVentR\\BackEndVentR\\Dato\\Dato.csproj",
+        "projectUniqueName": "D:\\Usuario\\Karo\\Source\\Repo\\AplicadaProyecto\\BackEndVentR\\BackEndVentR\\Dato\\Dato.csproj",
         "projectName": "Dato",
-        "projectPath": "C:\\Users\\User\\Documents\\Universidad\\Cursos\\Informática Aplicada a los Negocios\\Proyecto\\ProyectoAplicada\\AplicadaProyecto\\BackEndVentR\\BackEndVentR\\Dato\\Dato.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Documents\\Universidad\\Cursos\\Informática Aplicada a los Negocios\\Proyecto\\ProyectoAplicada\\AplicadaProyecto\\BackEndVentR\\BackEndVentR\\Dato\\obj\\",
+        "projectPath": "D:\\Usuario\\Karo\\Source\\Repo\\AplicadaProyecto\\BackEndVentR\\BackEndVentR\\Dato\\Dato.csproj",
+        "packagesPath": "C:\\Users\\Karol\\.nuget\\packages\\",
+        "outputPath": "D:\\Usuario\\Karo\\Source\\Repo\\AplicadaProyecto\\BackEndVentR\\BackEndVentR\\Dato\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Karol\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -89,8 +89,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\User\\Documents\\Universidad\\Cursos\\Informática Aplicada a los Negocios\\Proyecto\\ProyectoAplicada\\AplicadaProyecto\\BackEndVentR\\BackEndVentR\\Entidad\\Entidad.csproj": {
-                "projectPath": "C:\\Users\\User\\Documents\\Universidad\\Cursos\\Informática Aplicada a los Negocios\\Proyecto\\ProyectoAplicada\\AplicadaProyecto\\BackEndVentR\\BackEndVentR\\Entidad\\Entidad.csproj"
+              "D:\\Usuario\\Karo\\Source\\Repo\\AplicadaProyecto\\BackEndVentR\\BackEndVentR\\Entidad\\Entidad.csproj": {
+                "projectPath": "D:\\Usuario\\Karo\\Source\\Repo\\AplicadaProyecto\\BackEndVentR\\BackEndVentR\\Entidad\\Entidad.csproj"
               }
             }
           }
@@ -124,21 +124,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\User\\Documents\\Universidad\\Cursos\\Informática Aplicada a los Negocios\\Proyecto\\ProyectoAplicada\\AplicadaProyecto\\BackEndVentR\\BackEndVentR\\Entidad\\Entidad.csproj": {
+    "D:\\Usuario\\Karo\\Source\\Repo\\AplicadaProyecto\\BackEndVentR\\BackEndVentR\\Entidad\\Entidad.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Documents\\Universidad\\Cursos\\Informática Aplicada a los Negocios\\Proyecto\\ProyectoAplicada\\AplicadaProyecto\\BackEndVentR\\BackEndVentR\\Entidad\\Entidad.csproj",
+        "projectUniqueName": "D:\\Usuario\\Karo\\Source\\Repo\\AplicadaProyecto\\BackEndVentR\\BackEndVentR\\Entidad\\Entidad.csproj",
         "projectName": "Entidad",
-        "projectPath": "C:\\Users\\User\\Documents\\Universidad\\Cursos\\Informática Aplicada a los Negocios\\Proyecto\\ProyectoAplicada\\AplicadaProyecto\\BackEndVentR\\BackEndVentR\\Entidad\\Entidad.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Documents\\Universidad\\Cursos\\Informática Aplicada a los Negocios\\Proyecto\\ProyectoAplicada\\AplicadaProyecto\\BackEndVentR\\BackEndVentR\\Entidad\\obj\\",
+        "projectPath": "D:\\Usuario\\Karo\\Source\\Repo\\AplicadaProyecto\\BackEndVentR\\BackEndVentR\\Entidad\\Entidad.csproj",
+        "packagesPath": "C:\\Users\\Karol\\.nuget\\packages\\",
+        "outputPath": "D:\\Usuario\\Karo\\Source\\Repo\\AplicadaProyecto\\BackEndVentR\\BackEndVentR\\Entidad\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Karol\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -176,21 +176,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\User\\Documents\\Universidad\\Cursos\\Informática Aplicada a los Negocios\\Proyecto\\ProyectoAplicada\\AplicadaProyecto\\BackEndVentR\\BackEndVentR\\Negocio\\Negocio.csproj": {
+    "D:\\Usuario\\Karo\\Source\\Repo\\AplicadaProyecto\\BackEndVentR\\BackEndVentR\\Negocio\\Negocio.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Documents\\Universidad\\Cursos\\Informática Aplicada a los Negocios\\Proyecto\\ProyectoAplicada\\AplicadaProyecto\\BackEndVentR\\BackEndVentR\\Negocio\\Negocio.csproj",
+        "projectUniqueName": "D:\\Usuario\\Karo\\Source\\Repo\\AplicadaProyecto\\BackEndVentR\\BackEndVentR\\Negocio\\Negocio.csproj",
         "projectName": "Negocio",
-        "projectPath": "C:\\Users\\User\\Documents\\Universidad\\Cursos\\Informática Aplicada a los Negocios\\Proyecto\\ProyectoAplicada\\AplicadaProyecto\\BackEndVentR\\BackEndVentR\\Negocio\\Negocio.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Documents\\Universidad\\Cursos\\Informática Aplicada a los Negocios\\Proyecto\\ProyectoAplicada\\AplicadaProyecto\\BackEndVentR\\BackEndVentR\\Negocio\\obj\\",
+        "projectPath": "D:\\Usuario\\Karo\\Source\\Repo\\AplicadaProyecto\\BackEndVentR\\BackEndVentR\\Negocio\\Negocio.csproj",
+        "packagesPath": "C:\\Users\\Karol\\.nuget\\packages\\",
+        "outputPath": "D:\\Usuario\\Karo\\Source\\Repo\\AplicadaProyecto\\BackEndVentR\\BackEndVentR\\Negocio\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Karol\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -203,11 +203,11 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\User\\Documents\\Universidad\\Cursos\\Informática Aplicada a los Negocios\\Proyecto\\ProyectoAplicada\\AplicadaProyecto\\BackEndVentR\\BackEndVentR\\Dato\\Dato.csproj": {
-                "projectPath": "C:\\Users\\User\\Documents\\Universidad\\Cursos\\Informática Aplicada a los Negocios\\Proyecto\\ProyectoAplicada\\AplicadaProyecto\\BackEndVentR\\BackEndVentR\\Dato\\Dato.csproj"
+              "D:\\Usuario\\Karo\\Source\\Repo\\AplicadaProyecto\\BackEndVentR\\BackEndVentR\\Dato\\Dato.csproj": {
+                "projectPath": "D:\\Usuario\\Karo\\Source\\Repo\\AplicadaProyecto\\BackEndVentR\\BackEndVentR\\Dato\\Dato.csproj"
               },
-              "C:\\Users\\User\\Documents\\Universidad\\Cursos\\Informática Aplicada a los Negocios\\Proyecto\\ProyectoAplicada\\AplicadaProyecto\\BackEndVentR\\BackEndVentR\\Entidad\\Entidad.csproj": {
-                "projectPath": "C:\\Users\\User\\Documents\\Universidad\\Cursos\\Informática Aplicada a los Negocios\\Proyecto\\ProyectoAplicada\\AplicadaProyecto\\BackEndVentR\\BackEndVentR\\Entidad\\Entidad.csproj"
+              "D:\\Usuario\\Karo\\Source\\Repo\\AplicadaProyecto\\BackEndVentR\\BackEndVentR\\Entidad\\Entidad.csproj": {
+                "projectPath": "D:\\Usuario\\Karo\\Source\\Repo\\AplicadaProyecto\\BackEndVentR\\BackEndVentR\\Entidad\\Entidad.csproj"
               }
             }
           }
@@ -235,7 +235,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
         }
       }
     }
