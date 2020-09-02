@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 //Services
 import { ProdutsService } from '../../services/produts.service';
 //Models
 import { ProductModel } from '../../models/products.model';
 import { ShopcartService } from '../../services/shopcart.service';
-import { ShopCartModel } from 'src/app/models/shopcart.model';
 
+import Swal from 'sweetalert2';
+import { ShopCartModel } from '../../models/shopcart.model';
 
 @Component({
   selector: 'app-product',
@@ -20,19 +21,21 @@ export class ProductComponent implements OnInit {
   shopcart:ShopCartModel;
   shopcarts:any=[];
   newProduct=true;
+  userId:number;
+  
 
   constructor(  private activatedRoute:ActivatedRoute, 
                 private produtsService:ProdutsService,
-                private shopcartService:ShopcartService
+                private shopcartService:ShopcartService,
+                private router: Router
                 ) {
 
     this.activatedRoute.params.subscribe( params =>{
-      console.log(params['id']);
       produtsService.getById(params['id']).subscribe((data:{})=>{
         this.product=data;
       });
     });
-
+    this.userId = parseInt(localStorage.getItem("userId"));
     this.shopcart=new ShopCartModel();
    }
 
@@ -40,13 +43,35 @@ export class ProductComponent implements OnInit {
   }
 
   addShopcart(idProduct:number){
-    
-      console.log(this.product);
-      this.shopcart.precio=this.product.precio.value;
-      this.shopcart.detalle = this.product.detalle;
-      this.shopcart.nombre= this.product.nombre;
-      this.shopcart.urlImg = this.product.urlImg;
 
+    this.shopcart.id_usuario=this.userId;
+    this.shopcart.idProducto=idProduct;
+    this.shopcartService.addProductShopCart(this.shopcart)
+    .subscribe( resp => {
+      if(resp){
+        Swal.fire(
+          'Agregado al carrito',
+          'OK para continuar',
+          'success'
+        )
+        this.router.navigateByUrl('/shopcart');
+      }else{
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Algo salio mal; intenta otra vez',
+        })
+      }
+    } )
+
+  }
+  /*
+  addShopcart(idProduct:number){
+
+    this.shopcart.precio=this.product.precio.value;
+    this.shopcart.detalle = this.product.detalle;
+    this.shopcart.nombre= this.product.nombre;
+    this.shopcart.urlImg = this.product.urlImg;
     this.shopcart.id_producto=idProduct;
     this.shopcart.id_usuario=parseInt( localStorage.getItem("userId"));
     
@@ -83,5 +108,6 @@ export class ProductComponent implements OnInit {
     return true;
     
   }
+  */
 
 }

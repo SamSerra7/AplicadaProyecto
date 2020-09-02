@@ -1,0 +1,49 @@
+<div class="container">
+    <app-loading *ngIf="loading == true"></app-loading>
+    <section *ngIf="loading == false">
+        <div>
+            <h2 *ngIf="textTofind">Buscando: <small>{{textTofind}}</small></h2>
+            <div *ngIf="products.length == 0" class="alert alert-info animated fadeInLeft" role="alert">
+                Ninguna considencia
+            </div>
+        </div>
+    </section>
+    <section *ngIf="loading == false">
+        <div>
+            <hr>
+            <h1>Productos disponibles <small> ({{ products.length }})</small> </h1>
+        </div>
+        <div *ngIf="products.length > 0">
+            <div class="btn-group m-2" role="group" aria-label="Basic example">
+                <button (click)="goStart()" type="button" class="btn btn-primary">Inicio</button>
+                <button (click)="goMedium()" type="button" class="btn btn-primary">Medio</button>
+                <button (click)="goEnd()" type="button" class="btn btn-primary">Final</button>
+            </div>
+            <hr>
+            <cdk-virtual-scroll-viewport itemSize="100" class="viewport">
+                <div class="card-columns animated fadeInUp">
+                    <div *cdkVirtualFor="let product of products">
+                        <a (click)="viewProduct(product.idProducto)">
+                            <div class="card container-card">
+                                <img [src]="product.urlImg" class="card-img-top" [alt]="product.nombre">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{product.nombre}}</h5>
+                                    <p class="card-text">{{product.detalle}}</p>
+                                    <p class="card-text">Disponibles:<small class="text-muted"> {{product.cantidad}}</small></p>
+                                    <h4 style="color: red;">{{product.precio.value | currency: '¢'}}</h4>
+                                    <p><small>Código:{{product.idProducto}}</small></p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </cdk-virtual-scroll-viewport>
+            <hr>
+            <div class="btn-group m-2" role="group" aria-label="Basic example">
+                <button (click)="goStart()" type="button" class="btn btn-primary">Inicio</button>
+                <button (click)="goMedium()" type="button" class="btn btn-primary">Medio</button>
+                <button (click)="goEnd()" type="button" class="btn btn-primary">Final</button>
+            </div>
+        </div>
+    </section>
+</div>
