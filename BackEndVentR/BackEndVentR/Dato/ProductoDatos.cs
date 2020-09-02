@@ -100,7 +100,7 @@ namespace Dato
         /// </summary>
         /// <param name="idUsuario"></param>
         /// <param name="idProducto"></param>
-        public void AgregarBusquedaProductoUsuario(int idUsuario,int idProducto)
+        public void AgregarBusquedaProductoUsuario(int idProducto, int idUsuario)
         {
             using (NpgsqlConnection con = conexion.GetConexion())
             {
@@ -130,12 +130,12 @@ namespace Dato
             using (NpgsqlConnection con = conexion.GetConexion())
             {
                 con.Open();
-                string sql = "products.pa_listarProductosPorUsuario(@idUsuario)";
+                string sql = "SELECT * FROM products.pa_listarProductosPorUsuario(@idUsuario)";
 
 
                 using (var command = new NpgsqlCommand(sql, con))
                 {
-                    command.Parameters.AddWithValue(":id_usuario", idUsuario);
+                    command.Parameters.AddWithValue(":idUsuario", idUsuario);
 
 
                     using (NpgsqlDataReader reader = command.ExecuteReader())
@@ -155,5 +155,51 @@ namespace Dato
             return productos;
         }
 
+
+        //Desactiva un producto por su id
+        public Boolean DesactivarProducto(int IdProducto)
+        {
+
+            using (NpgsqlConnection con = conexion.GetConexion())
+            {
+                con.Open();
+                string sql = "Call products.pa_desactivar_producto(@p_idProducto);";
+
+                using (var command = new NpgsqlCommand(sql, con))
+                {
+                    
+
+                        command.Parameters.AddWithValue(":p_idProducto", IdProducto);
+                        command.ExecuteNonQuery();
+                   
+                }
+
+                return true;
+            }
+
+        }
+
+
+        //Activa un producto por su id
+        public Boolean ActivarProducto(int IdProducto)
+        {
+
+            using (NpgsqlConnection con = conexion.GetConexion())
+            {
+                con.Open();
+                string sql = "Call products.pa_activar_producto(@p_idProducto);";
+
+                using (var command = new NpgsqlCommand(sql, con))
+                {
+                   
+                        command.Parameters.AddWithValue(":p_idProducto", IdProducto);
+                        command.ExecuteNonQuery();
+                    
+                }
+
+                return true;
+            }
+
+        }
     }
 }
