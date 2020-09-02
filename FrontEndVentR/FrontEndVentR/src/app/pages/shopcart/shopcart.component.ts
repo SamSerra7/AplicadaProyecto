@@ -39,8 +39,6 @@ export class ShopcartComponent implements OnInit {
       this.shopcart = productsResp;
       this.getCalculations();
     })
-
-    /*this.shopcart = JSON.parse(localStorage.getItem('shopcart'));*/
   }
 
   getCalculations(){
