@@ -12,9 +12,19 @@ namespace Negocio
 
 
         
-        public String AgregarUsuario(Usuario usuario)
+        public bool AgregarUsuario(Usuario usuario)
         {
             return usuarioDatos.AgregarUsuario(usuario);
+        }
+
+        public bool ModificarUsuario(Usuario usuario)
+        {
+            return usuarioDatos.ModificarUsuario(usuario);
+        }
+
+        public bool EliminarUsuario(int idUsuario)
+        {
+            return usuarioDatos.EliminarUsuario(idUsuario);
         }
 
         public Usuario BuscarUsuarioEspecifico(int Id_U)

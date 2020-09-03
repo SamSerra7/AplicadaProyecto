@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace Entidad
+namespace PresentacionVentR.Models
 {
     public class Usuario
     {
@@ -13,7 +14,7 @@ namespace Entidad
 
         public Usuario()
         {
-              
+
         }
 
         public Usuario(string correo, string contrasennia, int rol)
@@ -40,3 +41,4 @@ namespace Entidad
         }
     }
 }
+
