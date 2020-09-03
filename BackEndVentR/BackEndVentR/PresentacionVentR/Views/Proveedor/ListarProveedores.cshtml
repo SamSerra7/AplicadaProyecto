@@ -6,8 +6,9 @@
 
 <center> <h3>Lista de todos los proveedores</h3> </center>
 
-<p>
-    <a asp-action="RegistrarProveedor"  >Registrar Proveedor</a>
+<p><center>
+    <a asp-action="RegistrarProveedor">Registrar Proveedor</a>
+    </center>
 </p>
 <table class="table">
     <thead>
@@ -21,27 +22,45 @@
             <th>
                 @Html.DisplayNameFor(model => model.activo)
             </th>
+            <th>
+                Activar | Desactivar
+            </th>
+            <th>
+                Opciones
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-           @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdProveedor)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.activo)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "FiltrarProveedor", new { idProveedor = item.IdProveedor }) |
-                @Html.ActionLink("Details", "DetalleProveedor", new { idProveedor = item.IdProveedor }) |
-                @Html.ActionLink("Eliminar", "EliminarProveedor", new { idProveedor = item.IdProveedor })
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdProveedor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.activo)
+                </td>
+                <td>
+                    <button id="activar" name="activar" onclick="activar(@Html.DisplayFor(modelItem => item.IdProveedor), '@Html.DisplayFor(modelItem => item.Nombre)')"> <img src="~/img/on.svg" width="30" height="30" />  </button>
+
+                    |
+                    <button id="desactivar" name="desactivar" onclick="desactivar(@Html.DisplayFor(modelItem => item.IdProveedor),'@Html.DisplayFor(modelItem => item.Nombre)')"><img src="~/img/off.svg" width="30" height="30" />  </button>
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "FiltrarProveedor", new { idProveedor = item.IdProveedor,@class= "btn btn-warning" }) |
+                    @Html.ActionLink("Detalles", "DetalleProveedor", new { idProveedor = item.IdProveedor, @class= "btn btn-info" }) |
+                    <button class="btn btn-danger" onclick="eliminarProveedor(@Html.DisplayFor(modelItem => item.IdProveedor), '@Html.DisplayFor(modelItem => item.Nombre)')"> Eliminar </button>
+
+
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+<script src="~/js/jquery-3.3.1.js"></script>
+<script src="~/js/ActivarDesactivarProveedor.js"></script>
+<script src="~/js/EliminarProveedor.js"></script>

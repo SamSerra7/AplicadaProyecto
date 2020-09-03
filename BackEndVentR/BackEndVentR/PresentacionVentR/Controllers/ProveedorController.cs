@@ -27,11 +27,11 @@ namespace PresentacionVentR.Controllers
         }
 
         [HttpPost]
-        public async Task<JsonResult> Registrar( Proveedor proveedor)
+        public async Task<JsonResult> Registrar([FromBody]  Proveedor proveedor)
         {
             EnvioDatoProveedor envioDatoProveedor = new EnvioDatoProveedor();
-
-            bool respuesta = await envioDatoProveedor.registrarProveedorAsync(proveedor);
+      
+           bool respuesta = await envioDatoProveedor.registrarProveedorAsync(proveedor);
 
             return Json(respuesta);
         }
@@ -70,10 +70,26 @@ namespace PresentacionVentR.Controllers
             EnvioDatoProveedor envioDatoProveedor = new EnvioDatoProveedor();
             bool respuesta = await envioDatoProveedor.eliminarProveedorAsync(idProveedor);
 
-
-            return View("ListarProveedores", await envioDatoProveedor.listarPersonaAsync());
+            return Json(respuesta);
+            //return View("ListarProveedores", await envioDatoProveedor.listarPersonaAsync());
         }
 
+
+
+        [HttpGet]
+        public async Task<IActionResult> ActivarProveedor(int IdProveedor)
+        {
+            EnvioDatoProveedor envioDatoProveedor = new EnvioDatoProveedor();
+            bool respuesta = await envioDatoProveedor.activarProveedorAsync(IdProveedor);
+            return Json(respuesta);
+        }
+        [HttpGet]
+        public async Task<IActionResult> DesactivarProveedor(int IdProveedor)
+        {
+            EnvioDatoProveedor envioDatoProveedor = new EnvioDatoProveedor();
+            bool respuesta = await envioDatoProveedor.desactivarProveedorAsync(IdProveedor);
+            return Json(respuesta);
+        }
 
     }
 }

@@ -3,74 +3,45 @@
 @{
     ViewData["Title"] = "FiltrarProveedor";
 }
+<br>
+<br>
 
-<center><h4>Modificar Proveedor</h4></center>
 
-<hr />
 <div class="row">
     <div class="col-md-4"></div>
     <div class="col-md-4">
+        <hr />
+        <center><h4>Modificar Proveedor</h4></center>
+
+        <hr />
+        <br>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
             <label asp-for="IdProveedor" class="control-label"></label>
-            <input asp-for="IdProveedor" id="IdProveedor" name="IdProveedor"  class="form-control" />
+            <input asp-for="IdProveedor" id="IdProveedor" name="IdProveedor" class="form-control" readonly />
             <span asp-validation-for="IdProveedor" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="Nombre" class="control-label"></label>
-            <input asp-for="Nombre" name="Nombre" id="Nombre"  class="form-control" />
-            <span asp-validation-for="Nombre" class="text-danger"></span>
+            <input asp-for="Nombre" name="Nombre" id="Nombre" class="form-control" />
+            <span asp-validation-for="Nombre" id="mensaje" class="text-danger"></span>
         </div>
-        <div class="form-group form-check">
-            <label class="form-check-label">
-                <input class="form-check-input" id="activo" name="activo"  asp-for="activo" /> @Html.DisplayNameFor(model => model.activo)
-            </label>
-        </div>
+
         <div class="form-group">
             <input type="button" name="btnEnviar" id="btnEnviar" value="Guardar" class="btn btn-warning" />
         </div>
 
     </div>
 
-    <div class="col-md-4"></div>
+    <div class="col-md-4">
+
+    </div>
 </div>
 
 <div>
-    <a asp-action="ListarProveedores">Regresar</a>
+    <a asp-action="listarProveedores" class="badge badge-info">Regresar a el listado</a>
 </div>
 
+<script src="~/js/jquery-3.3.1.js"></script>
+<script src="~/js/ModificarProveedorjs.js"></script>
 
-@section scripts {
-    <script>
-        $("#btnEnviar").click(function () {
-            var proveedor = {
-                'IdProveedor': $('#IdProveedor').val(),
-                'Nombre': $('#Nombre').val(),
-                'activo': $('#activo').val()
-
-            };
-
-            alert("hola  nombres->" + $('#activo').val());
-            alert("p2 " + proveedor.activo + proveedor.Nombre);
-            alert("hola  nombres->" + +JSON.stringify(proveedor));
-            $.ajax({
-                url: "@Url.Action("Modificar", "Proveedor")",
-                type: 'put',
-                contentType: 'application/json',
-                data: JSON.stringify(proveedor),
-                success: function (response) {
-                    console.log(response);
-                    if (response) {
-                        alert('El proveedor fue registrado exitosamente.');
-                    } else {
-                        alert('No ha sido registrado');
-                    }
-
-
-                },
-                error: function (error) {
-                }
-            });
-        });
-    </script>
-}

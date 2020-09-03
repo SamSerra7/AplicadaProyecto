@@ -92,7 +92,37 @@ namespace PresentacionVentR.EnvioDato
             }
         }
 
-   
+        public async Task<bool> activarProveedorAsync(int proveedorId)
+        {
+            using (var httpClient = new HttpClient())
+            {
+
+                string url = string.Concat(Constantes.Constantes.URLParaEnvioDatosProveedor, "/ActivarProveedor/" + proveedorId);
+                using (var response = await httpClient.GetAsync(url))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+
+                    var respuesta = JsonConvert.DeserializeObject<bool>(apiResponse);
+                    return respuesta;
+                }
+            }
+        }
+
+        public async Task<bool> desactivarProveedorAsync(int proveedorId)
+        {
+            using (var httpClient = new HttpClient())
+            {
+
+                string url = string.Concat(Constantes.Constantes.URLParaEnvioDatosProveedor, "/DesactivarProveedor/" + proveedorId);
+                using (var response = await httpClient.GetAsync(url))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+
+                    var respuesta = JsonConvert.DeserializeObject<bool>(apiResponse);
+                    return respuesta;
+                }
+            }
+        }
 
     }
 }
