@@ -3,20 +3,22 @@
 @{
     ViewData["Title"] = "RegistrarProveedor";
 }
+<br>
+<br>
 
-<center><h3>RegistrarProveedor</h3></center>
-
-<hr />
 <div class="row">
     <div class="col-md-4"></div>
     <div class="col-md-4">
+        <hr />
+        <center><h4>Registrar Proveedor</h4></center>
 
-      
+        <hr />
+        <br>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
             <label asp-for="Nombre" class="control-label"></label>
-            <input asp-for="Nombre" name="Nombre"  required id="Nombre" class="form-control"  placeholder="Nombre"  />
-            <span asp-validation-for="Nombre"   id="mensaje" class="text-danger"></span>
+            <input asp-for="Nombre" name="Nombre" required id="Nombre" class="form-control" placeholder="Nombre" />
+            <span asp-validation-for="Nombre" id="mensaje" class="text-danger"></span>
         </div>
 
         <div class="form-group">
@@ -25,56 +27,13 @@
 
     </div>
 
-    <div class="col-md-4"></div>
+    <div class="col-md-4">
+
+    </div>
 </div>
 
-    <div>
-        <a asp-action="ListarProveedores">Regresar</a>
-    </div>
-
-
-    @section scripts {
-        <script>
-            $("#btnEnviar").click(function () {
-                var mensaje_error = [];
-                var error = document.getElementById("mensaje");
-                error.style.color = 'red';
-
-            var proveedor = {
-                'Nombre': $('#Nombre').val()
-            };
-
-            var nombre = $('#Nombre').val();
-            if (nombre == "" || nombre==null) {
-                mensaje_error.push('**Ingrese el nombre de la empresa');
-            } else {
-                registrarProveedor(proveedor);
-                }
-              
-
-               error.innerHTML = mensaje_error.join(', ') + '\n';
-        });
-
-            function registrarProveedor(proveedor) {
-                     $.ajax({
-                url: "@Url.Action("Registrar", "Proveedor")",
-                type: 'POST',
-                contentType: 'application/json',
-                data: JSON.stringify(proveedor),
-                success: function (response) {
-                    console.log(response);
-                    if (response) {
-                       alert('El proveedor fue registrado exitosamente.');
-                    } else {
-                       alert('No ha sido registrado');
-                    }
-
-
-                },
-                error: function (error) {
-                }
-            });
-            }
-
-        </script>
-    }
+<div>
+    <a asp-action="listarProveedores" class="badge badge-info">Regresar a el listado</a>
+</div>
+<script src="~/js/jquery-3.3.1.js"></script>
+<script src="~/js/RegistrarProveedor.js"></script>
