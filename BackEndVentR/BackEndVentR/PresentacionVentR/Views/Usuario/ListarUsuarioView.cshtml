@@ -1,0 +1,48 @@
+﻿@model IEnumerable<PresentacionVentR.Models.Usuario>
+
+@{
+    ViewData["Title"] = "Lista de Usuarios";
+}
+
+<h1>Lista de Usuarios</h1>
+
+<p>
+    <a asp-action="AgregarUsuarioView">Agregar Usuario</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id_Usuario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Correo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Id_Rol)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id_Usuario)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Correo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id_Rol)
+                </td>
+                <td>
+                    @Html.ActionLink("Modificar", "ModificarUsuarioView", new { idUsuario = item.Id_Usuario }) |
+
+                    @Html.ActionLink("Eliminar", "EliminarUsuario", new { idUsuario = item.Id_Usuario })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

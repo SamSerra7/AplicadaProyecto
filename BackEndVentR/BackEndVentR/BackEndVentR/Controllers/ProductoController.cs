@@ -35,6 +35,20 @@ namespace BackEndVentR.Controllers
             return productoNegocio.buscarProducto(idProducto);
         }
 
+        
+        //GET api/Producto/ActivarProducto/1    Activa un producto especifico por su id de producto
+        [HttpGet("ActivarProducto/{IdProducto}")]
+        public Boolean ActivarProducto(int IdProducto)
+        {
+            return productoNegocio.ActivarProducto(IdProducto);
+        }
+
+        //GET api/Producto/DesactivarProducto/1             Desactiva un producto especifico por su id de producto
+        [HttpGet("DesactivarProducto/{IdProducto}")]
+        public Boolean DesactivarProducto( int IdProducto)
+        {
+            return productoNegocio.DesactivarProducto(IdProducto);
+        }
 
 
     }

@@ -1,5 +1,25 @@
-.carousel-caption {
-    background: white;
-    border-radius: 20px;
-    color: black;
+div.scrollmenu {
+    overflow: auto;
+    white-space: nowrap;
+}
+
+div.scrollmenu a {
+    display: inline-block;
+    text-align: center;
+    padding: 14px;
+    text-decoration: none;
+}
+
+div.scrollmenu a:hover {
+    background-color: rgb(203, 238, 255);
+    cursor: pointer;
+}
+
+.img {
+    height: 100px;
+    width: auto;
+}
+
+h5 {
+    color: rgb(83, 83, 83);
 }

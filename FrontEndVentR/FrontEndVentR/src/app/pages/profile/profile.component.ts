@@ -12,7 +12,7 @@ export class ProfileComponent implements OnInit {
 
   constructor( private usersService:UsersService) {
 
-    usersService.getById(parseInt(localStorage.getItem("userId")))
+    this.usersService.getById(parseInt(localStorage.getItem("userId")))
     .subscribe(user => {
       this.user = user;
     });

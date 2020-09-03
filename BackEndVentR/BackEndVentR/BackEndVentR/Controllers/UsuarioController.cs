@@ -34,9 +34,17 @@ namespace BackEndVentR.Controllers
         //POST : api/Usuario
 
         [HttpPost]
-        public string Post([FromBody] Usuario u)
+        public bool Post([FromBody] Usuario u)
         {
             return usuarioNegocio.AgregarUsuario(u);
+        }
+
+
+        //PUT api/Usuario              Recibe un usuario para modificar su registro en la base de datos
+        [HttpPut]
+        public bool ActualizarUsuario([FromBody] Usuario u)
+        {
+            return usuarioNegocio.ModificarUsuario(u);
         }
 
         //POST : api/Usuario/VerificarUsuario
@@ -45,6 +53,13 @@ namespace BackEndVentR.Controllers
         public Boolean VerificarUsuario([FromBody] Usuario u)
         {
             return usuarioNegocio.VerificarUsuario(u);
+        }
+
+        //Delete api/Usuario/EliminarUsuario/2
+        [HttpDelete("EliminarUsuario/{IdUsuario}")]
+        public Boolean EliminarUsuario(int IdUsuario)
+        {
+            return usuarioNegocio.EliminarUsuario(IdUsuario);
         }
 
 
@@ -63,7 +78,7 @@ namespace BackEndVentR.Controllers
 
 
         // PUT api/<ProductoController> listar para un usuario específico
-        [HttpGet("{idUsuario}")]
+        [HttpGet("{idUsuario}/producto")]
         public IEnumerable<Producto> listarProductosUsuario(int idUsuario)
         {
             return productoNegocio.listarProductosPorUsuario(idUsuario);

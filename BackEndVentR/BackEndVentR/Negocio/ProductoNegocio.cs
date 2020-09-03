@@ -64,6 +64,16 @@ namespace Negocio
             productoDatos.AgregarBusquedaProductoUsuario(idProducto,idUsuario);
             return productoDatos.buscarProducto(idProducto);
         }
+
+        public Boolean ActivarProducto(int IdProducto)
+        {
+            return productoDatos.ActivarProducto(IdProducto);
+        }
+
+        public Boolean DesactivarProducto(int IdProducto)
+        {
+            return productoDatos.DesactivarProducto(IdProducto);
+        }
     }
 
 

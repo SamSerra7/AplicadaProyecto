@@ -1,0 +1,37 @@
+﻿@model PresentacionVentR.Models.Proveedor
+
+@{
+    ViewData["Title"] = "DetalleProveedor";
+}
+<br><br>
+    <hr />
+<h3>Detalle del Proveedor</h3>
+
+<div>
+    <hr/>
+    
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.IdProveedor)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.IdProveedor)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Nombre)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Nombre)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.activo)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.activo)
+            </dd>
+        </dl>
+       
+</div>
+<div>
+    <a asp-action="listarProveedores" class="badge badge-info">Regresar a el listado</a>
+</div>
