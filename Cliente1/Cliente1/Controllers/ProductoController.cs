@@ -10,12 +10,12 @@ namespace Cliente1.Controllers
     public class ProductoController : Controller
     {
 
-        private PriductoData pd;
+        private ProductoData pd;
 
         // GET: Producto
         public ActionResult ObtenerLista()
         {
-            pd = new PriductoData();
+            pd = new ProductoData();
             ModelState.Clear();
             return View(pd.ObtenerProductos());
         }
@@ -34,7 +34,7 @@ namespace Cliente1.Controllers
                 if (ModelState.IsValid)
                 {
 
-                    pd = new PriductoData();
+                    pd = new ProductoData();
                     if (pd.Add(producto))
                     {
                         ViewBag.Mensagem = " ingresado con exito ";
@@ -51,7 +51,7 @@ namespace Cliente1.Controllers
 
         public ActionResult Actualizar(int id)
         {
-            pd = new PriductoData();
+            pd = new ProductoData();
             return View(pd.ObtenerProductos().Find(t => t.id_produto == id));
         }
 
@@ -59,7 +59,7 @@ namespace Cliente1.Controllers
         {
             try
             {
-                pd = new PriductoData();
+                pd = new ProductoData();
                 pd.Actualizar(producto);
                 return RedirectToAction("ObtenerLista");
             }
@@ -73,7 +73,7 @@ namespace Cliente1.Controllers
         {
             try
             {
-                pd = new PriductoData();
+                pd = new ProductoData();
                 if (pd.Eliminar(id))
                 {
                     ViewBag.Mensagem = "Eliminado con exito";

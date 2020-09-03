@@ -1,0 +1,31 @@
+.viewport {
+    height: 1100px;
+}
+
+.viewport-content {
+    display: flex;
+    height: 1200px;
+    margin: 5px;
+}
+
+.card img {
+    height: 150px;
+    width: auto;
+    padding: 10px;
+}
+
+div a {
+    display: inline-block;
+    text-align: center;
+    padding: 14px;
+    text-decoration: none;
+}
+
+div a:hover {
+    background-color: rgb(203, 238, 255);
+    cursor: pointer;
+}
+
+div .container-card {
+    width: 250px;
+}

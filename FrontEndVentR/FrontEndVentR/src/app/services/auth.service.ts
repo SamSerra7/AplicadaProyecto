@@ -39,7 +39,7 @@ export class AuthService {
   login( user: UserModel){
     return this.http.post<any>(endpoint + 'VerificarUsuario/', JSON.stringify(user), httpOptions)
     .pipe(
-      tap((user) => console.log('processing...')),
+      tap((user) => console.log('processing auth...')),
       catchError(this.handleError<any>('error login user')),
       map(resp =>{
         console.log("Login service:"+resp);
@@ -58,7 +58,7 @@ export class AuthService {
       this.users=resp;      
       for(let user of this.users){
         if( user.correo == localStorage.getItem("token")){
-          localStorage.setItem('userId',user.id_Usuario)
+          localStorage.setItem('userId',user.id_Usuario);
           return this.user=user;
         }
       }
@@ -111,12 +111,12 @@ export class AuthService {
    }
    
 
-  isLogin(): boolean{
-    
-    if(this.userTokenEmail){
-      return true;
+  isLogin(): boolean{ 
+
+    if(this.userTokenEmail == ""){
+      return false;
     }
-    return false;    
+    return true;    
   }
 
   haveRole(role:string): boolean{

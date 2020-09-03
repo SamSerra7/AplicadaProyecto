@@ -38,17 +38,15 @@ export class ProdutsService {
 
   
   findProduct(textToFind:string){
-
     this.products =  JSON.parse(localStorage.getItem('products'));
-
+    if(!textToFind){
+      return this.products;
+    }
     textToFind = textToFind.toLowerCase();
-
     let newProducts:any[]=[];
-
     for(let product of this.products){
       let nombre = product.nombre.toLowerCase();
       let detalle = product.detalle.toLowerCase();
-
       if( nombre.indexOf(textToFind) >= 0 || detalle.indexOf(textToFind) >= 0 ){
         newProducts.push(product)
       }
