@@ -27,11 +27,11 @@ namespace PresentacionVentR.Controllers
         }
 
         [HttpPost]
-        public async Task<JsonResult> Registrar( Proveedor proveedor)
+        public async Task<JsonResult> Registrar([FromBody]  Proveedor proveedor)
         {
             EnvioDatoProveedor envioDatoProveedor = new EnvioDatoProveedor();
-
-            bool respuesta = await envioDatoProveedor.registrarProveedorAsync(proveedor);
+      
+           bool respuesta = await envioDatoProveedor.registrarProveedorAsync(proveedor);
 
             return Json(respuesta);
         }

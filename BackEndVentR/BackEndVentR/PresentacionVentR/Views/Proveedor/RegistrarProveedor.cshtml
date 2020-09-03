@@ -11,18 +11,14 @@
     <div class="col-md-4"></div>
     <div class="col-md-4">
 
+      
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    
         <div class="form-group">
             <label asp-for="Nombre" class="control-label"></label>
-            <input asp-for="Nombre" name="Nombre" id="Nombre" class="form-control" />
-            <span asp-validation-for="Nombre" class="text-danger"></span>
+            <input asp-for="Nombre" name="Nombre"  required id="Nombre" class="form-control"  placeholder="Nombre"  />
+            <span asp-validation-for="Nombre"   id="mensaje" class="text-danger"></span>
         </div>
-        <div class="form-group form-check">
-            <label class="form-check-label">
-                <input class="form-check-input" id="activo" name="activo" asp-for="activo" /> @Html.DisplayNameFor(model => model.activo)
-            </label>
-        </div>
+
         <div class="form-group">
             <input id="btnEnviar" name="btnEnviar" type="button" value="Guardar " class="btn btn-primary" />
         </div>
@@ -39,18 +35,28 @@
 
     @section scripts {
         <script>
-        $("#btnEnviar").click(function () {
-            var proveedor = {
-                'Nombre': $('#Nombre').val(),
-                'activo': $('#activo').val()
+            $("#btnEnviar").click(function () {
+                var mensaje_error = [];
+                var error = document.getElementById("mensaje");
+                error.style.color = 'red';
 
+            var proveedor = {
+                'Nombre': $('#Nombre').val()
             };
 
-            alert("hola  nombres->" + $('#activo').val() + $('#Nombre').val());
-            alert("p2 " + proveedor.activo+proveedor.Nombre);
+            var nombre = $('#Nombre').val();
+            if (nombre == "" || nombre==null) {
+                mensaje_error.push('**Ingrese el nombre de la empresa');
+            } else {
+                registrarProveedor(proveedor);
+                }
+              
 
-            alert("hola  nombres->" +JSON.stringify(proveedor));
-            $.ajax({
+               error.innerHTML = mensaje_error.join(', ') + '\n';
+        });
+
+            function registrarProveedor(proveedor) {
+                     $.ajax({
                 url: "@Url.Action("Registrar", "Proveedor")",
                 type: 'POST',
                 contentType: 'application/json',
@@ -58,9 +64,9 @@
                 success: function (response) {
                     console.log(response);
                     if (response) {
-                        alert('El proveedor fue registrado exitosamente.');
+                       alert('El proveedor fue registrado exitosamente.');
                     } else {
-                        alert('No ha sido registrado');
+                       alert('No ha sido registrado');
                     }
 
 
@@ -68,6 +74,7 @@
                 error: function (error) {
                 }
             });
-        });
+            }
+
         </script>
     }
