@@ -1,0 +1,47 @@
+﻿@model PresentacionVentR.Models.Proveedor
+
+@{
+    ViewData["Title"] = "FiltrarProveedor";
+}
+<br>
+<br>
+
+
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <hr />
+        <center><h4>Modificar Proveedor</h4></center>
+
+        <hr />
+        <br>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="IdProveedor" class="control-label"></label>
+            <input asp-for="IdProveedor" id="IdProveedor" name="IdProveedor" class="form-control" readonly />
+            <span asp-validation-for="IdProveedor" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Nombre" class="control-label"></label>
+            <input asp-for="Nombre" name="Nombre" id="Nombre" class="form-control" />
+            <span asp-validation-for="Nombre" id="mensaje" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <input type="button" name="btnEnviar" id="btnEnviar" value="Guardar" class="btn btn-warning" />
+        </div>
+
+    </div>
+
+    <div class="col-md-4">
+
+    </div>
+</div>
+
+<div>
+    <a asp-action="listarProveedores" class="badge badge-info">Regresar a el listado</a>
+</div>
+
+<script src="~/js/jquery-3.3.1.js"></script>
+<script src="~/js/ModificarProveedorjs.js"></script>
+
