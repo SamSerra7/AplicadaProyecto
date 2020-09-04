@@ -25,12 +25,24 @@ export class ProductListComponent implements OnInit {
   }
 
   loadProducts(){
+    
     this.activatedRoute.params.subscribe(params => {    
-      this.textTofind = params['text'];
-      this.products = this.produtsService.findProduct(this.textTofind);  
-      if(this.products){
-        this.loading=false;
-      } 
+      this.textTofind = params['text'];      
+      if(this.textTofind){
+        this.products = this.produtsService.findProduct(this.textTofind);  
+        if(this.products){
+          this.loading=false;
+        }
+      }else{
+        this.produtsService.getAll()
+        .subscribe(resp =>{
+          this.products=resp;
+          if(this.products){
+            localStorage.setItem('products', JSON.stringify(this.products));
+            this.loading=false;
+          }
+        }); 
+      }
     });
   }
 
