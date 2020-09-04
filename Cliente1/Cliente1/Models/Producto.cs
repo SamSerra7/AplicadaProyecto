@@ -15,12 +15,13 @@ namespace Cliente1.Models
         public int cantidad { get; set; }
         public byte estado { get; set; }
         public string descripcion { get; set; }
+        public int id_proveedor { get; set; }
 
         public Producto()
         {
         }
 
-        public Producto(int id_produto, string nombre, float precio, string url_img, int cantidad, byte estado, string descripcion)
+        public Producto(int id_produto, string nombre, float precio, string url_img, int cantidad, byte estado, string descripcion, int id_proveedor)
         {
             this.id_produto = id_produto;
             this.nombre = nombre;
@@ -29,6 +30,7 @@ namespace Cliente1.Models
             this.cantidad = cantidad;
             this.estado = estado;
             this.descripcion = descripcion;
+            this.id_proveedor = id_proveedor;
         }
     }
 }
