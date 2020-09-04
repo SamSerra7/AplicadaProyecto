@@ -39,7 +39,7 @@ namespace Dato
             return usuarios;
         }
 
-        public string AgregarUsuario(Usuario usuario)
+        public bool AgregarUsuario(Usuario usuario)
         {
 
             using (NpgsqlConnection con = conexion.GetConexion())
@@ -49,26 +49,58 @@ namespace Dato
 
                 using (var command = new NpgsqlCommand(sql, con))
                 {
-                    try
-                    {
+                    
 
                         command.Parameters.AddWithValue(":u_correo", usuario.Correo);
                         command.Parameters.AddWithValue(":u_contrasennia", usuario.Contrasennia);
                         command.Parameters.AddWithValue(":u_idrol", usuario.Id_Rol);
                         command.ExecuteNonQuery();
-                    }
-                    catch (PostgresException ex)
-                    {
-                        if (ex.SqlState == "23505")
-                        {                         
-
-                            con.Close();
-                            return "El correo ya se encuentra registrado";
-                        }
-                    }
+                    
                 }
-                con.Close();
-                return "Registrado con exito";
+
+                return true;
+            }
+        }
+
+        public bool ModificarUsuario(Usuario usuario)
+        {
+
+            using (NpgsqlConnection con = conexion.GetConexion())
+            {
+                con.Open();
+                string sql = "Call users.pa_actualizar_usuario(@u_id,@u_correo,@u_contras,@u_rol);";
+
+                using (var command = new NpgsqlCommand(sql, con))
+                {
+
+                    command.Parameters.AddWithValue(":u_id", usuario.Id_Usuario);
+                    command.Parameters.AddWithValue(":u_correo", usuario.Correo);
+                    command.Parameters.AddWithValue(":u_contras", usuario.Contrasennia);
+                    command.Parameters.AddWithValue(":u_rol", usuario.Id_Rol);
+                    command.ExecuteNonQuery();
+
+                }
+
+                return true;
+            }
+        }
+
+        public bool EliminarUsuario(int id)
+        {
+
+            using (NpgsqlConnection con = conexion.GetConexion())
+            {
+                con.Open();
+                string sql = "Call users.pa_eliminar_usuario(@u_id);";
+
+                using (var command = new NpgsqlCommand(sql, con))
+                {
+
+                    command.Parameters.AddWithValue(":u_id", id);
+                    command.ExecuteNonQuery();
+
+                }
+                return true;
             }
         }
 
@@ -77,7 +109,7 @@ namespace Dato
             using (NpgsqlConnection con = conexion.GetConexion())
             {
                 con.Open();
-                string sql = "SELECT id_usuario,correo,id_rol FROM users.usuario where id_usuario=@id_u";
+                string sql = "SELECT id_usuario,correo,contrasennia,id_rol FROM users.usuario where id_usuario=@id_u";
 
                 using (var command = new NpgsqlCommand(sql, con))
                 {
@@ -86,7 +118,7 @@ namespace Dato
                     {
                         while (reader.Read())
                         {
-                            return new Usuario(reader.GetInt32(0), reader.GetString(1), reader.GetInt32(2));
+                            return new Usuario(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetInt32(3));
                         }
 
                     }
