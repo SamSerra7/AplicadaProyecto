@@ -16,7 +16,7 @@ namespace Cliente1.EnvioDato
             using (var httpClient = new HttpClient())
             {
 
-                string url = string.Concat(Constante.Constantes.URLParaRecibirLlave, "/metodoControladorParaREcibirLlave/" + 2);
+                string url = string.Concat(Constante.Constantes.URLParaRecibirLlave, "/2/llave" );
                 using (var response = await httpClient.GetAsync(url))
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
