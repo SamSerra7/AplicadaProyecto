@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Entidad;
 using Microsoft.AspNetCore.Mvc;
@@ -27,12 +28,20 @@ namespace BackEndVentR.Controllers
 
         // POST api/<LlaveController>
         [HttpPost]
-        public void crearLlave([FromBody] int idProveedor)
+        public IActionResult crearLlave([FromBody] JsonElement body)
         {
-            llaveNegocio.crearLlave(idProveedor);
+            llaveNegocio.crearLlave(body.GetProperty("idProveedor").GetInt32());
+            return Ok();
         }
 
-       
+        // GET api/<LlaveController>/5/llave
+        [HttpGet("{idProveedor}/llave")]
+        public Llave llaveActiva(int idProveedor)
+        {
+            return llaveNegocio.llaveActiva(idProveedor);
+        }
+
+
 
     }
 }

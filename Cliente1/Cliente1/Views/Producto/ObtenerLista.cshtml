@@ -2,7 +2,17 @@
 
 <p>
     @Html.ActionLink("Agregar Producto", "Agregar")
+    <!--@Html.ActionLink("Generar Llave", "RecibirLlave", "ApiConsumoLlave")-->
 </p>
+
+<button id="ver" onclick="getLlave()">Ver Llave</button>
+
+<button onclick="crearLlave()">Crear Llave</button>
+
+<button onclick="sincronizar()">Sincronizar</button>
+
+<h3 id="llave"></h3>
+
 <table class="table">
     <tr>
         @*<th>
@@ -67,3 +77,57 @@
     }
 
 </table>
+@section scripts{
+    <script type="text/javascript">
+        let mostrar = false;
+        function getLlave() {
+            if (!mostrar) {
+                $.get('http://localhost:59292/api/Llave/2/llave').done(function (data) {
+                    console.log(data);
+                    //data.atributo => para acceder al valor
+                    if (data == undefined) {
+                        $("#llave").text("Este proveedor no contiene una llave");
+                    }
+                    else {
+                        $("#llave").text(data.codLlave);
+                        
+                    }
+
+                    $("#ver").text("Ocultar llave");
+                    mostrar = true;
+                });
+            }
+            else {
+                $("#llave").text("");
+                mostrar = false;
+            }     
+        }
+
+        function crearLlave() {
+            $.ajax({
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: 'POST',
+                url: 'http://localhost:59292/api/Llave',
+                data: JSON.stringify({ idProveedor: 2 }),
+                dataType: "json"
+            })
+                .done(() => alert("La creación de la llave fué exitosa"))
+                .fail((e) => alert("error: " + e));
+        }
+
+        function sincronizar() {
+            $.get('http://localhost:59292/api/Producto')
+                .done((data) => {
+                    console.log(data);
+                    //TODO mostrar el Json de los productos vendidos con su cantidad
+
+                    alert("Sincronizado correctamente con VentR");
+                })
+                .fail((e) => alert("Error al sincronizar: " + e));
+        }
+
+    </script>
+}
