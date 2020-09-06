@@ -9,6 +9,6 @@ namespace Cliente1.Constante
     {
         public const string URLParaRecibirLlave = "http://localhost:59292/api/Llave";
 
-        public const string URLParaDisminuirCantidadProducto = "http://localhost:62464/api/usuario";
+        public const string URLParaDisminuirCantidadProducto = "http://localhost:59292/api/usuario";
     }
 }
