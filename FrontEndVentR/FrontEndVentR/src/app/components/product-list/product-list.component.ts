@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProdutsService } from '../../services/produts.service';
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
+import { AuthService } from '../../services/auth.service';
+import { UsersService } from '../../services/users.service';
 
 @Component({
   selector: 'app-product-list',
@@ -14,9 +16,12 @@ export class ProductListComponent implements OnInit {
   textTofind:string;
   @ViewChild( CdkVirtualScrollViewport) viewport: CdkVirtualScrollViewport;
   loading=true;
+  userId:number;
 
   constructor(private activatedRoute:ActivatedRoute,
               private produtsService:ProdutsService,
+              private authService:AuthService,
+              private userService:UsersService,
               private router: Router) {
     this.loadProducts();
   }
@@ -34,14 +39,27 @@ export class ProductListComponent implements OnInit {
           this.loading=false;
         }
       }else{
-        this.produtsService.getAll()
-        .subscribe(resp =>{
-          this.products=resp;
-          if(this.products){
-            localStorage.setItem('products', JSON.stringify(this.products));
-            this.loading=false;
-          }
-        }); 
+        if(this.authService.isLogin()){
+          this.userId= parseInt(localStorage.getItem("userId"));
+          this.userService.getMostSearchedProducts(this.userId)
+          .subscribe(resp =>{
+            this.products=resp;
+            if(this.products){
+              localStorage.setItem('products', JSON.stringify(this.products));
+              this.loading=false;
+            }
+          }); 
+        }else{
+          this.produtsService.getAll()
+          .subscribe(resp =>{
+            this.products=resp;
+            if(this.products){
+              localStorage.setItem('products', JSON.stringify(this.products));
+              this.loading=false;
+            }
+          }); 
+        }
+       
       }
     });
   }

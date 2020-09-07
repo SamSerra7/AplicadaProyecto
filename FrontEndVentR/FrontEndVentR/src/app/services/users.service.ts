@@ -41,10 +41,8 @@ export class UsersService {
       catchError(this.handleError<any>('no user by id'))
       );
   }
-  getBestSellerProducts(userId:number){
-    if(!userId){
-      userId=1;
-    }
+  
+  getMostSearchedProducts(userId:number){
     return this.http.get(endpoint + userId +'/producto').pipe(
       map(this.extractData),
       catchError(this.handleError<any>('getById'))
