@@ -54,7 +54,16 @@ namespace Cliente1.Controllers
             pd = new ProductoData();
             return View(pd.ObtenerProductos().Find(t => t.id_produto == id));
         }
+        
+        [HttpGet]
+                public ActionResult ModificarProducto(int idProvedor, int producto_proveedor, int cantidad)
+        {
+            //ps que modifique
 
+
+            return Json("Modificado");
+
+        }
         public ActionResult Actualizar(int id, Producto producto)
         {
             try

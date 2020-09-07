@@ -90,7 +90,7 @@
                     }
                     else {
                         $("#llave").text(data.codLlave);
-                        
+
                     }
 
                     $("#ver").text("Ocultar llave");
@@ -100,7 +100,7 @@
             else {
                 $("#llave").text("");
                 mostrar = false;
-            }     
+            }
         }
 
         function crearLlave() {
@@ -121,13 +121,39 @@
         function sincronizar() {
             $.get('http://localhost:59292/api/Producto')
                 .done((data) => {
+
                     console.log(data);
                     //TODO mostrar el Json de los productos vendidos con su cantidad
-
+                    var id_proveedor = data.idProveedor;
+                    var cantidad = data.cantidad;
+                    var producto_proveedor = data.producto_proveedor;
+                    sincronizarProducto(idProveedor, producto_proveedor, cantidad);
                     alert("Sincronizado correctamente con VentR");
                 })
                 .fail((e) => alert("Error al sincronizar: " + e));
         }
+
+
+        function sincronizarProducto(idProveedor, producto_proveedor, cantidad) {
+            $.ajax({
+        
+        url: '/Proveedor/Registrar',
+     //   url: "@Url.Action("ModificarProducto", "Producto")",
+        type: 'get',
+    
+                data: { "idProvedor": parseInt(idProveedor), "producto_proveedor": parseInt(producto_proveedor), "cantidad": parseInt(cantidad)},
+        success: function (response) {
+            console.log(response);
+            if (response) {
+                alert('El producto fue modificado exitosamente.');
+            } else {
+                alert('No ha sido registrado');
+            }
+        },
+        error: function (error) {
+        }
+    });
+}
 
     </script>
 }
