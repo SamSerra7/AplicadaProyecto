@@ -41,15 +41,14 @@ namespace Dato
             using (NpgsqlConnection con = conexion.GetConexion())
             {
                 con.Open();
-                string sql = "Call products.pa_modificar_proveedor(@p_idproveedor,@p_nombre,@p_activo);";
+                string sql = "Call products.pa_modificar_proveedor(@p_idproveedor,@p_nombre);";
 
                 using (var command = new NpgsqlCommand(sql, con))
                 {
 
 
-                    command.Parameters.AddWithValue(":p_idproveedor", proveedor.Nombre);
-                    command.Parameters.AddWithValue(":p_nombre", proveedor.activo);
-                    command.Parameters.AddWithValue(":p_activo", proveedor.IdProveedor);
+                    command.Parameters.AddWithValue(":p_idproveedor", proveedor.IdProveedor);
+                    command.Parameters.AddWithValue(":p_nombre", proveedor.Nombre);
                     int result = command.ExecuteNonQuery();
 
                     if (result == -1)

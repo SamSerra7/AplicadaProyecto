@@ -33,6 +33,7 @@ namespace Cliente1.Models
                 command.Parameters.AddWithValue("@cantidad", producto.cantidad);
                 command.Parameters.AddWithValue("@estado", producto.estado);
                 command.Parameters.AddWithValue("@descripcion", producto.descripcion);
+                command.Parameters.AddWithValue("@id_proveedor", producto.id_proveedor);
 
                 _con.Open();
 
@@ -67,6 +68,7 @@ namespace Cliente1.Models
                         cantidad = Convert.ToInt32(reader["cantidad"]),
                         estado = Convert.ToByte(reader["estado"]),
                         descripcion = Convert.ToString(reader["descripcion"]),
+                        id_proveedor = Convert.ToInt32(reader["id_proveedor"]),
                     };
                     productolista.Add(p);
                 }
@@ -98,6 +100,7 @@ namespace Cliente1.Models
                         cantidad = Convert.ToInt32(reader["cantidad"]),
                         estado = Convert.ToByte(reader["estado"]),
                         descripcion = Convert.ToString(reader["descripcion"]),
+                        id_proveedor = Convert.ToInt32(reader["id_proveedor"]),
                     };
                     productolista.Add(p);
                 }

@@ -1,4 +1,5 @@
 ﻿using Dato;
+using Entidad;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -31,6 +32,16 @@ namespace Negocio
         {
             if(idProveedor <= 0) throw new Exception("Proveedor inválido");
             llaveDatos.crearLlave(idProveedor);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="idProveedor"></param>
+        /// <returns>obeto tipo Llave</returns>
+        public Llave llaveActiva(int idProveedor)
+        {
+            return tieneLlaveActiva(idProveedor) ? llaveDatos.llaveActiva(idProveedor) : llaveDatos.eliminarLlave(idProveedor);
         }
     }
 }
