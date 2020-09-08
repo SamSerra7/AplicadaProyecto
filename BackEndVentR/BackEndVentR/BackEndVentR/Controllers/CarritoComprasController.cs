@@ -8,6 +8,7 @@ using Negocio;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
+
 namespace BackEndVentR.Controllers
 {
     [Route("api/[controller]")]
@@ -34,16 +35,23 @@ namespace BackEndVentR.Controllers
             return respuesta;
         }
 
-        // PUT api/<CarritoComprasController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+
+
+        // Disminuyen en 1 los productos del carrito de compras
+        //  GET api/carritocompras/DisminuirCantidad
+        [HttpGet("{idUsuario}/cantidad/{idProducto}")]
+        public void DisminuirCantidad(int idUsuario, int idProducto)
         {
+            carrito_compras_negocio.disminuir_cantidad(idUsuario, idProducto);
         }
 
-        // DELETE api/<CarritoComprasController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+
+        // Aumenta en 1 los productos del carrito de compras
+        //  GET api/carritocompras/DisminuirCantidad
+        [HttpGet("Agregar_cantidad/{idUsuario,idProducto}")]
+        public void Agregar_cantidad(int idUsuario, int idProducto)
         {
+            carrito_compras_negocio.agregar_cantidad(idProducto, idUsuario);
         }
     }
 }

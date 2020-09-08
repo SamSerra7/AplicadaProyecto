@@ -12,6 +12,60 @@ namespace Dato
         private ProductoDatos productoDato = new ProductoDatos();
 
 
+        public void disminuir_cantidad(int idProducto, int idUsuario)
+        {
+
+            using (NpgsqlConnection con = conexion.GetConexion())
+            {
+                try
+                {
+                    con.Open();
+                    string sql = "call products.pa_disminuir_cantidad(@idUsuario,@idProducto); ";
+
+                    using (var command = new NpgsqlCommand(sql, con))
+                    {
+                        command.Parameters.AddWithValue("@idUsuario", idUsuario);
+                        command.Parameters.AddWithValue("@idProducto", idProducto);
+
+                        int result = command.ExecuteNonQuery();
+
+                    }
+
+                }
+                catch (Exception)
+                {
+                  
+                }
+            }
+        }
+
+        public void agregar_cantidad(int idProducto, int idUsuario)
+        {
+
+            using (NpgsqlConnection con = conexion.GetConexion())
+            {
+                try
+                {
+                    con.Open();
+                    string sql = "call  products.pa_aumentar_cantidad(@idUsuario,@idProducto); ";
+
+                    using (var command = new NpgsqlCommand(sql, con))
+                    {
+                        command.Parameters.AddWithValue("@idUsuario", idUsuario);
+                        command.Parameters.AddWithValue("@idProducto", idProducto);
+                        
+                        int result = command.ExecuteNonQuery();
+
+                     
+                    }
+
+                }
+                catch (Exception)
+                {
+                }
+            }
+        }
+
         public bool agregar_producto_carrito(int idUsuario, CarritoComprasProducto carrito)
         {
             
