@@ -8,6 +8,7 @@ namespace Entidad
     public class Producto
     {
 
+
         private int id_producto;
 
         public int IdProducto
@@ -16,6 +17,18 @@ namespace Entidad
             set {
                 if (value < 0) throw new Exception("El id no puede ser negativo"); 
                 id_producto = value; 
+            }
+        }
+
+        private int id_producto_proveedor;
+
+        public int IdProductoProveedor
+        {
+            get { return id_producto_proveedor; }
+            set
+            {
+                if (value < 0) throw new Exception("El id no puede ser negativo");
+                id_producto_proveedor = value;
             }
         }
 
@@ -75,6 +88,22 @@ namespace Entidad
             set { proveedor = value ?? throw new Exception("Debe tener un proveedor"); }
         }
 
+        public int IdProveedor { get; set; }
+
+        public Producto(int id_producto_proveedor,int id_producto, string nombre, SqlMoney precio, string urlImg,
+            string detalle, bool activo, int cantidad, Proveedor proveedor)
+        {
+            IdProductoProveedor = id_producto_proveedor;
+            IdProducto = id_producto;
+            Nombre = nombre;
+            Precio = precio;
+            UrlImg = urlImg;
+            Detalle = detalle;
+            Activo = activo;
+            Cantidad = cantidad;
+            Proveedor = proveedor;
+        }
+
 
         public Producto(int id_producto, string nombre, SqlMoney precio, string urlImg,
             string detalle, bool activo, int cantidad, Proveedor proveedor)
@@ -99,9 +128,13 @@ namespace Entidad
             Cantidad = cantidad;
             Proveedor = proveedor;
         }
-        public Producto(int id_producto)
+
+
+        public Producto(int id_producto,int id_proveedor,int cantidad)
         {
             this.id_producto=id_producto;
+            this.IdProveedor = id_proveedor;
+            this.cantidad = cantidad;
         }
 
         public Producto(){}

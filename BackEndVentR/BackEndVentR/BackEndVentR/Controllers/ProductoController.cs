@@ -50,6 +50,14 @@ namespace BackEndVentR.Controllers
             return productoNegocio.DesactivarProducto(IdProducto);
         }
 
+        //PUT api/Producto/AgregarCantidad Agrega una cantidad dada a un producto
+        //Nota: Recibe un modelo con IdProducto,IdProveedor y cantidad
+        [HttpPut("AgregarCantidad")]
+        public Boolean AgregarCantidad([FromBody] Producto producto)
+        {
+            return productoNegocio.AgregarCantidad(producto);
+        }
+
 
     }
 }
