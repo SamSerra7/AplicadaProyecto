@@ -4,6 +4,7 @@ import { ShopCartModel } from '../../models/shopcart.model';
 import { ProdutsService } from '../../services/produts.service';
 import { Router } from '@angular/router';
 import { ShopcartService } from '../../services/shopcart.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-shopcart',
@@ -33,6 +34,10 @@ export class ShopcartComponent implements OnInit {
     
   }
 
+  buy(){
+    
+  }
+
   getShopcartProducts(){
     this.shopcartService.getByUserId(this.userId)
     .subscribe(productsResp =>{
@@ -50,6 +55,7 @@ export class ShopcartComponent implements OnInit {
     this.total = this.iva + this.subTotal;
 
   }
+
   getProducts(){
 
     this.productService.getAll()
@@ -60,7 +66,26 @@ export class ShopcartComponent implements OnInit {
   }
 
   delete(id:number){
-    console.log(id);
+    
+    this.shopcartService.deleteProductShopCart(id)
+    .subscribe( resp => {
+      if(resp == true){
+        Swal.fire({
+          text: 'Borrado con exito...',
+          icon: 'info',
+          title: 'Producto fue borrado'
+        });        
+      }else{
+        Swal.fire({
+          text: 'Error al borrar...',
+          icon: 'error',
+          title: 'Intente de nuevo'
+        });
+      }
+    })
+
+    
+
   }
 
   viewProduct(id:number){
