@@ -43,6 +43,9 @@ export class UsersService {
   }
   
   getMostSearchedProducts(userId:number){
+    if(!userId){
+      userId = -1;
+    }
     return this.http.get(endpoint + userId +'/producto').pipe(
       map(this.extractData),
       catchError(this.handleError<any>('getById'))

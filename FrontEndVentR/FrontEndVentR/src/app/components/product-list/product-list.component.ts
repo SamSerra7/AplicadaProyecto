@@ -31,37 +31,51 @@ export class ProductListComponent implements OnInit {
 
   loadProducts(){
     
-    this.activatedRoute.params.subscribe(params => {    
+    this.activatedRoute.params.subscribe(params => {   
+
       this.textTofind = params['text'];      
       if(this.textTofind){
+
         this.products = this.produtsService.findProduct(this.textTofind);  
         if(this.products){
           this.loading=false;
-        }
+        }//end if
+
       }else{
         if(this.authService.isLogin()){
+
           this.userId= parseInt(localStorage.getItem("userId"));
+
           this.userService.getMostSearchedProducts(this.userId)
           .subscribe(resp =>{
-            this.products=resp;
+
+            this.products=resp;            
             if(this.products){
               localStorage.setItem('products', JSON.stringify(this.products));
               this.loading=false;
-            }
-          }); 
+            }//end if
+
+          });//end subscribe
+
         }else{
+
           this.produtsService.getAll()
           .subscribe(resp =>{
+
             this.products=resp;
             if(this.products){
               localStorage.setItem('products', JSON.stringify(this.products));
               this.loading=false;
-            }
-          }); 
-        }
-       
-      }
-    });
+            }//end if
+
+          });//end subscribe
+          
+        }//end else
+
+      }//end else
+
+    });//end subscribe
+
   }
 
   viewProduct(id:number){
