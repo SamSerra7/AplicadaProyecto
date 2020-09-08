@@ -12,7 +12,7 @@ namespace Dato
         private ProductoDatos productoDato = new ProductoDatos();
 
 
-        public void disminuir_cantidad(int idProducto, int idUsuario)
+        public Boolean disminuir_cantidad(int idUsuario, int idProducto)
         {
 
             using (NpgsqlConnection con = conexion.GetConexion())
@@ -28,18 +28,21 @@ namespace Dato
                         command.Parameters.AddWithValue("@idProducto", idProducto);
 
                         int result = command.ExecuteNonQuery();
-
+                        if (result == -1)
+                            return true;
+                        else
+                            return false;
                     }
 
                 }
                 catch (Exception)
                 {
-                  
+                    return false; 
                 }
             }
         }
 
-        public void agregar_cantidad(int idProducto, int idUsuario)
+        public Boolean agregar_cantidad(int idProducto, int idUsuario)
         {
 
             using (NpgsqlConnection con = conexion.GetConexion())
@@ -56,12 +59,16 @@ namespace Dato
                         
                         int result = command.ExecuteNonQuery();
 
-                     
+                        if (result == -1)
+                            return true;
+                        else
+                            return false;
                     }
 
                 }
                 catch (Exception)
                 {
+                    return false;
                 }
             }
         }
