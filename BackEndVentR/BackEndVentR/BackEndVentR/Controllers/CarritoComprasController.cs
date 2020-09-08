@@ -8,6 +8,7 @@ using Negocio;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
+
 namespace BackEndVentR.Controllers
 {
     [Route("api/[controller]")]
@@ -16,6 +17,7 @@ namespace BackEndVentR.Controllers
     {
        
         private CarritoComprasNegocio carrito_compras_negocio = new CarritoComprasNegocio();
+
 
         // GET api/CarritoComprasController/get
         [HttpGet("{id_usuario}")]
@@ -34,16 +36,7 @@ namespace BackEndVentR.Controllers
             return respuesta;
         }
 
-        // PUT api/<CarritoComprasController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
 
-        // DELETE api/<CarritoComprasController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+
     }
 }
