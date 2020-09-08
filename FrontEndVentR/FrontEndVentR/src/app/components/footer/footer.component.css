@@ -1,3 +1,22 @@
 .footer {
-    height: 250px;
+    height: auto;
+    width: 100%;
+}
+
+div h3 {
+    color: #fff128;
+}
+
+div a {
+    color: white;
+    text-decoration: none;
+}
+
+div p {
+    color: white;
+}
+
+div img {
+    width: 200px;
+    height: auto;
 }

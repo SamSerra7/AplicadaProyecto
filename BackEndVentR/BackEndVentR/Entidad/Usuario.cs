@@ -30,5 +30,13 @@ namespace Entidad
             this.Correo = correo;
             this.Id_Rol = rol;
         }
+
+        public Usuario(int id_Usuario, string correo,string contrasennia, int rol)
+        {
+            this.Id_Usuario = id_Usuario;
+            this.Correo = correo;
+            this.Contrasennia = contrasennia;
+            this.Id_Rol = rol;
+        }
     }
 }
