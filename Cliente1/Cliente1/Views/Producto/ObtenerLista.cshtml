@@ -119,15 +119,16 @@
         }
 
         function sincronizar() {
+            //Solamente es de cambiar el url del back end aqui, lo demas está bien
             $.get('http://localhost:59292/api/Producto')
                 .done((data) => {
 
                     console.log(data);
-                    //TODO mostrar el Json de los productos vendidos con su cantidad
-                    var id_proveedor = data.idProveedor;
+                    // TODO mostrar el Json de los productos vendidos con su cantidad
+                    var id_proveedor = data.id_producto;
                     var cantidad = data.cantidad;
-                    var producto_proveedor = data.producto_proveedor;
-                    sincronizarProducto(idProveedor, producto_proveedor, cantidad);
+                    var producto_proveedor = data.id_producto;
+                    sincronizarProducto(id_proveedor, producto_proveedor, cantidad);
                     alert("Sincronizado correctamente con VentR");
                 })
                 .fail((e) => alert("Error al sincronizar: " + e));
@@ -135,25 +136,23 @@
 
 
         function sincronizarProducto(idProveedor, producto_proveedor, cantidad) {
+
             $.ajax({
-        
-        url: '/Proveedor/Registrar',
-     //   url: "@Url.Action("ModificarProducto", "Producto")",
-        type: 'get',
-    
-                data: { "idProvedor": parseInt(idProveedor), "producto_proveedor": parseInt(producto_proveedor), "cantidad": parseInt(cantidad)},
-        success: function (response) {
-            console.log(response);
-            if (response) {
-                alert('El producto fue modificado exitosamente.');
-            } else {
-                alert('No ha sido registrado');
-            }
-        },
-        error: function (error) {
+                url: '/Producto/ModificarProducto',
+                type: 'GET',
+                data: { "id_producto": parseInt(producto_proveedor), "id_proveedor": parseInt(idProveedor), "cantidad": parseInt(cantidad) },
+                success: function (response) {
+                    console.log(response);
+                    if (response) {
+                        alert('El producto fue sincronizado exitosamente.');
+                    } else {
+                        alert('No ha sido sincronizado');
+                    }
+                },
+                error: function (error) {
+                }
+            });
         }
-    });
-}
 
     </script>
 }
