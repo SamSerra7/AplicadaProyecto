@@ -324,3 +324,15 @@ BackEndVentR/BackEndVentR/PresentacionVentR/obj/PresentacionVentR.csproj.nuget.d
 BackEndVentR/BackEndVentR/PresentacionVentR/obj/PresentacionVentR.csproj.nuget.g.props
 BackEndVentR/BackEndVentR/PresentacionVentR/obj/project.assets.json
 BackEndVentR/BackEndVentR/PresentacionVentR/obj/project.nuget.cache
+BackEndVentR/BackEndVentR/BackEndVentR/obj/Debug/netcoreapp3.1/BackEndVentR.assets.cache
+BackEndVentR/BackEndVentR/BackEndVentR/obj/Debug/netcoreapp3.1/BackEndVentR.csprojAssemblyReference.cache
+BackEndVentR/BackEndVentR/Dato/obj/Debug/netcoreapp3.1/Dato.assets.cache
+BackEndVentR/BackEndVentR/Dato/obj/Debug/netcoreapp3.1/Dato.csprojAssemblyReference.cache
+BackEndVentR/BackEndVentR/Entidad/obj/Debug/netcoreapp3.1/Entidad.assets.cache
+BackEndVentR/BackEndVentR/Entidad/obj/Debug/netcoreapp3.1/Entidad.csprojAssemblyReference.cache
+BackEndVentR/BackEndVentR/Negocio/obj/Debug/netcoreapp3.1/Negocio.assets.cache
+BackEndVentR/BackEndVentR/Negocio/obj/Debug/netcoreapp3.1/Negocio.csprojAssemblyReference.cache
+BackEndVentR/BackEndVentR/PresentacionVentR/obj/Debug/netcoreapp3.1/PresentacionVentR.assets.cache
+BackEndVentR/BackEndVentR/PresentacionVentR/obj/Debug/netcoreapp3.1/PresentacionVentR.csprojAssemblyReference.cache
+BackEndVentR/BackEndVentR/.vs/BackEndVentR/DesignTimeBuild/.dtbcache.v2
+BackEndVentR/BackEndVentR/.vs/BackEndVentR/v16/.suo
