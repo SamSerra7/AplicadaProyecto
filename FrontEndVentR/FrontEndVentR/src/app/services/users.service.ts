@@ -4,7 +4,6 @@ import { Observable, of } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
 
 import { UserModel } from '../models/user.model';
-import { UserRoleModel } from '../models/user-role.model';
 
 const endpoint = 'http://localhost:59292/api/Usuario/';
 
@@ -51,6 +50,8 @@ export class UsersService {
       catchError(this.handleError<any>('getById'))
       );
   }
+
+
 
   /*----------------------------------------------*/
   updateuser(users: UserModel): Observable<any>{
