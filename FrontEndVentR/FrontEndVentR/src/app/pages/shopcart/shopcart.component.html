@@ -6,7 +6,7 @@
 
     <h1>Carrito de compras</h1>
     <div *ngIf="shopcart.length > 0" class="row">
-        <div class="col-12">
+        <div class="col-12 table-of">
             <table class="table">
                 <thead>
                     <tr>
@@ -47,8 +47,8 @@
                 </tbody>
             </table>
         </div>
-        <div class="col-6"></div>
-        <div class="col-6">
+        <div class="col-lg-6 col-md-6 col-sm-12"></div>
+        <div class="col-lg-6 col-md-6 col-sm-12">
             <table class="table">
                 <thead>
                     <tr>
@@ -71,7 +71,7 @@
             </table>
         </div>
         <div class="col-12">
-            <button style="width: 50%;" class="float-right btn btn-outline-warning btn-block m-2">Pagar</button>
+            <button (click)="buy()" style="width: 50%;" class="float-right btn btn-outline-warning btn-block m-2">Pagar</button>
             <button routerLink="['/home']" style="width: 50%;" class="float-right btn btn-outline-primary btn-block m-2">Seguir comprando</button>
         </div>
     </div>

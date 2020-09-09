@@ -4,7 +4,8 @@ import { Observable, of } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
 import { ProductModel } from '../models/products.model';
 
-const endpoint = 'http://localhost:59292/api/producto';
+const endpoint = 'http://localhost:59292/api/producto/';
+const endpointUserProduct = 'http://localhost:59292/api/usuario/';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -29,8 +30,15 @@ export class ProdutsService {
       );
   }
 
-  getById(id): Observable<any> {
-    return this.http.get(endpoint + '/' + id).pipe(
+  getById(productId): Observable<any> {
+    let userId = localStorage.getItem('userId');
+    if(userId){
+      return this.http.get(endpointUserProduct + userId +'/producto/'+ productId).pipe(
+        map(this.extractData),
+        catchError(this.handleError<any>('getById'))
+        );  
+    }
+    return this.http.get(endpoint +  productId).pipe(
       map(this.extractData),
       catchError(this.handleError<any>('getById'))
       );
