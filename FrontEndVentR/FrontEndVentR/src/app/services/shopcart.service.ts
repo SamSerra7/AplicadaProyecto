@@ -6,7 +6,8 @@ import { ProductModel } from '../models/products.model';
 import { ShopCartModel } from '../models/shopcart.model';
 
 
-const endpoint = 'http://localhost:59292/api/CarritoCompras/';
+const endpoint = 'http://localhost:59292/api/';
+
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -25,14 +26,14 @@ export class ShopcartService {
   constructor(private http: HttpClient) { }
 
   getByUserId(id:number){
-    return this.http.get(endpoint + id).pipe(
+    return this.http.get(endpoint + 'CarritoCompras/' + id).pipe(
       map(this.extractData),
       catchError(this.handleError<any>('getById'))
       );
   }
 
   addProductShopCart( shopCart:ShopCartModel){
-    return this.http.post<any>(endpoint + shopCart.id_usuario , JSON.stringify(shopCart), httpOptions)
+    return this.http.post<any>(endpoint + 'CarritoCompras/' + shopCart.id_usuario , JSON.stringify(shopCart), httpOptions)
     .pipe(
       tap((user) => console.log('processing...')),
       catchError(this.handleError<any>('error login user')),
@@ -43,10 +44,20 @@ export class ShopcartService {
   }
 
   deleteProductShopCart(id:number):Observable<any> {
-    return this.http.delete(endpoint + id).pipe(
+    return this.http.delete(endpoint + 'CarritoCompras/' + id).pipe(
       map(this.extractData),
       catchError(this.handleError<any>('no product deleted from shopcart'))
       );
+  }
+
+  registerSale(userId:number){
+    return this.http.post<any>(endpoint +'user/venta/', JSON.stringify(userId), httpOptions).pipe(
+      tap((user) => console.log('added sale')),
+      catchError(this.handleError<any>('error add sale')),
+      map(resp =>{
+        return resp;
+      })
+    );
   }
 
   private extractData(res: Response) {
