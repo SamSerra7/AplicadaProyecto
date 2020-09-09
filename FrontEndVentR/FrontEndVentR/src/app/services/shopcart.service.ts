@@ -42,6 +42,13 @@ export class ShopcartService {
     );
   }
 
+  deleteProductShopCart(id:number):Observable<any> {
+    return this.http.delete(endpoint + id).pipe(
+      map(this.extractData),
+      catchError(this.handleError<any>('no product deleted from shopcart'))
+      );
+  }
+
   private extractData(res: Response) {
     let body = res;
     return body || { }; 
