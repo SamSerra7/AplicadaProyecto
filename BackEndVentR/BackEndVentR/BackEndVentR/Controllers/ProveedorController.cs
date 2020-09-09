@@ -77,9 +77,12 @@ namespace BackEndVentR.Controllers
             return proveedorNegocio.AgregarProveedor(proveedor);
         }
 
-       
+        [HttpPut]
+        public bool ModificarProveedor([FromBody] Proveedor proveedor)
+        {
+            return proveedorNegocio.modificarProveedor(proveedor);
+        }
 
-      
     }
 
 
