@@ -32,5 +32,14 @@ namespace Cliente1.Models
             this.descripcion = descripcion;
             this.id_proveedor = id_proveedor;
         }
+
+
+        public Producto(int id_produto, int id_proveedor,int cantidad)
+        {
+            this.id_produto = id_produto;
+           
+            this.cantidad = cantidad;
+            this.id_proveedor = id_proveedor;
+        }
     }
 }
