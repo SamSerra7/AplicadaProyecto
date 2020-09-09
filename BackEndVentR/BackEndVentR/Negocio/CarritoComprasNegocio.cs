@@ -25,5 +25,14 @@ namespace Negocio
         }
 
 
+        public Boolean agregar_cantidad(int idProducto, int idUsuario) {
+          return  carrito_compras_datos.agregar_cantidad(idProducto, idUsuario);
+        }
+
+        public Boolean disminuir_cantidad(int idUsuario, int idProducto)
+        {
+            return carrito_compras_datos.disminuir_cantidad(idUsuario,idProducto);
+        }
+
     }
 }

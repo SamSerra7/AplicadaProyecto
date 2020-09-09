@@ -137,6 +137,30 @@ namespace Cliente1.Models
 
         }
 
+        public bool ActualizarCantidad(Producto producto)
+        {
+            Connection();
+
+            int i;
+
+            using (SqlCommand command = new SqlCommand("ActualizarCantidad", _con))
+            {
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@id_producto", producto.id_produto);
+                command.Parameters.AddWithValue("@id_proveedor", producto.id_proveedor);
+                command.Parameters.AddWithValue("@cantidad", producto.cantidad);
+
+                _con.Open();
+
+                i = command.ExecuteNonQuery();
+
+            }
+            _con.Close();
+
+            return i >= 1;
+
+        }
+
         public bool Eliminar(int id_producto)
         {
             Connection();
