@@ -88,10 +88,9 @@ namespace Entidad
             set { proveedor = value ?? throw new Exception("Debe tener un proveedor"); }
         }
 
-        public int IdProveedor { get; set; }
 
-        public Producto(int id_producto_proveedor,int id_producto, string nombre, SqlMoney precio, string urlImg,
-            string detalle, bool activo, int cantidad, Proveedor proveedor)
+        public Producto(int id_producto_proveedor, string nombre, SqlMoney precio, string urlImg,
+            string detalle, int cantidad, Proveedor proveedor)
         {
             IdProductoProveedor = id_producto_proveedor;
             IdProducto = id_producto;
@@ -99,7 +98,6 @@ namespace Entidad
             Precio = precio;
             UrlImg = urlImg;
             Detalle = detalle;
-            Activo = activo;
             Cantidad = cantidad;
             Proveedor = proveedor;
         }
@@ -130,11 +128,11 @@ namespace Entidad
         }
 
 
-        public Producto(int id_producto,int id_proveedor,int cantidad)
+        public Producto(int id_producto,Proveedor proveedor,int cantidad)
         {
-            this.id_producto=id_producto;
-            this.IdProveedor = id_proveedor;
-            this.cantidad = cantidad;
+            IdProductoProveedor=id_producto;
+            Proveedor = proveedor;
+            Cantidad = cantidad;
         }
 
         public Producto(){}

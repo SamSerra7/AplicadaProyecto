@@ -211,18 +211,46 @@ namespace Dato
         /// <param name="idProveedor"></param>
         /// <param name="cantidad"></param>
         /// <returns>Boolean resultado</returns>
-        public Boolean AgregarCantidad(int idProducto, int idProveedor,int cantidad)
+        public Boolean AgregarCantidad(int idProductoProveedor, int idProveedor,int cantidad)
         {
             using (NpgsqlConnection con = conexion.GetConexion())
             {
                 con.Open();
-                string sql = "CALL products.pa_agregar_cantidad(@p_id_producto,@p_id_proveedor,@p_cantidad);";
+                string sql = "CALL products.pa_agregar_cantidad(@p_id_producto_proveedor,@p_id_proveedor,@p_cantidad);";
 
                 using (var command = new NpgsqlCommand(sql, con))
                 {
-                    command.Parameters.AddWithValue(":p_id_producto", idProducto);
+                    command.Parameters.AddWithValue(":p_id_producto_proveedor", idProductoProveedor);
                     command.Parameters.AddWithValue(":p_id_proveedor", idProveedor);
                     command.Parameters.AddWithValue(":p_cantidad", cantidad);
+                    command.ExecuteNonQuery();
+                }
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// Metodo que registra un producto nuevo, recibe un Objeto de Tipo Producto
+        /// </summary>
+        /// <param name="producto"></param>
+        /// <returns>Boolean resultado</returns>
+        public Boolean AgregarProducto(Producto producto)
+        {
+            using (NpgsqlConnection con = conexion.GetConexion())
+            {
+                con.Open();
+                string sql = "CALL products.pa_agregar_producto(@p_nombre,@p_precio, @p_url,@p_detalle, " +
+                    "@p_cantidad, @p_id_proveedor,@p_id_producto_proveedor);";
+
+                using (var command = new NpgsqlCommand(sql, con))
+                {
+                    command.Parameters.AddWithValue(":p_nombre", producto.Nombre);
+                    command.Parameters.AddWithValue(":p_precio", producto.Precio);
+                    command.Parameters.AddWithValue(":p_url", producto.UrlImg);
+                    command.Parameters.AddWithValue(":p_detalle", producto.Detalle);
+                    command.Parameters.AddWithValue(":p_cantidad", producto.Cantidad);
+                    command.Parameters.AddWithValue(":p_id_proveedor", producto.Proveedor.IdProveedor);
+                    command.Parameters.AddWithValue(":p_id_producto_proveedor", producto.IdProductoProveedor);
                     command.ExecuteNonQuery();
                 }
             }

@@ -93,7 +93,17 @@ namespace Negocio
         /// <param name="producto"></param>
         /// <returns>Boolean resultado</returns>
         public Boolean AgregarCantidad(Producto producto) {
-            return productoDatos.AgregarCantidad(producto.IdProducto,producto.IdProveedor,producto.Cantidad);
+            return productoDatos.AgregarCantidad(producto.IdProducto,producto.Proveedor.IdProveedor,producto.Cantidad);
+        }
+
+        /// <summary>
+        /// Metodo que agrega un nuevo producto, recibe un Objeto de Tipo Producto
+        /// </summary>
+        /// <param name="producto"></param>
+        /// <returns>Boolean respuesta</returns>
+        public Boolean AgregarProducto(Producto producto)
+        {
+            return productoDatos.AgregarProducto(producto);
         }
     }
 
