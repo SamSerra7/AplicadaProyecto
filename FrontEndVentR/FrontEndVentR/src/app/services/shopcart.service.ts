@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
-import { ProductModel } from '../models/products.model';
 import { ShopCartModel } from '../models/shopcart.model';
 
 
@@ -20,8 +19,6 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class ShopcartService {
-
-  
 
   constructor(private http: HttpClient) { }
 
@@ -59,6 +56,29 @@ export class ShopcartService {
       })
     );
   }
+
+  plusProductsCartShop(shopCart:ShopCartModel){
+    //{idUser}/Producto/{idProducto}/Agregarcantidad
+
+    return this.http.get(
+      endpoint + shopCart.id_usuario + '/Producto/' + shopCart.idProducto + '/Agregarcantidad').pipe(
+      map(this.extractData),
+      catchError(this.handleError<any>('plus product...'))
+      );
+
+  }
+
+  lessProductsCartShop(shopCart:ShopCartModel){
+    //{idUser}/Producto/{idProducto}/DisminuirCantidad
+
+    return this.http.get(
+      endpoint + shopCart.id_usuario + '/Producto/' + shopCart.idProducto + '/DisminuirCantidad').pipe(
+      map(this.extractData),
+      catchError(this.handleError<any>('less product...'))
+      );
+    
+  }
+
 
   private extractData(res: Response) {
     let body = res;
