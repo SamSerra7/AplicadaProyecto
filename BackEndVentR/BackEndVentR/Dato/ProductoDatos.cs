@@ -27,21 +27,21 @@ namespace Dato
 
             List<Producto> productos = new List<Producto>();
 
-            using(NpgsqlConnection con = conexion.GetConexion())
+            using (NpgsqlConnection con = conexion.GetConexion())
             {
                 con.Open();
                 string sql = "SELECT id_producto,nombre,precio,url_img,detalle,activo,cantidad,id_proveedor FROM products.producto WHERE activo<>false";
-                
-                
-                using(var command = new NpgsqlCommand(sql, con))
+
+
+                using (var command = new NpgsqlCommand(sql, con))
                 {
                     using (NpgsqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            productos.Add( new Producto(reader.GetInt32(0), reader.GetString(1),
-                                                            reader.GetDecimal(2), reader.GetString(3), 
-                                                                reader.GetString(4),reader.GetBoolean(5),
+                            productos.Add(new Producto(reader.GetInt32(0), reader.GetString(1),
+                                                            reader.GetDecimal(2), reader.GetString(3),
+                                                                reader.GetString(4), reader.GetBoolean(5),
                                                                     reader.GetInt32(6), proveedorDatos.buscarProveedor(reader.GetInt32(7)))
                             );
                         }
@@ -66,7 +66,7 @@ namespace Dato
             using (NpgsqlConnection con = conexion.GetConexion())
             {
                 con.Open();
-                string sql = "SELECT id_producto,nombre,precio,url_img,detalle,activo,cantidad,id_proveedor FROM products.producto " 
+                string sql = "SELECT id_producto,nombre,precio,url_img,detalle,activo,cantidad,id_proveedor FROM products.producto "
                                 + " WHERE activo<>false AND id_producto = @idProducto";
 
                 using (var command = new NpgsqlCommand(sql, con))
@@ -109,9 +109,9 @@ namespace Dato
 
                 using (var command = new NpgsqlCommand(sql, con))
                 {
-                        command.Parameters.AddWithValue(":id_usuario", idUsuario);
-                        command.Parameters.AddWithValue(":id_producto", idProducto);
-                        command.ExecuteNonQuery();
+                    command.Parameters.AddWithValue(":id_usuario", idUsuario);
+                    command.Parameters.AddWithValue(":id_producto", idProducto);
+                    command.ExecuteNonQuery();
                 }
             }
         }
@@ -167,11 +167,11 @@ namespace Dato
 
                 using (var command = new NpgsqlCommand(sql, con))
                 {
-                    
 
-                        command.Parameters.AddWithValue(":p_idProducto", IdProducto);
-                        command.ExecuteNonQuery();
-                   
+
+                    command.Parameters.AddWithValue(":p_idProducto", IdProducto);
+                    command.ExecuteNonQuery();
+
                 }
 
                 return true;
@@ -191,15 +191,71 @@ namespace Dato
 
                 using (var command = new NpgsqlCommand(sql, con))
                 {
-                   
-                        command.Parameters.AddWithValue(":p_idProducto", IdProducto);
-                        command.ExecuteNonQuery();
-                    
+
+                    command.Parameters.AddWithValue(":p_idProducto", IdProducto);
+                    command.ExecuteNonQuery();
+
                 }
 
                 return true;
             }
 
         }
+
+
+        /// <summary>
+        /// Método para aumentar la cantidad de productos en inventario, recibe el id del producto y el proveedor
+        /// y la cantidad que se desea aumentar a dicho producto.
+        /// </summary>
+        /// <param name="idProducto"></param>
+        /// <param name="idProveedor"></param>
+        /// <param name="cantidad"></param>
+        /// <returns>Boolean resultado</returns>
+        public Boolean AgregarCantidad(int idProductoProveedor, int idProveedor,int cantidad)
+        {
+            using (NpgsqlConnection con = conexion.GetConexion())
+            {
+                con.Open();
+                string sql = "CALL products.pa_agregar_cantidad(@p_id_producto_proveedor,@p_id_proveedor,@p_cantidad);";
+
+                using (var command = new NpgsqlCommand(sql, con))
+                {
+                    command.Parameters.AddWithValue(":p_id_producto_proveedor", idProductoProveedor);
+                    command.Parameters.AddWithValue(":p_id_proveedor", idProveedor);
+                    command.Parameters.AddWithValue(":p_cantidad", cantidad);
+                    command.ExecuteNonQuery();
+                }
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// Metodo que registra un producto nuevo, recibe un Objeto de Tipo Producto
+        /// </summary>
+        /// <param name="producto"></param>
+        /// <returns>Boolean resultado</returns>
+        public Boolean AgregarProducto(Producto producto)
+        {
+            using (NpgsqlConnection con = conexion.GetConexion())
+            {
+                con.Open();
+                string sql = "CALL products.pa_agregar_producto(@p_nombre,@p_precio, @p_url,@p_detalle, " +
+                    "@p_cantidad, @p_id_proveedor,@p_id_producto_proveedor);";
+
+                using (var command = new NpgsqlCommand(sql, con))
+                {
+                    command.Parameters.AddWithValue(":p_nombre", producto.Nombre);
+                    command.Parameters.AddWithValue(":p_precio", producto.Precio);
+                    command.Parameters.AddWithValue(":p_url", producto.UrlImg);
+                    command.Parameters.AddWithValue(":p_detalle", producto.Detalle);
+                    command.Parameters.AddWithValue(":p_cantidad", producto.Cantidad);
+                    command.Parameters.AddWithValue(":p_id_proveedor", producto.Proveedor.IdProveedor);
+                    command.Parameters.AddWithValue(":p_id_producto_proveedor", producto.IdProductoProveedor);
+                    command.ExecuteNonQuery();
+                }
+            }
+            return true;
+        }
+
     }
 }
