@@ -41,14 +41,14 @@ export class ShopcartService {
   }
 
   deleteProductShopCart(shopCart:ShopCartModel):Observable<any> {
-    return this.http.delete(endpoint + 'CarritoCompras/' + shopCart).pipe(
+    return this.http.get(endpoint +'usuario/'+ shopCart.id_usuario + '/Producto/' + shopCart.idProducto + '/borrarDelCarrito').pipe(
       map(this.extractData),
       catchError(this.handleError<any>('no product deleted from shopcart'))
       );
   }
 
   registerSale(userId:number){
-    return this.http.post<any>(endpoint +'user/venta/', JSON.stringify(userId), httpOptions).pipe(
+    return this.http.get(endpoint +'usuario/venta/' + userId).pipe(
       tap((user) => console.log('added sale')),
       catchError(this.handleError<any>('error add sale')),
       map(resp =>{
@@ -78,7 +78,6 @@ export class ShopcartService {
       );
     
   }
-
 
   private extractData(res: Response) {
     let body = res;
