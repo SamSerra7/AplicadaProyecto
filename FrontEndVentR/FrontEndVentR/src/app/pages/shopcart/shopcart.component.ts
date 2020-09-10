@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductModel } from '../../models/products.model';
-import { ShopCartModel } from '../../models/shopcart.model';
 import { ProdutsService } from '../../services/produts.service';
 import { Router } from '@angular/router';
 import { ShopcartService } from '../../services/shopcart.service';
 import Swal from 'sweetalert2';
+import { ShopCartModel } from '../../models/shopcart.model';
 
 @Component({
   selector: 'app-shopcart',
@@ -20,22 +20,59 @@ export class ShopcartComponent implements OnInit {
   total:number=0;
   userId:number;
 
-  constructor(  private productService:ProdutsService,
-                private router: Router,
+  constructor(  private router: Router,
                 private shopcartService:ShopcartService) {
-
     this.userId= parseInt(localStorage.getItem("userId"));
     this.getShopcartProducts();
-    this.getProducts();
-    
   }
 
   ngOnInit(): void {
     
   }
 
-  buy(){
-    
+  buy(userId:number){
+    console.log('Pagando:' + userId)
+  }
+
+  lessProduct(shopcart:any){
+
+    let newCartShop:ShopCartModel = new ShopCartModel();
+    newCartShop.id_usuario = this.userId;
+    newCartShop.idProducto = shopcart.productos.idProducto;
+    newCartShop.cantidad = shopcart.cantidad_Solicitada;
+
+    if(newCartShop.cantidad == 0){
+      this.shopcartService.deleteProductShopCart(newCartShop)
+      .subscribe( resp =>{
+        if(resp){      
+          this.getShopcartProducts();
+          this.getCalculations();
+        }
+      });
+    }else{
+      this.shopcartService.lessProductsCartShop(newCartShop)
+      .subscribe( resp =>{
+        if(resp){      
+          this.getShopcartProducts();
+          this.getCalculations();
+        }
+      });
+    }  
+  }
+
+  plusProduct(id:number){
+
+    let newCartShop:ShopCartModel = new ShopCartModel();
+    newCartShop.id_usuario = this.userId;
+    newCartShop.idProducto = id;
+
+    this.shopcartService.plusProductsCartShop(newCartShop)
+    .subscribe( resp =>{
+      if(resp){      
+        this.getShopcartProducts();
+        this.getCalculations();
+      }
+    });
   }
 
   getShopcartProducts(){
@@ -47,6 +84,10 @@ export class ShopcartComponent implements OnInit {
   }
 
   getCalculations(){
+
+    
+    this.subTotal=0;
+
     for(let newShopcart of this.shopcart ){
       this.subTotal += newShopcart.productos.precio.value * newShopcart.cantidad_Solicitada;
     }
@@ -56,31 +97,21 @@ export class ShopcartComponent implements OnInit {
 
   }
 
-  getProducts(){
-
-    this.productService.getAll()
-    .subscribe( products => {
-      this.products = products;
-    })
-
-  }
-
   delete(id:number){
+
+    let newCartShop:ShopCartModel = new ShopCartModel();
+    newCartShop.id_usuario = this.userId;
+    newCartShop.idProducto = id;
+
+
+
     
-    this.shopcartService.deleteProductShopCart(id)
+    this.shopcartService.deleteProductShopCart(newCartShop)
     .subscribe( resp => {
-      if(resp == true){
-        Swal.fire({
-          text: 'Borrado con exito...',
-          icon: 'info',
-          title: 'Producto fue borrado'
-        });        
-      }else{
-        Swal.fire({
-          text: 'Error al borrar...',
-          icon: 'error',
-          title: 'Intente de nuevo'
-        });
+      if(resp){
+
+        console.log('Borrado:'+ resp)
+
       }
     })
 
@@ -90,7 +121,6 @@ export class ShopcartComponent implements OnInit {
 
   viewProduct(id:number){
     this.router.navigate(['product',id]);
-  }
-  
+  }  
 
 }

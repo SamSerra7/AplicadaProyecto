@@ -17,9 +17,10 @@ import { ShopCartModel } from '../../models/shopcart.model';
 })
 export class ProductComponent implements OnInit {
 
-  product:any;
+  productList:any;
+  product:ProductModel = new ProductModel();
   shopcart:ShopCartModel;
-  shopcarts:any=[];
+  shopcartList:any;
   newProduct=true;
   userId:number;
   
@@ -31,8 +32,8 @@ export class ProductComponent implements OnInit {
                 ) {
 
     this.activatedRoute.params.subscribe( params =>{
-      produtsService.getById(params['id']).subscribe((data:{})=>{
-        this.product=data;
+      produtsService.getById(params['id']).subscribe((data:ProductModel)=>{
+        this.product = data;
       });
     });
     this.userId = parseInt(localStorage.getItem("userId"));
@@ -41,6 +42,21 @@ export class ProductComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  getShopcartProducts(){
+    this.shopcartService.getByUserId(this.userId)
+    .subscribe(resp =>{
+      this.shopcartList = resp;
+    })
+  }
+
+  getAllProducts(){
+    this.produtsService.getAll()
+    .subscribe(resp =>{
+      this.productList = resp;
+    })
+  }
+
 
   addShopcart(idProduct:number){
 
