@@ -69,5 +69,17 @@ namespace Negocio
             return proveedorDatos.DesactivarProveedor(IdProveedor);
         }
 
+        
+        /// <summary>
+        /// Samuel Serrano Guerra
+        /// Método que sincriniza las ventas
+        /// </summary>
+        /// <param name="idProveedor"></param>
+        /// <param name="llave"></param>
+        /// <returns>Json para el proveedor</returns>
+        public IEnumerable<SyncronizationType> sincronizarProveedor(int idProveedor, string llave)
+        {
+            return proveedorDatos.sincronizarProveedor(idProveedor, llave);
+        }
     }
 }

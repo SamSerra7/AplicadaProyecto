@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Threading.Tasks;
 using Entidad;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualBasic.CompilerServices;
 using Negocio;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -81,6 +83,13 @@ namespace BackEndVentR.Controllers
         public bool ModificarProveedor([FromBody] Proveedor proveedor)
         {
             return proveedorNegocio.modificarProveedor(proveedor);
+        }
+
+
+        [HttpGet("{idProveedor}/{llave}/sincronizacion")]
+        public IEnumerable<SyncronizationType> sincronizacion(int idProveedor,string llave)
+        {
+            return proveedorNegocio.sincronizarProveedor(idProveedor, llave);
         }
 
     }
