@@ -40,8 +40,8 @@ export class ShopcartService {
     );
   }
 
-  deleteProductShopCart(id:number):Observable<any> {
-    return this.http.delete(endpoint + 'CarritoCompras/' + id).pipe(
+  deleteProductShopCart(shopCart:ShopCartModel):Observable<any> {
+    return this.http.delete(endpoint + 'CarritoCompras/' + shopCart).pipe(
       map(this.extractData),
       catchError(this.handleError<any>('no product deleted from shopcart'))
       );
@@ -57,11 +57,11 @@ export class ShopcartService {
     );
   }
 
-  plusProductsCartShop(shopCart:ShopCartModel){
+  plusProductsCartShop(shopCart:ShopCartModel):Observable<any>{
     //{idUser}/Producto/{idProducto}/Agregarcantidad
 
     return this.http.get(
-      endpoint + shopCart.id_usuario + '/Producto/' + shopCart.idProducto + '/Agregarcantidad').pipe(
+      endpoint + 'usuario/' + shopCart.id_usuario + '/Producto/' + shopCart.idProducto + '/Agregarcantidad').pipe(
       map(this.extractData),
       catchError(this.handleError<any>('plus product...'))
       );
@@ -72,7 +72,7 @@ export class ShopcartService {
     //{idUser}/Producto/{idProducto}/DisminuirCantidad
 
     return this.http.get(
-      endpoint + shopCart.id_usuario + '/Producto/' + shopCart.idProducto + '/DisminuirCantidad').pipe(
+      endpoint + 'usuario/' + shopCart.id_usuario + '/Producto/' + shopCart.idProducto + '/DisminuirCantidad').pipe(
       map(this.extractData),
       catchError(this.handleError<any>('less product...'))
       );
