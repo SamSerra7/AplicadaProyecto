@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Entidad;
 using Microsoft.AspNetCore.Mvc;
@@ -20,6 +21,8 @@ namespace BackEndVentR.Controllers
     {
 
         private ProveedorNegocio proveedorNegocio = new ProveedorNegocio();
+
+        private ProductoNegocio productoNegocio = new ProductoNegocio();
         // GET: api/<ProveedorController>
         [HttpGet]
         public IEnumerable<Proveedor> Get()
@@ -90,6 +93,38 @@ namespace BackEndVentR.Controllers
         public IEnumerable<SyncronizationType> sincronizacion(int idProveedor,string llave)
         {
             return proveedorNegocio.sincronizarProveedor(idProveedor, llave);
+        }
+
+        
+        //api/idProveedor/2/llave/3/recibirProductos
+
+      
+        [HttpPost("{idProveedor}/{llave}/recibirProductos")]
+        //Proveedor/2/Llave/3/recibirProductos
+        public void agregarProducto(int idProveedor, string llave, [FromBody] JsonElement producto)
+        {
+
+            if (proveedorNegocio.validarProveedor(idProveedor,llave))
+            {
+
+           
+                List<Producto> listaProductos = new List<Producto>();
+           
+
+                foreach (JsonElement lista in producto.EnumerateArray()) { 
+                         listaProductos.Add(new Producto(
+                        lista.GetProperty("id_producto_proveedor").GetInt32(), 
+                        lista.GetProperty("nombre").GetString(),
+                        lista.GetProperty("precio").GetDecimal(),
+                        lista.GetProperty("url_img").GetString(), 
+                        lista.GetProperty("detalle").GetString(), 
+                        lista.GetProperty("cantidad").GetInt32(),
+                        proveedorNegocio.buscarProveedor(lista.GetProperty("id_proveedor").GetInt32())));
+                }
+
+
+                proveedorNegocio.agregarProductosProveedor(listaProductos);
+            }
         }
 
     }
