@@ -10,12 +10,17 @@
             </div>
             <div class="col-md-8">
                 <div class="card-body">
-                    <h6>Detalles:</h6>
-                    <p class="card-text">{{product.detalle}}</p>
+                    <h6>Detalles:
+                        <p class="card-text"><small>Cod:{{product.idProducto}}</small></p>
+                        <p class="card-text">{{product.detalle}}</p>
+                        <p *ngIf="product.cantidad > 0" class="card-text">Disponibles:<small class="text-muted"> {{product.cantidad}}</small></p>
+                        <p style="color: red;" *ngIf="product.cantidad == 0" class="card-text">Agotado</p>
+                    </h6>
                     <h6>Precio:</h6>
                     <h4 style="color: red;">{{product.precio.value | currency: '¢'}}</h4>
-                    <p class="card-text">Disponibles:<small class="text-muted"> {{product.cantidad}}</small></p>
-                    <button *ngIf="userId" (click)="addShopcart(product.idProducto)" class="btn btn-outline-primary btn-block"> Agregar al carrito </button>
+                    <hr>
+                    <p style="color: blue;"><small>Vendedor:{{product.proveedor.nombre}}</small></p>
+                    <button *ngIf="userId && product.cantidad > 0" (click)="addShopcart(product.idProducto)" class="btn btn-outline-primary btn-block"> Agregar al carrito </button>
                     <button *ngIf="!userId" routerLink="/sign-in" class="btn btn-outline-primary btn-block"> Agregar al carrito </button>
                 </div>
             </div>

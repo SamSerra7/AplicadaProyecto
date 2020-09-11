@@ -2,12 +2,16 @@ import { PrecioModel } from "./precio.model";
 import { ProveedorModel } from './proveedor.model';
 export class ProductModel{
 
-    idProducto: number;
+    activo:boolean;
     cantidad: number;
-    nombre: string;
-    urlImg: string;
     detalle: string;
-    precio: PrecioModel;
-    proveedor: ProveedorModel;
+    idProducto: number;
+    idProductoProveedor: number;    
+    nombre: string;
+    precio: PrecioModel=new PrecioModel();
+    proveedor: ProveedorModel=new ProveedorModel();
+    urlImg: string;   
+    
+    
     
 }
