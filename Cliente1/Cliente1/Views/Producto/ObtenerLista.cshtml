@@ -120,15 +120,22 @@
 
         function sincronizar() {
             //Solamente es de cambiar el url del back end aqui, lo demas está bien
-            $.get('http://localhost:59292/api/Producto')
+            let id_proveedor, cantidad, producto_proveedor ;
+
+            $.get('http://localhost:59292/api/Proveedor/2/Sincronizar')
                 .done((data) => {
 
                     console.log(data);
                     // TODO mostrar el Json de los productos vendidos con su cantidad
-                    var id_proveedor = data.id_producto;
-                    var cantidad = data.cantidad;
-                    var producto_proveedor = data.id_producto;
-                    sincronizarProducto(id_proveedor, producto_proveedor, cantidad);
+
+                    data.forEach((producto) => {
+                        id_proveedor = producto.id_producto;
+                        cantidad = producto.cantidad;
+                        producto_proveedor = producto.id_producto;
+                        sincronizarProducto(id_proveedor, producto_proveedor, cantidad);
+                    });
+
+                    
                     alert("Sincronizado correctamente con VentR");
                 })
                 .fail((e) => alert("Error al sincronizar: " + e));
@@ -140,7 +147,11 @@
             $.ajax({
                 url: '/Producto/ModificarProducto',
                 type: 'GET',
-                data: { "id_producto": parseInt(producto_proveedor), "id_proveedor": parseInt(idProveedor), "cantidad": parseInt(cantidad) },
+                data: {
+                    "id_producto": parseInt(producto_proveedor),
+                    "id_proveedor": parseInt(idProveedor),
+                    "cantidad": parseInt(cantidad)
+                },
                 success: function (response) {
                     console.log(response);
                     if (response) {
