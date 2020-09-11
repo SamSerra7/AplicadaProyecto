@@ -11,6 +11,8 @@
 
 <button onclick="sincronizar()">Sincronizar</button>
 
+<button onclick="enviarProductos()">Enviar Productos</button>
+
 <h3 id="llave"></h3>
 
 <table class="table">
@@ -70,8 +72,8 @@
                 @Html.DisplayFor(modelItem => item.descripcion)
             </td>
             <td>
-                @Html.ActionLink("Actualizar", "Actualizar", new { id = item.id_produto }) |
-                @Html.ActionLink("Eliminar", "Eliminar", new { id = item.id_produto })
+                @Html.ActionLink("Actualizar", "Actualizar", new { id = item.id_producto }) |
+                @Html.ActionLink("Eliminar", "Eliminar", new { id = item.id_producto })
             </td>
         </tr>
     }
@@ -79,7 +81,10 @@
 </table>
 @section scripts{
     <script type="text/javascript">
+
+        let llave = '';
         let mostrar = false;
+
         function getLlave() {
             if (!mostrar) {
                 $.get('http://localhost:59292/api/Llave/2/llave').done(function (data) {
@@ -90,7 +95,7 @@
                     }
                     else {
                         $("#llave").text(data.codLlave);
-
+                        llave = data.codLlave;
                     }
 
                     $("#ver").text("Ocultar llave");
@@ -99,6 +104,7 @@
             }
             else {
                 $("#llave").text("");
+                $("#ver").text("Ver llave");
                 mostrar = false;
             }
         }
@@ -120,7 +126,7 @@
 
         function sincronizar() {
             //Solamente es de cambiar el url del back end aqui, lo demas está bien
-            let id_proveedor, cantidad, producto_proveedor ;
+            let id_proveedor, cantidad, producto_proveedor;
 
             $.get('http://localhost:59292/api/Proveedor/2/Sincronizar')
                 .done((data) => {
@@ -135,7 +141,7 @@
                         sincronizarProducto(id_proveedor, producto_proveedor, cantidad);
                     });
 
-                    
+
                     alert("Sincronizado correctamente con VentR");
                 })
                 .fail((e) => alert("Error al sincronizar: " + e));
@@ -165,5 +171,25 @@
             });
         }
 
+
+        function enviarProductos() {
+
+            let url = 'http://localhost:59292/api/Proveedor/2/' + llave + '/recibirProductos';
+            let productos;
+
+            $.get('https://localhost:44358/api/ApiProducto')
+                .done((data) => {
+
+                    productos = data;
+
+                    $.post(url, productos, "json")
+                        .done((res) => {
+                            console.log(res);
+                        })
+                        .fail((e) => alert("Llave incorrecta o error: " + e.responseText));
+
+                })
+                .fail((e) => alert("Error al sincronizar: " + e.responseText));
+        }
     </script>
 }
