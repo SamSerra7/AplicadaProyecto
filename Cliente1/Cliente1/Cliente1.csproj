@@ -187,6 +187,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Producto\ObtenerLista.cshtml" />
     <Content Include="Views\Producto\Agregar.cshtml" />
+    <Content Include="Views\Producto\Actualizar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
