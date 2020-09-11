@@ -57,11 +57,13 @@ export class ProductComponent implements OnInit {
     })
   }
 
+ 
 
   addShopcart(idProduct:number){
 
     this.shopcart.id_usuario=this.userId;
     this.shopcart.idProducto=idProduct;
+
     this.shopcartService.addProductShopCart(this.shopcart)
     .subscribe( resp => {
       if(resp){
