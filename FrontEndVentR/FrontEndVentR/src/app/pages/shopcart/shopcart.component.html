@@ -33,7 +33,7 @@
                                     <path d="m256 0c-141.164062 0-256 114.835938-256 256s114.835938 256 256 256 256-114.835938 256-256-114.835938-256-256-256zm112 277.332031h-224c-11.777344 0-21.332031-9.554687-21.332031-21.332031s9.554687-21.332031 21.332031-21.332031h224c11.777344 0 21.332031 9.554687 21.332031 21.332031s-9.554687 21.332031-21.332031 21.332031zm0 0"/>
                                 </svg>
                             </a>
-                            <a class="btn" (click)="plusProduct(newShopcart.productos.idProducto)" style="color: blue;" title="Sumar">
+                            <a class="btn" (click)="plusProduct(newShopcart)" style="color: blue;" title="Sumar">
                                 <svg fill="currentColor" height="2em" width="2em" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
                                     <path d="m256 0c-141.164062 0-256 114.835938-256 256s114.835938 256 256 256 256-114.835938 256-256-114.835938-256-256-256zm112 277.332031h-90.667969v90.667969c0 11.777344-9.554687 21.332031-21.332031 21.332031s-21.332031-9.554687-21.332031-21.332031v-90.667969h-90.667969c-11.777344 0-21.332031-9.554687-21.332031-21.332031s9.554687-21.332031 21.332031-21.332031h90.667969v-90.667969c0-11.777344 9.554687-21.332031 21.332031-21.332031s21.332031 9.554687 21.332031 21.332031v90.667969h90.667969c11.777344 0 21.332031 9.554687 21.332031 21.332031s-9.554687 21.332031-21.332031 21.332031zm0 0"/>
                                 </svg>
@@ -50,16 +50,6 @@
         <div class="col-lg-6 col-md-6 col-sm-12">
             <table class="table">
                 <thead>
-                    <tr>
-                        <th scope="col" class="text-right">Sub Total:</th>
-                        <th scope="col" class="text-center">{{ subTotal | currency:'¢'}}</th>
-                    </tr>
-
-                    <tr>
-                        <th scope="col" class="text-right">iva:</th>
-                        <th scope="col" class="text-center">{{ iva | currency:'¢'}}</th>
-                    </tr>
-
                     <tr>
                         <th scope="col" class="text-right" style="color: brown;">Total:</th>
                         <th scope="col" class="text-center btn-outline-danger">{{ total | currency:'¢'}}</th>
