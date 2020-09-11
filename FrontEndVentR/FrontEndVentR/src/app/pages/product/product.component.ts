@@ -17,9 +17,10 @@ import { ShopCartModel } from '../../models/shopcart.model';
 })
 export class ProductComponent implements OnInit {
 
-  product:any;
+  productList:any;
+  product:ProductModel = new ProductModel();
   shopcart:ShopCartModel;
-  shopcarts:any=[];
+  shopcartList:any;
   newProduct=true;
   userId:number;
   
@@ -31,8 +32,8 @@ export class ProductComponent implements OnInit {
                 ) {
 
     this.activatedRoute.params.subscribe( params =>{
-      produtsService.getById(params['id']).subscribe((data:{})=>{
-        this.product=data;
+      produtsService.getById(params['id']).subscribe((data:ProductModel)=>{
+        this.product = data;
       });
     });
     this.userId = parseInt(localStorage.getItem("userId"));
@@ -42,10 +43,27 @@ export class ProductComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  getShopcartProducts(){
+    this.shopcartService.getByUserId(this.userId)
+    .subscribe(resp =>{
+      this.shopcartList = resp;
+    })
+  }
+
+  getAllProducts(){
+    this.produtsService.getAll()
+    .subscribe(resp =>{
+      this.productList = resp;
+    })
+  }
+
+ 
+
   addShopcart(idProduct:number){
 
     this.shopcart.id_usuario=this.userId;
     this.shopcart.idProducto=idProduct;
+
     this.shopcartService.addProductShopCart(this.shopcart)
     .subscribe( resp => {
       if(resp){
@@ -65,49 +83,5 @@ export class ProductComponent implements OnInit {
     } )
 
   }
-  /*
-  addShopcart(idProduct:number){
-
-    this.shopcart.precio=this.product.precio.value;
-    this.shopcart.detalle = this.product.detalle;
-    this.shopcart.nombre= this.product.nombre;
-    this.shopcart.urlImg = this.product.urlImg;
-    this.shopcart.id_producto=idProduct;
-    this.shopcart.id_usuario=parseInt( localStorage.getItem("userId"));
-    
-    this.saveInCart(this.shopcart);
-  }
-
-  saveInCart(newShopcart:ShopCartModel){
-
-    this.shopcarts =  JSON.parse(localStorage.getItem('shopcart'));
-    let newShopcarts:any []=[];
-
-    if(!this.shopcarts){
-      newShopcarts.push(newShopcart);
-      localStorage.setItem("shopcart",JSON.stringify(newShopcarts));
-      return false;
-    }
-
-    for(let shopcart of this.shopcarts){
-      //verifica si ya el producto existe
-      if(shopcart.id_producto == newShopcart.id_producto){
-        this.newProduct=false;
-        shopcart.cantidad ++;
-      }      
-      //llena lista con productos ya existentes
-      newShopcarts.push(shopcart);
-    }
-
-    if(this.newProduct == true){
-      //carga nuevo producto a la lista
-      newShopcarts.push(newShopcart);
-    }
-   
-    localStorage.setItem("shopcart",JSON.stringify(newShopcarts));
-    return true;
-    
-  }
-  */
-
+ 
 }

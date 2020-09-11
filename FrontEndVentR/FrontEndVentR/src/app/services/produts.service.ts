@@ -2,9 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
-import { ProductModel } from '../models/products.model';
 
-const endpoint = 'http://localhost:59292/api/producto';
+const endpoint = 'http://localhost:59292/api/';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -23,14 +22,21 @@ export class ProdutsService {
   constructor(private http: HttpClient) { }
 
   getAll(): Observable<any> {
-    return this.http.get(endpoint).pipe(
+    return this.http.get(endpoint + 'producto/').pipe(
       map(this.extractData),
       catchError(this.handleError<any>('getAll'))
       );
   }
 
-  getById(id): Observable<any> {
-    return this.http.get(endpoint + '/' + id).pipe(
+  getById(productId): Observable<any> {
+    let userId = localStorage.getItem('userId');
+    if(userId){
+      return this.http.get(endpoint + 'usuario/' + userId +'/producto/'+ productId).pipe(
+        map(this.extractData),
+        catchError(this.handleError<any>('getById'))
+        );  
+    }
+    return this.http.get(endpoint + 'producto/' +  productId).pipe(
       map(this.extractData),
       catchError(this.handleError<any>('getById'))
       );

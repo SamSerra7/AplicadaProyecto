@@ -1,5 +1,6 @@
 ﻿using Entidad;
 using Npgsql;
+using NpgsqlTypes;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -45,7 +46,7 @@ namespace Dato
                     {
                         while (reader.Read())
                         {
-                            if(reader.GetDate(0).CompareTo(DateTime.Now)>0 )
+                            if(reader.GetDateTime(0).CompareTo(DateTime.Now)>0 )
                             {
                                 llaveActiva = true;
                             }
@@ -59,6 +60,71 @@ namespace Dato
             return llaveActiva;
 
         }
+        
+        /// <summary>
+        /// Samuel Serrano Guerra
+        /// Elimina las llaves inactivas
+        /// </summary>
+        /// <param name="idProveedor"></param>
+        /// <returns>null Object</returns>
+        public Llave eliminarLlave(int idProveedor)
+        {
+            using (NpgsqlConnection con = conexion.GetConexion())
+            {
+                con.Open();
+                string sql = "CALL products.pa_eliminar_llave_inactiva(@idProveedor);";
+
+                using (var command = new NpgsqlCommand(sql, con))
+                {
+                    command.Parameters.AddWithValue("@idProveedor", idProveedor);
+                    command.ExecuteNonQuery();
+                }
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// Samuel Serrano Guerra
+        /// Método que retorna la llave de un proveeddor específico
+        /// </summary>
+        /// <param name="idProveedor"></param>
+        /// <returns>objeto de tipo Llave</returns>
+        public Llave llaveActiva(int idProveedor)
+        {
+
+            Llave llave = null;
+
+            using (NpgsqlConnection con = conexion.GetConexion())
+            {
+                con.Open();
+                string sql = "SELECT * FROM products.pa_get_llave_proveedor(@idProveedor)";
+
+
+                using (var command = new NpgsqlCommand(sql, con))
+                {
+
+                    command.Parameters.AddWithValue("@idProveedor", idProveedor);
+
+
+                    using (NpgsqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                        
+                            llave = new Llave(  reader.GetInt32(0),
+                                                reader.GetString(1),
+                                                proveedorDatos.buscarProveedor(reader.GetInt32(2)),
+                                                reader.GetDateTime(3));
+                        
+                        }
+
+
+                    }
+                }
+            }
+
+            return llave;
+        }
 
 
         /// <summary>
@@ -68,14 +134,14 @@ namespace Dato
         /// <param name="idProveedor"></param>
         public void crearLlave(int idProveedor)
         {
-            string cod = (idProveedor * 7 + 5 * 143 - 3) + "salllave";
-            string hash = cod.GetHashCode().ToString();
+            string cod = (idProveedor * 7 + 5 * 143 - 3)+"trhdJHYGVhtrfc";
+            string hash = cod.GetHashCode().ToString() + "salllave";
             Llave llave = new Llave(hash, proveedorDatos.buscarProveedor(idProveedor), DateTime.Now.AddDays(3));
             
             using (NpgsqlConnection con = conexion.GetConexion())
             {
                 con.Open();
-                string sql = "INSERT INTO products.llave (id_proveedor,llave,fecha_vencimiento) VALUES (@idProveedor,@llave,@fechaVencimiento)";
+                string sql = "CALL products.pa_crear_llave(@idProveedor,@llave,@fechaVencimiento);";
 
                 using (var command = new NpgsqlCommand(sql, con))
                 {

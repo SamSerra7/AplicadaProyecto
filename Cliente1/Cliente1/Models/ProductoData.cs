@@ -33,6 +33,7 @@ namespace Cliente1.Models
                 command.Parameters.AddWithValue("@cantidad", producto.cantidad);
                 command.Parameters.AddWithValue("@estado", producto.estado);
                 command.Parameters.AddWithValue("@descripcion", producto.descripcion);
+                command.Parameters.AddWithValue("@id_proveedor", producto.id_proveedor);
 
                 _con.Open();
 
@@ -67,6 +68,7 @@ namespace Cliente1.Models
                         cantidad = Convert.ToInt32(reader["cantidad"]),
                         estado = Convert.ToByte(reader["estado"]),
                         descripcion = Convert.ToString(reader["descripcion"]),
+                        id_proveedor = Convert.ToInt32(reader["id_proveedor"]),
                     };
                     productolista.Add(p);
                 }
@@ -98,6 +100,7 @@ namespace Cliente1.Models
                         cantidad = Convert.ToInt32(reader["cantidad"]),
                         estado = Convert.ToByte(reader["estado"]),
                         descripcion = Convert.ToString(reader["descripcion"]),
+                        id_proveedor = Convert.ToInt32(reader["id_proveedor"]),
                     };
                     productolista.Add(p);
                 }
@@ -122,6 +125,30 @@ namespace Cliente1.Models
                 command.Parameters.AddWithValue("@cantidad", producto.cantidad);
                 command.Parameters.AddWithValue("@estado", producto.estado);
                 command.Parameters.AddWithValue("@descripcion", producto.descripcion);
+
+                _con.Open();
+
+                i = command.ExecuteNonQuery();
+
+            }
+            _con.Close();
+
+            return i >= 1;
+
+        }
+
+        public bool ActualizarCantidad(Producto producto)
+        {
+            Connection();
+
+            int i;
+
+            using (SqlCommand command = new SqlCommand("ActualizarCantidad", _con))
+            {
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@id_producto", producto.id_produto);
+                command.Parameters.AddWithValue("@id_proveedor", producto.id_proveedor);
+                command.Parameters.AddWithValue("@cantidad", producto.cantidad);
 
                 _con.Open();
 

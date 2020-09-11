@@ -6,11 +6,11 @@
 
     <h1>Carrito de compras</h1>
     <div *ngIf="shopcart.length > 0" class="row">
-        <div class="col-12">
+        <div class="col-12 table-of">
             <table class="table">
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
+                        <th scope="col">Cod</th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Detalle</th>
                         <th scope="col">Precio</th>
@@ -21,46 +21,35 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let newShopcart of shopcart; let i=index">
-                        <th scope="row">{{i+1}}</th>
+                        <th scope="row">{{newShopcart.productos.idProducto}}</th>
                         <td>{{newShopcart.productos.nombre}}</td>
                         <td>{{newShopcart.productos.detalle}}</td>
                         <td>{{newShopcart.productos.precio.value | currency:'¢'}}</td>
                         <td>{{newShopcart.cantidad_Solicitada}}</td>
                         <td>{{newShopcart.cantidad_Solicitada * newShopcart.productos.precio.value | currency:'¢'}}</td>
                         <td>
-                            <a class="m-1 btn" (click)="delete(newShopcart.productos.idProducto)" style="color: red;" title="Borrar">
-                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-x-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                                    <path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z"/>
-                                    <path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z"/>
-                                  </svg>
+                            <a class="btn" (click)="lessProduct(newShopcart)" style="color: red;" title="Restar">
+                                <svg fill="currentColor" height="2em" width="2em" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="m256 0c-141.164062 0-256 114.835938-256 256s114.835938 256 256 256 256-114.835938 256-256-114.835938-256-256-256zm112 277.332031h-224c-11.777344 0-21.332031-9.554687-21.332031-21.332031s9.554687-21.332031 21.332031-21.332031h224c11.777344 0 21.332031 9.554687 21.332031 21.332031s-9.554687 21.332031-21.332031 21.332031zm0 0"/>
+                                </svg>
                             </a>
-                            <a class="m-1 btn" (click)="viewProduct(newShopcart.productos.idProducto)" style="color: blue;" title="Detalles">
-                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-plus-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"/>
-                                    <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z"/>
-                                    <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                                  </svg>
+                            <a class="btn" (click)="plusProduct(newShopcart)" style="color: blue;" title="Sumar">
+                                <svg fill="currentColor" height="2em" width="2em" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="m256 0c-141.164062 0-256 114.835938-256 256s114.835938 256 256 256 256-114.835938 256-256-114.835938-256-256-256zm112 277.332031h-90.667969v90.667969c0 11.777344-9.554687 21.332031-21.332031 21.332031s-21.332031-9.554687-21.332031-21.332031v-90.667969h-90.667969c-11.777344 0-21.332031-9.554687-21.332031-21.332031s9.554687-21.332031 21.332031-21.332031h90.667969v-90.667969c0-11.777344 9.554687-21.332031 21.332031-21.332031s21.332031 9.554687 21.332031 21.332031v90.667969h90.667969c11.777344 0 21.332031 9.554687 21.332031 21.332031s-9.554687 21.332031-21.332031 21.332031zm0 0"/>
+                                </svg>
+                            </a>
+                            <a class="btn" (click)="viewProduct(newShopcart.productos.idProducto)" title="Detalles">
+                                <img height="35em" width="35em" src="assets\images\icons\lupa.svg" alt="Detalles">
                             </a>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
-        <div class="col-6"></div>
-        <div class="col-6">
+        <div class="col-lg-6 col-md-6 col-sm-12"></div>
+        <div class="col-lg-6 col-md-6 col-sm-12">
             <table class="table">
                 <thead>
-                    <tr>
-                        <th scope="col" class="text-right">Sub Total:</th>
-                        <th scope="col" class="text-center">{{ subTotal | currency:'¢'}}</th>
-                    </tr>
-
-                    <tr>
-                        <th scope="col" class="text-right">iva:</th>
-                        <th scope="col" class="text-center">{{ iva | currency:'¢'}}</th>
-                    </tr>
-
                     <tr>
                         <th scope="col" class="text-right" style="color: brown;">Total:</th>
                         <th scope="col" class="text-center btn-outline-danger">{{ total | currency:'¢'}}</th>
@@ -71,7 +60,7 @@
             </table>
         </div>
         <div class="col-12">
-            <button style="width: 50%;" class="float-right btn btn-outline-warning btn-block m-2">Pagar</button>
+            <button (click)="buy(userId)" style="width: 50%;" class="float-right btn btn-outline-warning btn-block m-2">Pagar</button>
             <button routerLink="['/home']" style="width: 50%;" class="float-right btn btn-outline-primary btn-block m-2">Seguir comprando</button>
         </div>
     </div>

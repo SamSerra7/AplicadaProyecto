@@ -1,5 +1,6 @@
 .footer {
-    height: 250px;
+    height: auto;
+    width: 100%;
 }
 
 div h3 {
@@ -16,6 +17,6 @@ div p {
 }
 
 div img {
-    width: 50px;
-    ;
+    width: 200px;
+    height: auto;
 }

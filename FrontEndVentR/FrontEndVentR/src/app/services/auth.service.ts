@@ -85,20 +85,7 @@ export class AuthService {
     return this.userTokenEmail;
    }
   
-   /*
-   adduser( user: UserModel){
-     return this.http.post(endpoint, JSON.stringify(user), httpOptions)
-     .pipe(
-       map((resp:any) => {
-        console.log("Map");
-        return resp;
-       }),
-       catchError((err: any)=>{
-        return err.error.text;
-       })
-     );
-   } 
-   */
+  
    
   adduser( user: UserModel){
     return this.http.post<any>(endpoint, JSON.stringify(user), httpOptions).pipe(

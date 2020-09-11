@@ -2,12 +2,25 @@
 
 <p>
     @Html.ActionLink("Agregar Producto", "Agregar")
+    <!--@Html.ActionLink("Generar Llave", "RecibirLlave", "ApiConsumoLlave")-->
 </p>
+
+<button id="ver" onclick="getLlave()">Ver Llave</button>
+
+<button onclick="crearLlave()">Crear Llave</button>
+
+<button onclick="sincronizar()">Sincronizar</button>
+
+<h3 id="llave"></h3>
+
 <table class="table">
     <tr>
         @*<th>
                 @Html.DisplayNameFor(model => model.id_produto)
             </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.id_proveedor)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.nombre)
         </th>
@@ -36,6 +49,9 @@
                     @Html.DisplayFor(modelItem => item.id_produto)
                 </td>*@
             <td>
+                @Html.DisplayFor(modelItem => item.id_proveedor)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.nombre)
             </td>
             <td>
@@ -61,3 +77,93 @@
     }
 
 </table>
+@section scripts{
+    <script type="text/javascript">
+        let mostrar = false;
+        function getLlave() {
+            if (!mostrar) {
+                $.get('http://localhost:59292/api/Llave/2/llave').done(function (data) {
+                    console.log(data);
+                    //data.atributo => para acceder al valor
+                    if (data == undefined) {
+                        $("#llave").text("Este proveedor no contiene una llave");
+                    }
+                    else {
+                        $("#llave").text(data.codLlave);
+
+                    }
+
+                    $("#ver").text("Ocultar llave");
+                    mostrar = true;
+                });
+            }
+            else {
+                $("#llave").text("");
+                mostrar = false;
+            }
+        }
+
+        function crearLlave() {
+            $.ajax({
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: 'POST',
+                url: 'http://localhost:59292/api/Llave',
+                data: JSON.stringify({ idProveedor: 2 }),
+                dataType: "json"
+            })
+                .done(() => alert("La creación de la llave fué exitosa"))
+                .fail((e) => alert("error: " + e));
+        }
+
+        function sincronizar() {
+            //Solamente es de cambiar el url del back end aqui, lo demas está bien
+            let id_proveedor, cantidad, producto_proveedor ;
+
+            $.get('http://localhost:59292/api/Proveedor/2/Sincronizar')
+                .done((data) => {
+
+                    console.log(data);
+                    // TODO mostrar el Json de los productos vendidos con su cantidad
+
+                    data.forEach((producto) => {
+                        id_proveedor = producto.id_producto;
+                        cantidad = producto.cantidad;
+                        producto_proveedor = producto.id_producto;
+                        sincronizarProducto(id_proveedor, producto_proveedor, cantidad);
+                    });
+
+                    
+                    alert("Sincronizado correctamente con VentR");
+                })
+                .fail((e) => alert("Error al sincronizar: " + e));
+        }
+
+
+        function sincronizarProducto(idProveedor, producto_proveedor, cantidad) {
+
+            $.ajax({
+                url: '/Producto/ModificarProducto',
+                type: 'GET',
+                data: {
+                    "id_producto": parseInt(producto_proveedor),
+                    "id_proveedor": parseInt(idProveedor),
+                    "cantidad": parseInt(cantidad)
+                },
+                success: function (response) {
+                    console.log(response);
+                    if (response) {
+                        alert('El producto fue sincronizado exitosamente.');
+                    } else {
+                        alert('No ha sido sincronizado');
+                    }
+                },
+                error: function (error) {
+                }
+            });
+        }
+
+    </script>
+}
