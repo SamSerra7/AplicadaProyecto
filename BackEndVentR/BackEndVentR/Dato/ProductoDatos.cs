@@ -257,5 +257,38 @@ namespace Dato
             return true;
         }
 
+        //Agrega una lista de productos
+
+        public void agregarProductos(List<Producto> producto)
+        {
+            using (NpgsqlConnection con = conexion.GetConexion())
+            {
+                con.Open();
+                string sql = "CALL products.pa_agregar_producto(@p_nombre,@p_precio, @p_url,@p_detalle, " +
+                    "@p_cantidad, @p_id_proveedor,@p_id_producto_proveedor);";
+
+                using (var command = new NpgsqlCommand(sql, con))
+                {
+
+
+                    foreach (var elemento in producto)
+                    {
+
+                        command.Parameters.AddWithValue(":p_nombre", elemento.Nombre);
+                        command.Parameters.AddWithValue(":p_precio", elemento.Precio);
+                        command.Parameters.AddWithValue(":p_url", elemento.UrlImg);
+                        command.Parameters.AddWithValue(":p_detalle", elemento.Detalle);
+                        command.Parameters.AddWithValue(":p_cantidad", elemento.Cantidad);
+                        command.Parameters.AddWithValue(":p_id_proveedor", elemento.Proveedor.IdProveedor);
+                        command.Parameters.AddWithValue(":p_id_producto_proveedor", elemento.IdProductoProveedor);
+                        command.ExecuteNonQuery();
+
+                    }
+
+                }
+            }
+           
+        }
+
     }
 }
