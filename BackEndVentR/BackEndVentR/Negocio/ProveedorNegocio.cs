@@ -10,7 +10,7 @@ namespace Negocio
     {
 
         private ProveedorDatos proveedorDatos = new ProveedorDatos();
-
+        private ProductoDatos productoDatos = new ProductoDatos();
         public bool eliminarProveedor(int IdProveedor)
         {
             return proveedorDatos.eliminarProveedor(IdProveedor);
@@ -69,5 +69,32 @@ namespace Negocio
             return proveedorDatos.DesactivarProveedor(IdProveedor);
         }
 
+        
+        /// <summary>
+        /// Samuel Serrano Guerra
+        /// Método que sincriniza las ventas
+        /// </summary>
+        /// <param name="idProveedor"></param>
+        /// <param name="llave"></param>
+        /// <returns>Json para el proveedor</returns>
+        public IEnumerable<SyncronizationType> sincronizarProveedor(int idProveedor, string llave)
+        {
+            return proveedorDatos.sincronizarProveedor(idProveedor, llave);
+        }
+
+        /// <summary>
+        /// recibe una lista y agrega todos esos prpductos al la tabla productos
+        /// </summary>
+        /// <param name="listaProductos"></param>
+        public void agregarProductosProveedor(List<Producto> listaProductos)
+        {
+            productoDatos.agregarProductos(listaProductos);
+         
+        }
+
+        public bool validarProveedor(int idproveedor, string llave_proveedor)
+        {
+            return proveedorDatos.validarProveedor(idproveedor, llave_proveedor);
+        }
     }
 }

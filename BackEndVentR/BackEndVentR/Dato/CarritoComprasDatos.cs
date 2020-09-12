@@ -3,12 +3,13 @@ using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.Text;
-
+using Dato;
 namespace Dato
 {
     public class CarritoComprasDatos
     {
         private Conexion conexion = new Conexion();
+
         private ProductoDatos productoDato = new ProductoDatos();
 
 
@@ -59,6 +60,44 @@ namespace Dato
                         
                         int result = command.ExecuteNonQuery();
 
+                        if (result == -1)
+                            return true;
+                        else
+                            return false;
+                    }
+
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// Samuel Serrano Guerra
+        /// Método que elimina un producto de la tabla carrito_compras_producto
+        /// </summary>
+        /// <param name="idUsuario"></param>
+        /// <param name="idProducto"></param>
+        /// <returns>variable booleana</returns>
+        public bool borrarDelCarrito(int idUsuario, int idProducto)
+        {
+            using (NpgsqlConnection con = conexion.GetConexion())
+            {
+                try
+                {
+                    con.Open();
+                    string sql = "call products.pa_eliminar_del_carrito(@idUsuario,@idProducto); ";
+                    
+
+                    using (var command = new NpgsqlCommand(sql, con))
+                    {
+                        command.Parameters.AddWithValue("@idUsuario", idUsuario);
+                        command.Parameters.AddWithValue("@idProducto", idProducto);
+
+                        int result = command.ExecuteNonQuery();
                         if (result == -1)
                             return true;
                         else

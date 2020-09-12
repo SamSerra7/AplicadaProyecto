@@ -61,7 +61,7 @@ namespace Cliente1.Models
                 {
                     Producto p = new Producto()
                     {
-                        id_produto = Convert.ToInt32(reader["id_producto"]),
+                        id_producto = Convert.ToInt32(reader["id_producto"]),
                         nombre = Convert.ToString(reader["nombre"]),
                         precio = Convert.ToInt32(reader["precio"]),
                         url_img = Convert.ToString(reader["url_img"]),
@@ -93,7 +93,7 @@ namespace Cliente1.Models
                 {
                     Producto p = new Producto()
                     {
-                        id_produto = Convert.ToInt32(reader["id_producto"]),
+                        id_producto = Convert.ToInt32(reader["id_producto"]),
                         nombre = Convert.ToString(reader["nombre"]),
                         precio = Convert.ToInt32(reader["precio"]),
                         url_img = Convert.ToString(reader["url_img"]),
@@ -118,13 +118,37 @@ namespace Cliente1.Models
             using (SqlCommand command = new SqlCommand("ActualizarProducto", _con))
             {
                 command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.AddWithValue("@id_producto", producto.id_produto);
+                command.Parameters.AddWithValue("@id_producto", producto.id_producto);
                 command.Parameters.AddWithValue("@nombre", producto.nombre);
                 command.Parameters.AddWithValue("@precio", producto.precio);
                 command.Parameters.AddWithValue("@url_img", producto.url_img);
                 command.Parameters.AddWithValue("@cantidad", producto.cantidad);
                 command.Parameters.AddWithValue("@estado", producto.estado);
                 command.Parameters.AddWithValue("@descripcion", producto.descripcion);
+
+                _con.Open();
+
+                i = command.ExecuteNonQuery();
+
+            }
+            _con.Close();
+
+            return i >= 1;
+
+        }
+
+        public bool ActualizarCantidad(Producto producto)
+        {
+            Connection();
+
+            int i;
+
+            using (SqlCommand command = new SqlCommand("ActualizarCantidad", _con))
+            {
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@id_producto", producto.id_producto);
+                command.Parameters.AddWithValue("@id_proveedor", producto.id_proveedor);
+                command.Parameters.AddWithValue("@cantidad", producto.cantidad);
 
                 _con.Open();
 

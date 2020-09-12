@@ -1,12 +1,12 @@
-C:\Users\User\Documents\Universidad\Cursos\Informática Aplicada a los Negocios\Proyecto\ProyectoAplicada\AplicadaProyecto\BackEndVentR\BackEndVentR\Dato\bin\Debug\netcoreapp3.1\Dato.deps.json
-C:\Users\User\Documents\Universidad\Cursos\Informática Aplicada a los Negocios\Proyecto\ProyectoAplicada\AplicadaProyecto\BackEndVentR\BackEndVentR\Dato\bin\Debug\netcoreapp3.1\Dato.dll
-C:\Users\User\Documents\Universidad\Cursos\Informática Aplicada a los Negocios\Proyecto\ProyectoAplicada\AplicadaProyecto\BackEndVentR\BackEndVentR\Dato\bin\Debug\netcoreapp3.1\Dato.pdb
-C:\Users\User\Documents\Universidad\Cursos\Informática Aplicada a los Negocios\Proyecto\ProyectoAplicada\AplicadaProyecto\BackEndVentR\BackEndVentR\Dato\bin\Debug\netcoreapp3.1\Entidad.dll
-C:\Users\User\Documents\Universidad\Cursos\Informática Aplicada a los Negocios\Proyecto\ProyectoAplicada\AplicadaProyecto\BackEndVentR\BackEndVentR\Dato\bin\Debug\netcoreapp3.1\Entidad.pdb
-C:\Users\User\Documents\Universidad\Cursos\Informática Aplicada a los Negocios\Proyecto\ProyectoAplicada\AplicadaProyecto\BackEndVentR\BackEndVentR\Dato\obj\Debug\netcoreapp3.1\Dato.csprojAssemblyReference.cache
-C:\Users\User\Documents\Universidad\Cursos\Informática Aplicada a los Negocios\Proyecto\ProyectoAplicada\AplicadaProyecto\BackEndVentR\BackEndVentR\Dato\obj\Debug\netcoreapp3.1\Dato.AssemblyInfoInputs.cache
-C:\Users\User\Documents\Universidad\Cursos\Informática Aplicada a los Negocios\Proyecto\ProyectoAplicada\AplicadaProyecto\BackEndVentR\BackEndVentR\Dato\obj\Debug\netcoreapp3.1\Dato.AssemblyInfo.cs
-C:\Users\User\Documents\Universidad\Cursos\Informática Aplicada a los Negocios\Proyecto\ProyectoAplicada\AplicadaProyecto\BackEndVentR\BackEndVentR\Dato\obj\Debug\netcoreapp3.1\Dato.csproj.CoreCompileInputs.cache
-C:\Users\User\Documents\Universidad\Cursos\Informática Aplicada a los Negocios\Proyecto\ProyectoAplicada\AplicadaProyecto\BackEndVentR\BackEndVentR\Dato\obj\Debug\netcoreapp3.1\Dato.csproj.CopyComplete
-C:\Users\User\Documents\Universidad\Cursos\Informática Aplicada a los Negocios\Proyecto\ProyectoAplicada\AplicadaProyecto\BackEndVentR\BackEndVentR\Dato\obj\Debug\netcoreapp3.1\Dato.dll
-C:\Users\User\Documents\Universidad\Cursos\Informática Aplicada a los Negocios\Proyecto\ProyectoAplicada\AplicadaProyecto\BackEndVentR\BackEndVentR\Dato\obj\Debug\netcoreapp3.1\Dato.pdb
+C:\Users\Karol\Desktop\Clonacion\AplicadaProyecto\BackEndVentR\BackEndVentR\Dato\bin\Debug\netcoreapp3.1\Dato.deps.json
+C:\Users\Karol\Desktop\Clonacion\AplicadaProyecto\BackEndVentR\BackEndVentR\Dato\bin\Debug\netcoreapp3.1\Dato.dll
+C:\Users\Karol\Desktop\Clonacion\AplicadaProyecto\BackEndVentR\BackEndVentR\Dato\bin\Debug\netcoreapp3.1\Dato.pdb
+C:\Users\Karol\Desktop\Clonacion\AplicadaProyecto\BackEndVentR\BackEndVentR\Dato\bin\Debug\netcoreapp3.1\Entidad.dll
+C:\Users\Karol\Desktop\Clonacion\AplicadaProyecto\BackEndVentR\BackEndVentR\Dato\bin\Debug\netcoreapp3.1\Entidad.pdb
+C:\Users\Karol\Desktop\Clonacion\AplicadaProyecto\BackEndVentR\BackEndVentR\Dato\obj\Debug\netcoreapp3.1\Dato.csprojAssemblyReference.cache
+C:\Users\Karol\Desktop\Clonacion\AplicadaProyecto\BackEndVentR\BackEndVentR\Dato\obj\Debug\netcoreapp3.1\Dato.AssemblyInfoInputs.cache
+C:\Users\Karol\Desktop\Clonacion\AplicadaProyecto\BackEndVentR\BackEndVentR\Dato\obj\Debug\netcoreapp3.1\Dato.AssemblyInfo.cs
+C:\Users\Karol\Desktop\Clonacion\AplicadaProyecto\BackEndVentR\BackEndVentR\Dato\obj\Debug\netcoreapp3.1\Dato.csproj.CoreCompileInputs.cache
+C:\Users\Karol\Desktop\Clonacion\AplicadaProyecto\BackEndVentR\BackEndVentR\Dato\obj\Debug\netcoreapp3.1\Dato.csproj.CopyComplete
+C:\Users\Karol\Desktop\Clonacion\AplicadaProyecto\BackEndVentR\BackEndVentR\Dato\obj\Debug\netcoreapp3.1\Dato.dll
+C:\Users\Karol\Desktop\Clonacion\AplicadaProyecto\BackEndVentR\BackEndVentR\Dato\obj\Debug\netcoreapp3.1\Dato.pdb

@@ -49,19 +49,36 @@ namespace Cliente1.Controllers
             }
         }
 
+
+
+        [HttpGet]
+        public ActionResult ModificarProducto(int id_producto, int id_proveedor, int cantidad)
+        {
+            pd = new ProductoData();
+            pd.ActualizarCantidad(new Producto(id_producto, id_proveedor, cantidad));
+
+            return View("ObtenerLista", pd.ObtenerProductos());
+
+        }
+
+
+
         public ActionResult Actualizar(int id)
         {
             pd = new ProductoData();
-            return View(pd.ObtenerProductos().Find(t => t.id_produto == id));
+            return View(pd.ObtenerProductos().Find(t => t.id_producto == id));
         }
-
+        [HttpPost]
         public ActionResult Actualizar(int id, Producto producto)
         {
             try
             {
                 pd = new ProductoData();
-                pd.Actualizar(producto);
-                return RedirectToAction("ObtenerLista");
+                if (pd.Actualizar(producto))
+                {
+                    ViewBag.Mensagen = " Modificado con exito ";
+                }
+                return View(pd.ObtenerProductos().Find(t => t.id_producto == id));
             }
             catch (Exception)
             {
