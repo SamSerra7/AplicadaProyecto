@@ -275,7 +275,7 @@ namespace Dato
                     {
 
                         command.Parameters.AddWithValue(":p_nombre", elemento.Nombre);
-                        command.Parameters.AddWithValue(":p_precio", elemento.Precio);
+                        command.Parameters.AddWithValue(":p_precio", (decimal) elemento.Precio);
                         command.Parameters.AddWithValue(":p_url", elemento.UrlImg);
                         command.Parameters.AddWithValue(":p_detalle", elemento.Detalle);
                         command.Parameters.AddWithValue(":p_cantidad", elemento.Cantidad);
