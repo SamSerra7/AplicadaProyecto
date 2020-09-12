@@ -3,12 +3,13 @@ using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.Text;
-
+using Dato;
 namespace Dato
 {
     public class CarritoComprasDatos
     {
         private Conexion conexion = new Conexion();
+
         private ProductoDatos productoDato = new ProductoDatos();
 
 
