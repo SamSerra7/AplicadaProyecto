@@ -66,7 +66,7 @@ namespace Cliente1.Controllers
         public ActionResult Actualizar(int id)
         {
             pd = new ProductoData();
-            return View(pd.ObtenerProductos().Find(t => t.id_produto == id));
+            return View(pd.ObtenerProductos().Find(t => t.id_producto == id));
         }
         [HttpPost]
         public ActionResult Actualizar(int id, Producto producto)
@@ -78,7 +78,7 @@ namespace Cliente1.Controllers
                 {
                     ViewBag.Mensagen = " Modificado con exito ";
                 }
-                return View(pd.ObtenerProductos().Find(t => t.id_produto == id));
+                return View(pd.ObtenerProductos().Find(t => t.id_producto == id));
             }
             catch (Exception)
             {
