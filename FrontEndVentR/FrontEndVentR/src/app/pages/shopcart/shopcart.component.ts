@@ -25,12 +25,25 @@ export class ShopcartComponent implements OnInit {
                 private produtsService:ProdutsService,
                 private shopcartService:ShopcartService) {
     this.userId= parseInt(localStorage.getItem("userId"));
+    this.saveCantItems(parseInt(localStorage.getItem("userId")));
     this.getShopcartProducts();
+    
   }
 
   ngOnInit(): void {
     
   }
+
+  saveCantItems(userId:number){
+    let cantiItems = 0;
+    this.shopcartService.getByUserId(userId)
+    .subscribe( resp => {
+      if(resp){
+        cantiItems = resp.length;
+        localStorage.setItem("cantItems", cantiItems.toString());
+      }
+    });
+   }
 
   buy(userId:number){
 
@@ -193,28 +206,6 @@ export class ShopcartComponent implements OnInit {
     this.total = this.iva + this.subTotal;
     this.total =  this.subTotal;
 
-
-  }
-
-  delete(id:number){
-
-    let newCartShop:ShopCartModel = new ShopCartModel();
-    newCartShop.id_usuario = this.userId;
-    newCartShop.idProducto = id;
-
-
-
-    
-    this.shopcartService.deleteProductShopCart(newCartShop)
-    .subscribe( resp => {
-      if(resp){
-
-        console.log('Borrado:'+ resp)
-
-      }
-    })
-
-    
 
   }
 
