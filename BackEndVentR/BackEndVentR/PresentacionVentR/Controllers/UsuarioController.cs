@@ -37,19 +37,18 @@ namespace PresentacionVentR.Controllers
 
             if (await api.RegistrarUsuario(usuario))
             {
-                return View("ListarUsuarioView", await api.ListarUsuarios()); ;
+                return View("ListarUsuarioView", await api.ListarUsuarios());
             }
-            return View("No se pudo registrar, intente otra vez");
+            return View("Error", new ErrorViewModel { RequestId = "2" });
         }
 
         [HttpPost]
         public async Task<IActionResult> Modificar(Usuario usuario)
         {
             if (await api.ActualizarUsuario(usuario)) {
-                return View("ListarUsuarioView", await api.ListarUsuarios()); ;
+                return View("ListarUsuarioView", await api.ListarUsuarios()); 
             }
-            return View("No se pudo eliminar, intente otra vez");
-
+            return View("Error", new ErrorViewModel { RequestId = "1"});
         }
 
 
@@ -61,7 +60,7 @@ namespace PresentacionVentR.Controllers
                 return View("ListarUsuarioView", await api.ListarUsuarios());
             }
 
-            return View("No se pudo eliminar, intente otra vez");
+            return View("Error", new ErrorViewModel { RequestId = "3" });
 
 
         }
