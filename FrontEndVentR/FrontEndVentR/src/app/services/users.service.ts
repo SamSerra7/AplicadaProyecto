@@ -41,14 +41,14 @@ export class UsersService {
       );
   }
   
-  getMostSearchedProducts(userId:number){
+  getMostSearchedProducts(userId:number):Observable<any>{
     if(!userId){
       userId = -1;
     }
     return this.http.get(endpoint + userId +'/producto').pipe(
       map(this.extractData),
-      catchError(this.handleError<any>('getById'))
-      );
+      catchError(this.handleError<any>('Get Most Searched Products error'))
+    );
   }
 
 
