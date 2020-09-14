@@ -44,7 +44,6 @@ namespace Entidad
         }
 
         private SqlMoney precio;
-
         public SqlMoney Precio
         {
             get { return precio; }
@@ -88,7 +87,7 @@ namespace Entidad
             set { proveedor = value ?? throw new Exception("Debe tener un proveedor"); }
         }
 
-
+        
         public Producto(int id_producto_proveedor, string nombre, SqlMoney precio, string urlImg,
             string detalle, int cantidad, Proveedor proveedor)
         {
@@ -100,6 +99,18 @@ namespace Entidad
             Detalle = detalle;
             Cantidad = cantidad;
             Proveedor = proveedor;
+        }
+
+        public Producto(int id_producto, string nombre, SqlMoney p_precio, string urlImg,
+           string detalle, int cantidad, bool estado)
+        {
+            IdProducto = id_producto;
+            Nombre = nombre;
+            Precio = p_precio;
+            UrlImg = urlImg;
+            Detalle = detalle;
+            Cantidad = cantidad;
+            Activo = estado;
         }
 
 
