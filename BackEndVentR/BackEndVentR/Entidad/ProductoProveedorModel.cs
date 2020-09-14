@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
-namespace Cliente1.Models
+namespace Entidad
 {
-    public class Producto
+    public class ProductoProveedorModel
     {
-
         public int id_producto { get; set; }
         public string nombre { get; set; }
         public float precio { get; set; }
@@ -17,11 +15,11 @@ namespace Cliente1.Models
         public string descripcion { get; set; }
         public int id_proveedor { get; set; }
 
-        public Producto()
+        public ProductoProveedorModel()
         {
         }
 
-        public Producto(int id_produto, string nombre, float precio, string url_img, int cantidad, byte estado, string descripcion, int id_proveedor)
+        public ProductoProveedorModel(int id_produto, string nombre, float precio, string url_img, int cantidad, byte estado, string descripcion, int id_proveedor)
         {
             this.id_producto = id_produto;
             this.nombre = nombre;
@@ -34,12 +32,5 @@ namespace Cliente1.Models
         }
 
 
-        public Producto(int id_producto, int id_proveedor,int cantidad)
-        {
-            this.id_producto = id_producto;
-           
-            this.cantidad = cantidad;
-            this.id_proveedor = id_proveedor;
-        }
     }
 }

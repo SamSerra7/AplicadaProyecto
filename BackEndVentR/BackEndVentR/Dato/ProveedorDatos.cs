@@ -131,10 +131,14 @@ namespace Dato
             using (NpgsqlConnection con = conexion.GetConexion())
             {
                 con.Open();
-                string sql = "Call products.pa_sincronizacion(@idProveedor,@Llave);";
+                string sql = "SELECT * from products.pa_sincronizacion(@idProveedor,@Llave);";
 
                 using (var command = new NpgsqlCommand(sql, con))
                 {
+
+                    command.Parameters.AddWithValue("@idProveedor", idProveedor);
+                    command.Parameters.AddWithValue("@Llave", llave);
+
                     using (NpgsqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
@@ -147,8 +151,32 @@ namespace Dato
                     }
                 }
             }
+            ActualizarSync(idProveedor);
             return datosSinc;
         }
+
+
+        public void ActualizarSync(int IdProveedor)
+        {
+
+            using (NpgsqlConnection con = conexion.GetConexion())
+            {
+                con.Open();
+                string sql = "Call products.pa_actualizar_sync(@p_idProveedor);";
+
+                using (var command = new NpgsqlCommand(sql, con))
+                {
+
+
+                    command.Parameters.AddWithValue(":p_idProveedor", IdProveedor);
+                    command.ExecuteNonQuery();
+
+
+                }
+            }
+
+        }
+
 
         public Proveedor buscarProveedorActivo(int idProveedor)
         {
