@@ -6,4 +6,13 @@ C:\Users\User\Documents\Universidad\Cursos\Informática Aplicada a los Negocios\
 C:\Users\User\Documents\Universidad\Cursos\Informática Aplicada a los Negocios\Proyecto\ProyectoAplicada\AplicadaProyecto\BackEndVentR\BackEndVentR\Entidad\obj\Debug\netcoreapp3.1\Entidad.csproj.CoreCompileInputs.cache
 C:\Users\User\Documents\Universidad\Cursos\Informática Aplicada a los Negocios\Proyecto\ProyectoAplicada\AplicadaProyecto\BackEndVentR\BackEndVentR\Entidad\obj\Debug\netcoreapp3.1\Entidad.dll
 C:\Users\User\Documents\Universidad\Cursos\Informática Aplicada a los Negocios\Proyecto\ProyectoAplicada\AplicadaProyecto\BackEndVentR\BackEndVentR\Entidad\obj\Debug\netcoreapp3.1\Entidad.pdb
+C:\Users\Karol\Desktop\Clonacion\AplicadaProyecto\BackEndVentR\BackEndVentR\Entidad\bin\Debug\netcoreapp3.1\Entidad.deps.json
+C:\Users\Karol\Desktop\Clonacion\AplicadaProyecto\BackEndVentR\BackEndVentR\Entidad\bin\Debug\netcoreapp3.1\Entidad.dll
+C:\Users\Karol\Desktop\Clonacion\AplicadaProyecto\BackEndVentR\BackEndVentR\Entidad\bin\Debug\netcoreapp3.1\Entidad.pdb
+C:\Users\Karol\Desktop\Clonacion\AplicadaProyecto\BackEndVentR\BackEndVentR\Entidad\obj\Debug\netcoreapp3.1\Entidad.csprojAssemblyReference.cache
+C:\Users\Karol\Desktop\Clonacion\AplicadaProyecto\BackEndVentR\BackEndVentR\Entidad\obj\Debug\netcoreapp3.1\Entidad.AssemblyInfoInputs.cache
+C:\Users\Karol\Desktop\Clonacion\AplicadaProyecto\BackEndVentR\BackEndVentR\Entidad\obj\Debug\netcoreapp3.1\Entidad.AssemblyInfo.cs
+C:\Users\Karol\Desktop\Clonacion\AplicadaProyecto\BackEndVentR\BackEndVentR\Entidad\obj\Debug\netcoreapp3.1\Entidad.csproj.CoreCompileInputs.cache
+C:\Users\Karol\Desktop\Clonacion\AplicadaProyecto\BackEndVentR\BackEndVentR\Entidad\obj\Debug\netcoreapp3.1\Entidad.dll
+C:\Users\Karol\Desktop\Clonacion\AplicadaProyecto\BackEndVentR\BackEndVentR\Entidad\obj\Debug\netcoreapp3.1\Entidad.pdb
 C:\Users\User\Documents\Universidad\Cursos\Informática Aplicada a los Negocios\Proyecto\ProyectoAplicada\AplicadaProyecto\BackEndVentR\BackEndVentR\Entidad\obj\Debug\netcoreapp3.1\Entidad.csprojAssemblyReference.cache

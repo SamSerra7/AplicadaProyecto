@@ -4,7 +4,6 @@ import { Observable, of } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
 
 import { UserModel } from '../models/user.model';
-import { UserRoleModel } from '../models/user-role.model';
 
 const endpoint = 'http://localhost:59292/api/Usuario/';
 
@@ -42,15 +41,17 @@ export class UsersService {
       );
   }
   
-  getMostSearchedProducts(userId:number){
+  getMostSearchedProducts(userId:number):Observable<any>{
     if(!userId){
       userId = -1;
     }
     return this.http.get(endpoint + userId +'/producto').pipe(
       map(this.extractData),
-      catchError(this.handleError<any>('getById'))
-      );
+      catchError(this.handleError<any>('Get Most Searched Products error'))
+    );
   }
+
+
 
   /*----------------------------------------------*/
   updateuser(users: UserModel): Observable<any>{

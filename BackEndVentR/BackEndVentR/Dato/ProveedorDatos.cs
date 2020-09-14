@@ -35,6 +35,31 @@ namespace Dato
             }
         }
 
+        //Devuelve true o false, verifica si el proveedor
+
+        public bool validarProveedor(int idproveedor, string llave_proveedor)
+        {
+
+
+            using (NpgsqlConnection con = conexion.GetConexion())
+            {
+                con.Open();
+                string sql = "select products.verificadorProveedor(@idproveedor,@llave_proveedor)";
+
+                using (var command = new NpgsqlCommand(sql, con))
+                {
+
+                    command.Parameters.AddWithValue("@idproveedor", idproveedor);
+                    command.Parameters.AddWithValue("@llave_proveedor", llave_proveedor);
+
+                    bool resultado = (bool)command.ExecuteScalar();
+                    command.ExecuteNonQuery();
+                    return resultado;
+
+                }
+            }
+        }
+
         public bool modificarProveedor(Proveedor proveedor)
         {
 
@@ -59,6 +84,8 @@ namespace Dato
                 }
             }
         }
+
+        
         public bool eliminarProveedor(int IdProveedor)
         {
 
@@ -89,6 +116,67 @@ namespace Dato
             }
             catch (Exception) { return false; }
         }
+
+        /// <summary>
+        /// Samuel Serrano Guerra
+        /// Método que retorna de la tabla de Sincronizacion
+        /// </summary>
+        /// <param name="idProveedor"></param>
+        /// <param name="llave"></param>
+        /// <returns></returns>
+        public List<SyncronizationType> sincronizarProveedor(int idProveedor, string llave)
+        {
+            List<SyncronizationType> datosSinc = new List<SyncronizationType>();
+
+            using (NpgsqlConnection con = conexion.GetConexion())
+            {
+                con.Open();
+                string sql = "SELECT * from products.pa_sincronizacion(@idProveedor,@Llave);";
+
+                using (var command = new NpgsqlCommand(sql, con))
+                {
+
+                    command.Parameters.AddWithValue("@idProveedor", idProveedor);
+                    command.Parameters.AddWithValue("@Llave", llave);
+
+                    using (NpgsqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            datosSinc.Add(
+                                new SyncronizationType(reader.GetInt32(0), reader.GetInt32(1))
+                            );
+                        }
+
+                    }
+                }
+            }
+            ActualizarSync(idProveedor);
+            return datosSinc;
+        }
+
+
+        public void ActualizarSync(int IdProveedor)
+        {
+
+            using (NpgsqlConnection con = conexion.GetConexion())
+            {
+                con.Open();
+                string sql = "Call products.pa_actualizar_sync(@p_idProveedor);";
+
+                using (var command = new NpgsqlCommand(sql, con))
+                {
+
+
+                    command.Parameters.AddWithValue(":p_idProveedor", IdProveedor);
+                    command.ExecuteNonQuery();
+
+
+                }
+            }
+
+        }
+
 
         public Proveedor buscarProveedorActivo(int idProveedor)
         {

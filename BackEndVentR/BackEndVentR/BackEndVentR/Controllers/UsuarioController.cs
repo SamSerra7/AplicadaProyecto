@@ -111,5 +111,13 @@ namespace BackEndVentR.Controllers
             return carrito_compras_negocio.agregar_cantidad(idProducto, idUsuario);
         }
 
+        // borra 1 producto del carrito de compras
+        //  GET api/usuario/1/producto/3/borrarDelCarrito
+        [HttpGet("{idUsuario}/Producto/{idProducto}/borrarDelCarrito")]
+
+        public Boolean borrarDelCarrito(int idUsuario, int idProducto)
+        {
+            return carrito_compras_negocio.borrarDelCarrito(idUsuario, idProducto);
+        }
     }
 }

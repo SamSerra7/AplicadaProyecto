@@ -34,5 +34,17 @@ namespace Negocio
             return carrito_compras_datos.disminuir_cantidad(idUsuario,idProducto);
         }
 
+
+        /// <summary>
+        /// Samuel Serrano Guerra
+        /// Método que permite borrar un elemento del carrito
+        /// </summary>
+        /// <param name="idProducto"></param>
+        /// <param name="idUsuario"></param>
+        /// <returns>variable booleana</returns>
+        public bool borrarDelCarrito(int idUsuario, int idProducto)
+        {
+            return carrito_compras_datos.borrarDelCarrito(idUsuario, idProducto);
+        }
     }
 }

@@ -65,14 +65,45 @@ namespace Negocio
             return productoDatos.buscarProducto(idProducto);
         }
 
+        /// <summary>
+        /// Metodo que activa mediante el id del producto
+        /// </summary>
+        /// <param name="IdProducto"></param>
+        /// <returns>Boolean respuesta</returns>
         public Boolean ActivarProducto(int IdProducto)
         {
             return productoDatos.ActivarProducto(IdProducto);
         }
 
+        /// <summary>
+        /// Metodo que desactiva mediante el id del producto
+        /// </summary>
+        /// <param name="IdProducto"></param>
+        /// <returns>Boolean respuesta</returns>
         public Boolean DesactivarProducto(int IdProducto)
         {
             return productoDatos.DesactivarProducto(IdProducto);
+        }
+
+
+        /// <summary>
+        /// Método para aumentar la cantidad de productos en inventario, recibe el id del producto y el proveedor
+        /// y la cantidad que se desea aumentar a dicho producto.
+        /// </summary>
+        /// <param name="producto"></param>
+        /// <returns>Boolean resultado</returns>
+        public Boolean AgregarCantidad(Producto producto) {
+            return productoDatos.AgregarCantidad(producto.IdProducto,producto.Proveedor.IdProveedor,producto.Cantidad);
+        }
+
+        /// <summary>
+        /// Metodo que agrega un nuevo producto, recibe un Objeto de Tipo Producto
+        /// </summary>
+        /// <param name="producto"></param>
+        /// <returns>Boolean respuesta</returns>
+        public Boolean AgregarProducto(Producto producto)
+        {
+            return productoDatos.AgregarProducto(producto);
         }
     }
 

@@ -17,9 +17,10 @@ import { ShopCartModel } from '../../models/shopcart.model';
 })
 export class ProductComponent implements OnInit {
 
-  product:any;
+  productList:any;
+  product:ProductModel = new ProductModel();
   shopcart:ShopCartModel;
-  shopcarts:any=[];
+  shopcartList:any;
   newProduct=true;
   userId:number;
   
@@ -31,8 +32,8 @@ export class ProductComponent implements OnInit {
                 ) {
 
     this.activatedRoute.params.subscribe( params =>{
-      produtsService.getById(params['id']).subscribe((data:{})=>{
-        this.product=data;
+      produtsService.getById(params['id']).subscribe((data:ProductModel)=>{
+        this.product = data;
       });
     });
     this.userId = parseInt(localStorage.getItem("userId"));
@@ -42,28 +43,74 @@ export class ProductComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  addShopcart(idProduct:number){
+  getShopcartProducts(){
+    this.shopcartService.getByUserId(this.userId)
+    .subscribe(resp =>{
+      this.shopcartList = resp;
+    })
+  }
+
+  getAllProducts(){
+    this.produtsService.getAll()
+    .subscribe(resp =>{
+      this.productList = resp;
+    })
+  }
+
+  add(shopcart:ShopCartModel){
+    this.shopcartService.addProductShopCart(shopcart)
+          .subscribe( resp => {
+            if(resp){
+              Swal.fire(
+                'Agregado al carrito',
+                'OK para continuar',
+                'success'
+              )
+              this.router.navigateByUrl('/shopcart');             
+            }else{
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Algo salio mal; intenta otra vez',
+              })
+            }
+          })
+  }
+
+   addShopcart(idProduct:number){
 
     this.shopcart.id_usuario=this.userId;
     this.shopcart.idProducto=idProduct;
-    this.shopcartService.addProductShopCart(this.shopcart)
-    .subscribe( resp => {
-      if(resp){
-        Swal.fire(
-          'Agregado al carrito',
-          'OK para continuar',
-          'success'
-        )
-        this.router.navigateByUrl('/shopcart');
-      }else{
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Algo salio mal; intenta otra vez',
-        })
-      }
-    } )
 
+    this.shopcartService.getByUserId(this.userId)
+    .subscribe( resp => {
+
+      if(resp.length != 0){
+        this.shopcartList = resp;
+        for(let shopcart of this.shopcartList){
+         if(shopcart.productos.idProducto == idProduct){
+           let apply = shopcart.cantidad_Solicitada + 1;
+           let available = shopcart.productos.cantidad
+           if(apply > available){
+             Swal.fire({
+               icon: 'error',
+               title: 'Ya tienes la cantidad máxima en el carrito',
+               text: 'Solo hay: ' + available + ' en stock',
+             })
+           }else{
+             this.add(this.shopcart);
+             break;
+           }
+         }else{
+           this.add(this.shopcart);
+           this.shopcartService.cantItemsControl(1);
+           break;
+         }
+        }
+      }else{
+        this.add(this.shopcart);
+      }
+    
+    });
   }
- 
 }
