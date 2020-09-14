@@ -27,7 +27,27 @@ namespace Negocio
             return productos;
 
         }
+        public IEnumerable<Producto> listar_todos_productos()
+        {
+            List<Producto> productos = productoDatos.listar_todos_productos();
 
+            //TODO: verificar que solo retorne productos y proveedores activos 
+
+
+            return productos;
+
+        }
+
+        public Producto listar_todos_productos_id(int idProveedor)
+        {
+            Producto productos = productoDatos.listar_todos_productos_id(idProveedor);
+
+            //TODO: verificar que solo retorne productos y proveedores activos 
+
+
+            return productos;
+
+        }
         /// <summary>
         /// Samuel Serrano 
         /// Método que retorna un producto buscado por ID

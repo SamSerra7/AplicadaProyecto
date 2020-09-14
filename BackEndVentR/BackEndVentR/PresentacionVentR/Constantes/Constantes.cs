@@ -10,5 +10,7 @@ namespace PresentacionVentR.Constantes
         public const string URLParaEnvioDatosProveedor = "http://localhost:59292/api/proveedor";
 
         public const string BaseURLApiUsuario = "http://localhost:59292/api/usuario";
+        public const string urlProducto = "http://localhost:59292/api/producto";
     }
+
 }

@@ -3,6 +3,7 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
 import { ShopCartModel } from '../models/shopcart.model';
+import { ProductModel } from '../models/products.model';
 
 
 const endpoint = 'http://localhost:59292/api/';
@@ -22,8 +23,8 @@ export class ShopcartService {
 
   constructor(private http: HttpClient) { }
 
-  getByUserId(id:number){
-    return this.http.get(endpoint + 'CarritoCompras/' + id).pipe(
+  getByUserId(userId:number):Observable<any>{
+    return this.http.get(endpoint + 'CarritoCompras/' + userId).pipe(
       map(this.extractData),
       catchError(this.handleError<any>('getById'))
       );
@@ -38,9 +39,37 @@ export class ShopcartService {
         return resp;
       })
     );
+  } 
+
+  plusProductsCartShop(shopCart:ShopCartModel):Observable<any>{
+
+   // this.cantItemsControl(1);
+    return this.http.get( endpoint + 'usuario/' + shopCart.id_usuario + '/Producto/' + shopCart.idProducto + '/Agregarcantidad').pipe(
+      map(this.extractData),
+      catchError(this.handleError<any>('plus product...'))
+      );
+
+  }
+
+  lessProductsCartShop(shopCart:ShopCartModel):Observable<any>{
+
+  //  this.cantItemsControl(-1);
+    return this.http.get(
+      endpoint + 'usuario/' + shopCart.id_usuario + '/Producto/' + shopCart.idProducto + '/DisminuirCantidad').pipe(
+      map(this.extractData),
+      catchError(this.handleError<any>('less product...'))
+      );
+    
+  }
+
+  cantItemsControl(cantiItems:number){
+    let newCantItems:number = parseInt(localStorage.getItem("cantItems"));
+    newCantItems += cantiItems;
+    localStorage.setItem("cantItems", newCantItems.toString());
   }
 
   deleteProductShopCart(shopCart:ShopCartModel):Observable<any> {
+    this.cantItemsControl(-1);
     return this.http.get(endpoint +'usuario/'+ shopCart.id_usuario + '/Producto/' + shopCart.idProducto + '/borrarDelCarrito').pipe(
       map(this.extractData),
       catchError(this.handleError<any>('no product deleted from shopcart'))
@@ -55,28 +84,6 @@ export class ShopcartService {
         return resp;
       })
     );
-  }
-
-  plusProductsCartShop(shopCart:ShopCartModel):Observable<any>{
-    //{idUser}/Producto/{idProducto}/Agregarcantidad
-
-    return this.http.get(
-      endpoint + 'usuario/' + shopCart.id_usuario + '/Producto/' + shopCart.idProducto + '/Agregarcantidad').pipe(
-      map(this.extractData),
-      catchError(this.handleError<any>('plus product...'))
-      );
-
-  }
-
-  lessProductsCartShop(shopCart:ShopCartModel){
-    //{idUser}/Producto/{idProducto}/DisminuirCantidad
-
-    return this.http.get(
-      endpoint + 'usuario/' + shopCart.id_usuario + '/Producto/' + shopCart.idProducto + '/DisminuirCantidad').pipe(
-      map(this.extractData),
-      catchError(this.handleError<any>('less product...'))
-      );
-    
   }
 
   private extractData(res: Response) {

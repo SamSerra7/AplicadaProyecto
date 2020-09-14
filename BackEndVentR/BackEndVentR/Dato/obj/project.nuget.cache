@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "/NOTj12gPGqYMfjvccbVW4GxmjqXGrV5p8CdTXodusRTJ1szUNdts0WvADPJYDQsOIh+Bp8tEdPszORe1XLtCw==",
+  "dgSpecHash": "9iJ7WXhfZ7HEAMXcFyH6xZZM2A6DZ1ECl8X//AGdTVG64cDTPb/wNH/kMJb0io0cJaW4f43rvPGK5touZfRNPg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Karol\\Desktop\\Clonacion\\AplicadaProyecto\\BackEndVentR\\BackEndVentR\\Dato\\Dato.csproj",
+  "projectFilePath": "C:\\Users\\User\\Documents\\Universidad\\Cursos\\Informática Aplicada a los Negocios\\Proyecto\\ProyectoAplicada\\AplicadaProyecto\\BackEndVentR\\BackEndVentR\\Dato\\Dato.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Karol\\.nuget\\packages\\npgsql\\4.1.4\\npgsql.4.1.4.nupkg.sha512",
-    "C:\\Users\\Karol\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\4.6.0\\system.runtime.compilerservices.unsafe.4.6.0.nupkg.sha512"
+    "C:\\Users\\User\\.nuget\\packages\\npgsql\\4.1.4\\npgsql.4.1.4.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\4.6.0\\system.runtime.compilerservices.unsafe.4.6.0.nupkg.sha512"
   ],
   "logs": []
 }
