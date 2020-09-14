@@ -85,8 +85,6 @@ export class ProductComponent implements OnInit {
     this.shopcartService.getByUserId(this.userId)
     .subscribe( resp => {
 
-      console.log(resp);
-
       if(resp.length != 0){
         this.shopcartList = resp;
         for(let shopcart of this.shopcartList){
@@ -110,7 +108,6 @@ export class ProductComponent implements OnInit {
          }
         }
       }else{
-        console.log("add");
         this.add(this.shopcart);
       }
     
