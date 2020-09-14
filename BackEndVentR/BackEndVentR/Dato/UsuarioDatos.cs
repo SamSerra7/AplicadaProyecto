@@ -54,8 +54,13 @@ namespace Dato
                         command.Parameters.AddWithValue(":u_correo", usuario.Correo);
                         command.Parameters.AddWithValue(":u_contrasennia", usuario.Contrasennia);
                         command.Parameters.AddWithValue(":u_idrol", usuario.Id_Rol);
+                    try { 
                         command.ExecuteNonQuery();
-                    
+                    }
+                    catch (PostgresException)
+                    {
+                        return false;
+                    }
                 }
 
                 return true;
@@ -77,8 +82,14 @@ namespace Dato
                     command.Parameters.AddWithValue(":u_correo", usuario.Correo);
                     command.Parameters.AddWithValue(":u_contras", usuario.Contrasennia);
                     command.Parameters.AddWithValue(":u_rol", usuario.Id_Rol);
-                    command.ExecuteNonQuery();
-
+                    try
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                    catch (PostgresException)
+                    {
+                        return false;
+                    }
                 }
 
                 return true;
@@ -97,8 +108,14 @@ namespace Dato
                 {
 
                     command.Parameters.AddWithValue(":u_id", id);
-                    command.ExecuteNonQuery();
-
+                    try
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                    catch (PostgresException)
+                    {
+                        return false;
+                    }
                 }
                 return true;
             }

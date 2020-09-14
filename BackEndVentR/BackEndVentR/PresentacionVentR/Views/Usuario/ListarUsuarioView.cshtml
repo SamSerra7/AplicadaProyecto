@@ -19,7 +19,7 @@
                 @Html.DisplayNameFor(model => model.Correo)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Id_Rol)
+                Rol
             </th>
             <th></th>
         </tr>
@@ -35,7 +35,14 @@
                     @Html.DisplayFor(modelItem => item.Correo)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Id_Rol)
+                    @if (item.Id_Rol == 1)
+                    {
+                        <p>Cliente</p>
+                    }
+                    else
+                    {
+                        <p>Administrador</p>
+                    }
                 </td>
                 <td>
                     @Html.ActionLink("Modificar", "ModificarUsuarioView", new { idUsuario = item.Id_Usuario }) |
