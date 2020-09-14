@@ -11,18 +11,19 @@ namespace Dato
         {
             /*CREDENCIALES SAMUEL
             var cs = "Host=localhost;Port=5433;Username=samuel;Password=s.1234;Database=VentR";
-             var cs = "Host=localhost;Port=5432;Username=postgres;Password=s.1234;Database=VentR";
-  
+             
              */
+            var cs = "Host=localhost;Port=5432;Username=postgres;Password=s.1234;Database=VentR";
+  
 
 
-
-
-
-            var cs = "Host=localhost;Port=5432;Username=postgres;Password=123456;Database=VentR";
 
 
             /*CREDENCIALES Karol
+            var cs = "Host=localhost;Port=5432;Username=postgres;Password=123456;Database=VentR";
+
+
+          
          
             var cs = "Host=localhost;Port=5432;Username=postgres;Password=123456;Database=VentR";
             */

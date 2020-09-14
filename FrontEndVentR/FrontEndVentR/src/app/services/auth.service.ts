@@ -84,6 +84,7 @@ export class AuthService {
   logout(){
     localStorage.removeItem('token');
     localStorage.removeItem('userId');
+    localStorage.setItem('cantItems', "0");
   }
 
    private saveToken(correo: string){
