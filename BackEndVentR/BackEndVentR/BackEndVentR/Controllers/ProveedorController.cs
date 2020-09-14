@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.IO;
 using System.Linq;
 using System.Numerics;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 using System.Web.Helpers;
 using Entidad;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Razor.TagHelpers;
 using Microsoft.VisualBasic.CompilerServices;
 using Nancy.Json;
 using Nancy.Json.Simple;
@@ -107,86 +109,33 @@ namespace BackEndVentR.Controllers
         [HttpPost("{idProveedor}/{llave}/recibirProductos")]
         //api/Proveedor/2/Llave/3/recibirProductos
         public void agregarProducto(int idProveedor, string llave,
-            [FromBody] JsonElement producto)
+            [FromBody] JsonElement productos)
         {
 
             if (proveedorNegocio.validarProveedor(idProveedor, llave))
             {
 
-
                 List<Producto> listaProductos = new List<Producto>();
 
-            
-                using (var document = JsonDocument.Parse(producto.GetRawText()))
+                var list = JsonConvert.DeserializeObject<List<ProductoProveedorModel>>(productos.ToString());
+                foreach (ProductoProveedorModel prod in  list)
                 {
-                    JsonElement root = document.RootElement;
-                    var lista = new List<string>();
-                 
-                    Enumerate(root);
-                   
-                    void Enumerate(JsonElement element)
-                    {
-                        if (element.ValueKind == JsonValueKind.Object)
-                        {
-                            foreach (var item in element.EnumerateObject())
-                            {
-                                if (item.Value.ValueKind == JsonValueKind.Object)
-                                {
-                                    Enumerate(item.Value);
-                                }
-
-                                if (item.Value.ValueKind == JsonValueKind.Number && item.Name == "id_producto_proveedor")
-                                {
-                                       lista.Add(item.Value.GetRawText());
-                                    var id_producto_proveedor= item.Value.GetRawText();
-                                }
-
-                                   else if (item.Value.ValueKind == JsonValueKind.String && item.Name == "nombre")
-                                     {
-                                    lista.Add(item.Value.GetRawText());
-                                    var nombre = item.Value.GetRawText();
-                                 }
-                                else if (item.Value.ValueKind == JsonValueKind.Number && item.Name == "precio")
-                                {
-                                    lista.Add(item.Value.GetRawText());
-                                }
-                                else if (item.Value.ValueKind == JsonValueKind.String && item.Name == "url_img")
-                                {
-                                    lista.Add(item.Value.GetRawText());
-                                }
-                                else if (item.Value.ValueKind == JsonValueKind.String && item.Name == "detalle")
-                                {
-                                    lista.Add(item.Value.GetRawText());
-                                }
-                                else if (item.Value.ValueKind == JsonValueKind.Number && item.Name == "cantidad")
-                                {
-                                    lista.Add(item.Value.GetRawText());
-                                }
-                                else if (item.Value.ValueKind == JsonValueKind.Number && item.Name == "id_proveedor")
-                                {
-                                    lista.Add(item.Value.GetRawText());
-                                }
-                               
-
-                            }
-
-                        }
-                    }
-                    listaProductos.Add(new Producto(int.Parse(lista[0]),
-                                 lista[1],
-                                 decimal.Parse(lista[2]),
-                                   lista[3],
-                                   lista[4],
-                                      int.Parse(lista[5]),
-                                 proveedorNegocio.buscarProveedor(int.Parse(lista[0]))));
+                    listaProductos.Add(
+                            new Producto(prod.id_producto,
+                                prod.nombre,
+                                SqlMoney.Parse(prod.precio.ToString()),
+                                prod.url_img,
+                                prod.descripcion,
+                                prod.cantidad,
+                                proveedorNegocio.buscarProveedor(prod.id_proveedor))
+                            );
                 }
+                   
                 proveedorNegocio.agregarProductosProveedor(listaProductos);
-
+                
             }
+            
 
-          
-
-               
         }
     }
 }

@@ -126,19 +126,19 @@
 
         function sincronizar() {
             //Solamente es de cambiar el url del back end aqui, lo demas está bien
-            let id_proveedor, cantidad, producto_proveedor;
+            let cantidad, producto_proveedor;
+            let url = 'http://localhost:59292/api/Proveedor/2/' + llave + '/sincronizacion';
 
-            $.get('http://localhost:59292/api/Proveedor/2/Sincronizar')
+            $.get(url)
                 .done((data) => {
 
                     console.log(data);
                     // TODO mostrar el Json de los productos vendidos con su cantidad
 
                     data.forEach((producto) => {
-                        id_proveedor = producto.id_producto;
                         cantidad = producto.cantidad;
-                        producto_proveedor = producto.id_producto;
-                        sincronizarProducto(id_proveedor, producto_proveedor, cantidad);
+                        producto_proveedor = producto.idProducto;
+                        sincronizarProducto(2, producto_proveedor, cantidad);
                     });
 
 
@@ -175,21 +175,22 @@
         function enviarProductos() {
 
             let url = 'http://localhost:59292/api/Proveedor/2/' + llave + '/recibirProductos';
-            let productos;
 
             $.get('https://localhost:44358/api/ApiProducto')
                 .done((data) => {
 
-                    productos = data;
-
-                    $.post(url, productos, "json")
-                        .done((res) => {
-                            console.log(res);
-                        })
-                        .fail((e) => alert("Llave incorrecta o error: " + e.responseText));
-
+                    $.ajax({
+                        url: url,
+                        type: "POST",
+                        data: JSON.stringify(data),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: (res) => { alert("Exito " + res); },
+                        error: (e) => {
+                            alert("Llave incorrecta o error: " + e.responseText)
+                        }
+                    });
                 })
-                .fail((e) => alert("Error al sincronizar: " + e.responseText));
         }
     </script>
 }

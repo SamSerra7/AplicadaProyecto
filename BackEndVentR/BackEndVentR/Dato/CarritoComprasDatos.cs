@@ -117,8 +117,7 @@ namespace Dato
             
             using (NpgsqlConnection con = conexion.GetConexion())
             {
-                try
-                {
+                
                     con.Open();
                     string sql = "call  products.pa_agregar_carrito_compras(@idUsuario,@idProducto,@cantidad_agregada); ";
 
@@ -130,16 +129,10 @@ namespace Dato
 
                         int result = command.ExecuteNonQuery();
 
-                        if (result == -1)
-                            return true;
-                        else
-                            return false;
+                        return result == -1;
                     }
 
-                }
-                catch (Exception) {
-                    return false;
-                }
+                
             }
         }
 
