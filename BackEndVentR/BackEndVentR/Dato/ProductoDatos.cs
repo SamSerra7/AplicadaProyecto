@@ -52,7 +52,73 @@ namespace Dato
             return productos;
         }
 
+        //Lista todos los productos que hay en BD, independientemente del estado
+        public List<Producto> listar_todos_productos()
+        {
 
+            List<Producto> productos = new List<Producto>();
+
+            using (NpgsqlConnection con = conexion.GetConexion())
+            {
+                con.Open();
+                string sql = "SELECT id_producto,nombre,precio,url_img,detalle,cantidad,activo FROM products.producto";
+
+
+
+                using (var command = new NpgsqlCommand(sql, con))
+                {
+                    using (NpgsqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            productos.Add(new Producto(
+                                reader.GetInt32(0), 
+                                reader.GetString(1),
+                                 reader.GetDecimal(2),
+                                 reader.GetString(3),
+                                 reader.GetString(4), 
+                                 reader.GetInt16(5), 
+                                 reader.GetBoolean(6))
+                                                                   
+                            );
+                        }
+
+                    }
+                }
+            }
+            return productos;
+        }
+
+        public Producto listar_todos_productos_id(int idProducto)
+        {
+
+            Producto productos = new Producto();
+
+            using (NpgsqlConnection con = conexion.GetConexion())
+            {
+                con.Open();
+                string sql = "SELECT id_producto, nombre, precio, url_img, detalle, cantidad, activo, id_proveedor FROM products.producto WHERE id_producto = @id_producto; ";
+
+
+                using (var command = new NpgsqlCommand(sql, con))
+                {
+                    command.Parameters.AddWithValue("@id_producto", idProducto);
+                    using (NpgsqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            productos =new Producto(reader.GetInt32(0), reader.GetString(1), reader.GetDecimal(2),
+                                                             reader.GetString(3),
+                                                                reader.GetString(4), reader.GetInt32(5), reader.GetBoolean(6))
+
+                            ;
+                        }
+
+                    }
+                }
+            }
+            return productos;
+        }
         /// <summary>
         /// Samuel Serrano
         /// Método que obtiene un producto específico de la base de datos (por ID)
@@ -255,6 +321,40 @@ namespace Dato
                 }
             }
             return true;
+        }
+
+        //Agrega una lista de productos
+
+        public void agregarProductos(List<Producto> producto)
+        {
+            using (NpgsqlConnection con = conexion.GetConexion())
+            {
+                con.Open();
+                string sql = "CALL products.pa_agregar_productos_proveedores(@p_nombre,@p_precio, @p_url,@p_detalle, " +
+                    "@p_cantidad, @p_id_proveedor,@p_id_producto_proveedor);";
+
+
+                foreach (var elemento in producto)
+                {
+                    using (var command = new NpgsqlCommand(sql, con))
+                {
+
+
+
+                        command.Parameters.AddWithValue(":p_nombre", elemento.Nombre);
+                        command.Parameters.AddWithValue(":p_precio", (Decimal) elemento.Precio);
+                        command.Parameters.AddWithValue(":p_url", elemento.UrlImg);
+                        command.Parameters.AddWithValue(":p_detalle", elemento.Detalle);
+                        command.Parameters.AddWithValue(":p_cantidad", elemento.Cantidad);
+                        command.Parameters.AddWithValue(":p_id_proveedor", elemento.Proveedor.IdProveedor);
+                        command.Parameters.AddWithValue(":p_id_producto_proveedor", elemento.IdProductoProveedor);
+                        command.ExecuteNonQuery();
+
+                    }
+
+                }
+            }
+           
         }
 
     }

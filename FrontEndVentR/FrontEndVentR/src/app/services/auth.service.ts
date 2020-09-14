@@ -4,6 +4,7 @@ import { Observable, of } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
 import { UserModel } from '../models/user.model';
 import { UsersService } from './users.service';
+import { ShopcartService } from './shopcart.service';
 
 const endpoint = 'http://localhost:59292/api/Usuario/';
 
@@ -26,6 +27,7 @@ export class AuthService {
   users:any=[];
 
   constructor(  private usersService: UsersService,
+                private shopcartService:ShopcartService,
                 private http: HttpClient) {
     this.user = new UserModel() ;
     this.readToken();
@@ -46,10 +48,23 @@ export class AuthService {
         if(resp){
           //save email an id in token
           this.saveToken(user.correo);
+          this.saveUserId();
+          
         }
         return resp;
       })
     );
+   }
+
+   saveCantItems(userId:number){
+    let cantiItems = 0;
+    this.shopcartService.getByUserId(userId)
+    .subscribe( resp => {
+      if(resp){
+        cantiItems = resp.length;
+        localStorage.setItem("cantItems", cantiItems.toString());
+      }
+    });
    }
 
    saveUserId(){
@@ -59,6 +74,7 @@ export class AuthService {
       for(let user of this.users){
         if( user.correo == localStorage.getItem("token")){
           localStorage.setItem('userId',user.id_Usuario);
+          this.saveCantItems(user.id_Usuario);
           return this.user=user;
         }
       }
@@ -68,12 +84,13 @@ export class AuthService {
   logout(){
     localStorage.removeItem('token');
     localStorage.removeItem('userId');
+    localStorage.setItem('cantItems', "0");
   }
 
    private saveToken(correo: string){
       this.userTokenEmail = correo;
       localStorage.setItem('token', this.userTokenEmail);
-      this.saveUserId();
+      
    }
 
    readToken(){     
@@ -83,9 +100,7 @@ export class AuthService {
       this.userTokenEmail = '';
     }
     return this.userTokenEmail;
-   }
-  
-  
+   }  
    
   adduser( user: UserModel){
     return this.http.post<any>(endpoint, JSON.stringify(user), httpOptions).pipe(
@@ -95,8 +110,7 @@ export class AuthService {
         return resp;
       })
     );
-   }
-   
+   }   
 
   isLogin(): boolean{ 
 
@@ -104,13 +118,7 @@ export class AuthService {
       return false;
     }
     return true;    
-  }
-
-  haveRole(role:string): boolean{
-    if(role === this.user.password){
-      return true;
-    }
-  }
+  }  
 
    private handleError<T> (operation = 'operation', result?: T) {
 		return (error: any): Observable<T> => {

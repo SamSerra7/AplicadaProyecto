@@ -34,8 +34,22 @@ namespace BackEndVentR.Controllers
         {
             return productoNegocio.buscarProducto(idProducto);
         }
+        //Lista todos los producos de BD independientemente de su estado
+        //api/Producto/Listar_todos_productos
+        [HttpGet("Listar_todos_productos")]
+        public IEnumerable<Producto> Listar_todos_productos()
+        {
+            return productoNegocio.listar_todos_productos();
+        }
 
-        
+        //api/Producto/Obtener_producto/3
+        [HttpGet("Obtener_producto/{idProducto}")]
+        public Producto Obtener_producto(int idProducto)
+        {
+            return productoNegocio.listar_todos_productos_id(idProducto);
+        }
+
+
         //GET api/Producto/ActivarProducto/1    Activa un producto especifico por su id de producto
         [HttpGet("ActivarProducto/{IdProducto}")]
         public Boolean ActivarProducto(int IdProducto)

@@ -1,12 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
+using System.IO;
 using System.Linq;
 using System.Numerics;
+using System.Text.Json;
 using System.Threading.Tasks;
+using System.Web.Helpers;
 using Entidad;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Razor.TagHelpers;
 using Microsoft.VisualBasic.CompilerServices;
+using Nancy.Json;
+using Nancy.Json.Simple;
 using Negocio;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using static System.Text.Json.JsonElement;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -20,6 +30,8 @@ namespace BackEndVentR.Controllers
     {
 
         private ProveedorNegocio proveedorNegocio = new ProveedorNegocio();
+
+        private ProductoNegocio productoNegocio = new ProductoNegocio();
         // GET: api/<ProveedorController>
         [HttpGet]
         public IEnumerable<Proveedor> Get()
@@ -87,12 +99,50 @@ namespace BackEndVentR.Controllers
 
 
         [HttpGet("{idProveedor}/{llave}/sincronizacion")]
-        public IEnumerable<SyncronizationType> sincronizacion(int idProveedor,string llave)
+        public IEnumerable<SyncronizationType> sincronizacion(int idProveedor, string llave)
         {
             return proveedorNegocio.sincronizarProveedor(idProveedor, llave);
         }
 
+
+
+        [HttpPost("{idProveedor}/{llave}/recibirProductos")]
+        //api/Proveedor/2/Llave/3/recibirProductos
+        public void agregarProducto(int idProveedor, string llave,
+            [FromBody] JsonElement productos)
+        {
+
+            if (proveedorNegocio.validarProveedor(idProveedor, llave))
+            {
+
+                List<Producto> listaProductos = new List<Producto>();
+
+                var list = JsonConvert.DeserializeObject<List<ProductoProveedorModel>>(productos.ToString());
+
+                foreach (ProductoProveedorModel prod in  list)
+                {
+                    listaProductos.Add(
+                            new Producto(prod.id_producto,
+                                prod.nombre,
+                                SqlMoney.Parse(prod.precio.ToString()),
+                                prod.url_img,
+                                prod.descripcion,
+                                prod.cantidad,
+                                proveedorNegocio.buscarProveedor(prod.id_proveedor))
+                            );
+                }
+                   
+                proveedorNegocio.agregarProductosProveedor(listaProductos);
+                
+            }
+            
+
+        }
     }
-
-
 }
+
+
+
+  
+
+
