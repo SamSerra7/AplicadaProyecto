@@ -43,11 +43,11 @@
         </span>
 
         <li *ngIf="isLogin" class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" style="color: white;" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a href="#" class="nav-link dropdown-toggle" style="color: white;" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Bienvenido: <small>{{user.correo}}</small>
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <button (click)="logout()" class="nav-link btn-sm" style="color: black;" title="Sign Out">Salir</button>
+                <a (click)="logout()" href="#" class="dropdown-item" style="color: black;" title="Sign Out">Salir</a>
             </div>
         </li>
     </div>

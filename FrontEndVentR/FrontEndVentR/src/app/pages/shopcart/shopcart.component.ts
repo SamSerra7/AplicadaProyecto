@@ -97,8 +97,8 @@ export class ShopcartComponent implements OnInit {
         text: "¡El producto sera eliminado del carrito!",
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
         confirmButtonText: '¡Si, borrar!'
       }).then((result) => {
         if (result.isConfirmed) {
@@ -116,10 +116,6 @@ export class ShopcartComponent implements OnInit {
       });
         }
       })
-
-
-
-      
     }else{
       this.shopcartService.lessProductsCartShop(newCartShop)
       .subscribe( resp =>{
