@@ -1,0 +1,193 @@
+﻿@model IEnumerable<Cliente2.Models.Producto>
+
+<p>
+    @Html.ActionLink("Agregar Producto", "Agregar")
+    <!--@Html.ActionLink("Generar Llave", "RecibirLlave", "ApiConsumoLlave")-->
+</p>
+
+<button id="ver" onclick="getLlave()">Ver Llave</button>
+
+<button onclick="crearLlave()">Crear Llave</button>
+
+<button onclick="sincronizar()">Sincronizar</button>
+
+<button onclick="enviarProductos()">Enviar Productos</button>
+
+<h3 id="llave"></h3>
+
+<table class="table">
+    <tr>
+        @*<th>
+                @Html.DisplayNameFor(model => model.id_produto)
+            </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.id_proveedor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.precio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.url_img)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cantidad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.estado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.descripcion)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.id_produto)
+                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.id_proveedor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.precio)
+            </td>
+            <td>
+                <img src="@Html.DisplayFor(modelItem => item.url_img)" width="50" height="50" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cantidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.estado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.descripcion)
+            </td>
+            <td>
+                @Html.ActionLink("Actualizar", "Actualizar", new { id = item.id_producto }) |
+                @Html.ActionLink("Eliminar", "Eliminar", new { id = item.id_producto })
+            </td>
+        </tr>
+    }
+
+</table>
+@section scripts{
+    <script type="text/javascript">
+
+        let llave = '';
+        let mostrar = false;
+
+        function getLlave() {
+            if (!mostrar) {
+                $.get('http://localhost:59292/api/Llave/3/llave').done(function (data) {
+                    //console.log(data);
+                    //data.atributo => para acceder al valor
+                    if (data == undefined) {
+                        $("#llave").text("Este proveedor no contiene una llave");
+                    }
+                    else {
+                        $("#llave").text(data.codLlave);
+                        llave = data.codLlave;
+                    }
+
+                    $("#ver").text("Ocultar llave");
+                    mostrar = true;
+                });
+            }
+            else {
+                $("#llave").text("");
+                $("#ver").text("Ver llave");
+                mostrar = false;
+            }
+        }
+
+        function crearLlave() {
+            $.ajax({
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: 'POST',
+                url: 'http://localhost:59292/api/Llave',
+                data: JSON.stringify({ idProveedor: 3 }),
+                dataType: "json"
+            })
+                .done(() => alert("La creación de la llave fué exitosa"))
+                .fail((e) => alert("error: " + e));
+        }
+
+        function sincronizar() {
+            //Solamente es de cambiar el url del back end aqui, lo demas está bien
+            let cantidad, producto_proveedor;
+            let url = 'http://localhost:59292/api/Proveedor/3/' + llave + '/sincronizacion';
+
+            $.get(url)
+                .done((data) => {
+
+                    //console.log(data);
+                    // TODO mostrar el Json de los productos vendidos con su cantidad
+
+                    data.forEach((producto) => {
+                        cantidad = producto.cantidad;
+                        producto_proveedor = producto.idProducto;
+                        sincronizarProducto(3, producto_proveedor, cantidad);
+                    });
+
+
+                    alert("Sincronizado correctamente con VentR");
+                })
+                .fail((e) => alert("Error al sincronizar: " + e));
+        }
+
+
+        function sincronizarProducto(idProveedor, producto_proveedor, cantidad) {
+
+            $.ajax({
+                url: '/Producto/ModificarProducto',
+                type: 'GET',
+                data: {
+                    "id_producto": parseInt(producto_proveedor),
+                    "id_proveedor": parseInt(idProveedor),
+                    "cantidad": parseInt(cantidad)
+                },
+                success: function (response) {
+                    console.log(response);
+                    if (response) {
+                        alert('El producto fue sincronizado exitosamente.');
+                    } else {
+                        alert('No ha sido sincronizado');
+                    }
+                },
+                error: function (error) {
+                }
+            });
+        }
+
+
+        function enviarProductos() {
+
+            let url = 'http://localhost:59292/api/Proveedor/3/' + llave + '/recibirProductos';
+
+            $.get('https://localhost:44358/api/ApiProducto')
+                .done((data) => {
+
+                    $.ajax({
+                        url: url,
+                        type: "POST",
+                        data: JSON.stringify(data),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: (res) => { alert("Exito " + res); }
+                    });
+                })
+        }
+    </script>
+}

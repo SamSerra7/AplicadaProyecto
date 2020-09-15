@@ -118,6 +118,7 @@ namespace BackEndVentR.Controllers
                 List<Producto> listaProductos = new List<Producto>();
 
                 var list = JsonConvert.DeserializeObject<List<ProductoProveedorModel>>(productos.ToString());
+
                 foreach (ProductoProveedorModel prod in  list)
                 {
                     listaProductos.Add(

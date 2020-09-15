@@ -25,7 +25,18 @@ namespace BackEndVentR.Controllers
             return productoNegocio.listarProductos();
         }
 
-        
+
+        /// <summary>
+        /// Metodo get que Lista los productos según el id del proveedor
+        /// </summary>
+        /// <param name="idProveedor"></param>
+        /// <returns>Lista de Productos</returns>
+        //GET: api/Producto/ListarProductoPorProveedor/1
+        [HttpGet("ListarProductoPorProveedor/{idProveedor}")]
+        public IEnumerable<Producto> ListaProductoPorProveedor(int idProveedor)
+        {
+            return productoNegocio.listarProductosPorProveedor(idProveedor);
+        }
 
 
         // GET api/<ProductoController>/5   buscar sin usuario
@@ -35,7 +46,22 @@ namespace BackEndVentR.Controllers
             return productoNegocio.buscarProducto(idProducto);
         }
 
-        
+        //Lista todos los producos de BD independientemente de su estado
+        //api/Producto/Listar_todos_productos
+        [HttpGet("Listar_todos_productos")]
+        public IEnumerable<Producto> Listar_todos_productos()
+        {
+            return productoNegocio.listar_todos_productos();
+        }
+
+        //api/Producto/Obtener_producto/3
+        [HttpGet("Obtener_producto/{idProducto}")]
+        public Producto Obtener_producto(int idProducto)
+        {
+            return productoNegocio.listar_todos_productos_id(idProducto);
+        }
+
+
         //GET api/Producto/ActivarProducto/1    Activa un producto especifico por su id de producto
         [HttpGet("ActivarProducto/{IdProducto}")]
         public Boolean ActivarProducto(int IdProducto)

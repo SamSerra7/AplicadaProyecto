@@ -30,7 +30,16 @@ namespace Entidad
             this.descripcion = descripcion;
             this.id_proveedor = id_proveedor;
         }
-
+        public ProductoProveedorModel(int id_produto, string nombre, float precio, string url_img,  string descripcion, int cantidad,byte estado)
+        {
+            this.id_producto = id_produto;
+            this.nombre = nombre;
+            this.precio = precio;
+            this.url_img = url_img;
+            this.cantidad = cantidad;
+            this.estado = estado;
+            this.descripcion = descripcion;
+        }
 
     }
 }
