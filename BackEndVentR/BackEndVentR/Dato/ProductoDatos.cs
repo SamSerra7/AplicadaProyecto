@@ -221,6 +221,38 @@ namespace Dato
             return productos;
         }
 
+        public List<Producto> listarProductosPorProveedor(int idProveedor)
+        {
+
+            List<Producto> productos = new List<Producto>();
+
+            using (NpgsqlConnection con = conexion.GetConexion())
+            {
+                con.Open();
+                string sql = "SELECT * FROM products.pa_listarProductosPorProveedor(@idProveedor)";
+
+
+                using (var command = new NpgsqlCommand(sql, con))
+                {
+                    command.Parameters.AddWithValue(":idProveedor", idProveedor);
+
+
+                    using (NpgsqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            productos.Add(new Producto(reader.GetInt32(0), reader.GetString(1),
+                                                            reader.GetDecimal(2), reader.GetString(3),
+                                                                reader.GetString(4), reader.GetBoolean(5),
+                                                                    reader.GetInt32(6))
+                            );
+                        }
+        
+                    }
+                }
+            }
+            return productos;
+        }
 
         //Desactiva un producto por su id
         public Boolean DesactivarProducto(int IdProducto)

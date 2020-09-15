@@ -72,6 +72,16 @@ namespace Negocio
             return productoDatos.listarProductosPorUsuario(idUsuario);
         }
 
+        /// <summary>
+        /// Lista los productos según el id del proveedor
+        /// </summary>
+        /// <param name="idProveedor"></param>
+        /// <returns>Lista de Productos</returns>
+        public IEnumerable<Producto> listarProductosPorProveedor(int idProveedor)
+        {
+            return productoDatos.listarProductosPorProveedor(idProveedor);
+        }
+
 
         /// <summary>
         /// Busca un producto por USUARIO específico
