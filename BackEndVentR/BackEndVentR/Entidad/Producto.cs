@@ -138,6 +138,17 @@ namespace Entidad
             Proveedor = proveedor;
         }
 
+        public Producto(int idProducto,string nombre, SqlMoney precio, string urlImg, string detalle, bool activo, int cantidad)
+        {
+            IdProducto = idProducto;
+            Nombre = nombre;
+            Precio = precio;
+            UrlImg = urlImg;
+            Detalle = detalle;
+            Activo = activo;
+            Cantidad = cantidad;
+        }
+
 
         public Producto(int id_producto,Proveedor proveedor,int cantidad)
         {
