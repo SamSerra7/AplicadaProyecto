@@ -25,7 +25,18 @@ namespace BackEndVentR.Controllers
             return productoNegocio.listarProductos();
         }
 
-        
+
+        /// <summary>
+        /// Metodo get que Lista los productos según el id del proveedor
+        /// </summary>
+        /// <param name="idProveedor"></param>
+        /// <returns>Lista de Productos</returns>
+        //GET: api/Producto/ListarProductoPorProveedor/1
+        [HttpGet("ListarProductoPorProveedor/{idProveedor}")]
+        public IEnumerable<Producto> ListaProductoPorProveedor(int idProveedor)
+        {
+            return productoNegocio.listarProductosPorProveedor(idProveedor);
+        }
 
 
         // GET api/<ProductoController>/5   buscar sin usuario
@@ -34,6 +45,7 @@ namespace BackEndVentR.Controllers
         {
             return productoNegocio.buscarProducto(idProducto);
         }
+
         //Lista todos los producos de BD independientemente de su estado
         //api/Producto/Listar_todos_productos
         [HttpGet("Listar_todos_productos")]
