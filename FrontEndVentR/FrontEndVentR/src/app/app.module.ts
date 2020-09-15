@@ -1,26 +1,30 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { ScrollingModule } from '@angular/cdk/scrolling';
-
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { HomeComponent } from './pages/home/home.component';
-import { CarouselComponent } from './components/carousel/carousel.component';
-import { FooterComponent } from './components/footer/footer.component';
-import { ProfileComponent } from './pages/profile/profile.component';
-import { SignInComponent } from './pages/sign-in/sign-in.component';
-import { SignUpComponent } from './pages/sign-up/sign-up.component';
-import { ShopcartComponent } from './pages/shopcart/shopcart.component';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+
+import { NavbarComponent } from './shared/navbar/navbar.component';
+import { CarouselComponent } from './shared/carousel/carousel.component';
+import { FooterComponent } from './shared/footer/footer.component';
+import { LoadingComponent } from './shared/loading/loading.component';
+import { ProductListComponent } from './shared/product-list/product-list.component';
+import { NotpagefoundComponent } from './shared/notpagefound/notpagefound.component';
+
+import { SignInComponent } from './shared/sign-in/sign-in.component';
+import { SignUpComponent } from './shared/sign-up/sign-up.component';
+
+import { HomeComponent } from './pages/home/home.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { ShopcartComponent } from './pages/shopcart/shopcart.component';
 import { BuyComponent } from './pages/buy/buy.component';
 import { SearchComponent } from './pages/search/search.component';
 import { ProductComponent } from './pages/product/product.component';
-import { LoadingComponent } from './components/loading/loading.component';
-import { ProductListComponent } from './components/product-list/product-list.component';
+import { PagesComponent } from './pages/pages.component';
+
 
 
 @NgModule({
@@ -38,7 +42,9 @@ import { ProductListComponent } from './components/product-list/product-list.com
     ProductComponent,
     SearchComponent,
     LoadingComponent,
-    ProductListComponent
+    ProductListComponent,
+    NotpagefoundComponent,
+    PagesComponent
   ],
   imports: [
     BrowserModule,

@@ -85,18 +85,19 @@ export class ProductComponent implements OnInit {
     this.shopcartService.getByUserId(this.userId)
     .subscribe( resp => {
 
-      if(resp.length != 0){
+      if(resp.length > 0){
         this.shopcartList = resp;
         for(let shopcart of this.shopcartList){
          if(shopcart.productos.idProducto == idProduct){
            let apply = shopcart.cantidad_Solicitada + 1;
-           let available = shopcart.productos.cantidad
+           let available = shopcart.productos.cantidad;
            if(apply > available){
              Swal.fire({
                icon: 'error',
                title: 'Ya tienes la cantidad máxima en el carrito',
                text: 'Solo hay: ' + available + ' en stock',
              })
+             break;
            }else{
              this.add(this.shopcart);
              break;

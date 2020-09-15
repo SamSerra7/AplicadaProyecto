@@ -6,7 +6,6 @@ import { AuthService } from '../../services/auth.service';
 
 //Models
 import { UserModel } from '../../models/user.model';
-import { ShopcartService } from '../../services/shopcart.service';
 
 
 @Component({
