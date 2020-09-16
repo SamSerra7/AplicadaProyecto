@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 //Services
@@ -6,16 +6,15 @@ import { AuthService } from '../../services/auth.service';
 
 //Models
 import { UserModel } from '../../models/user.model';
-import { ShopcartService } from '../../services/shopcart.service';
 
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html'
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent {
 
-  cantItems:number=0;
+  cantItems:number = 0;
   isLogin = false;
   user: UserModel;
   shopcarts:any=[];
@@ -25,9 +24,6 @@ export class NavbarComponent implements OnInit {
     this.user = new UserModel();    
     this.loadProfile();  
    }
-
-  ngOnInit(): void {   
-  } 
 
   findProduct(textToFind:string){    
     this.router.navigate(['/results',textToFind]);
@@ -46,5 +42,4 @@ export class NavbarComponent implements OnInit {
     }  
     this.cantItems = parseInt(localStorage.getItem("cantItems"));
   }
-
 }
