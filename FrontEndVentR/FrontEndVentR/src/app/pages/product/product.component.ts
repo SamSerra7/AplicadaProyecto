@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 //Services
@@ -15,7 +15,7 @@ import { ShopCartModel } from '../../models/shopcart.model';
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.css']
 })
-export class ProductComponent implements OnInit {
+export class ProductComponent {
 
   productList:any;
   product:ProductModel = new ProductModel();
@@ -85,18 +85,22 @@ export class ProductComponent implements OnInit {
     this.shopcartService.getByUserId(this.userId)
     .subscribe( resp => {
 
-      if(resp.length != 0){
+      //si resp mayor a cero ya tiene productos en el carrito
+      if(resp.length > 0){
         this.shopcartList = resp;
         for(let shopcart of this.shopcartList){
+        //si id == producto ya existe
          if(shopcart.productos.idProducto == idProduct){
            let apply = shopcart.cantidad_Solicitada + 1;
-           let available = shopcart.productos.cantidad
+           let available = shopcart.productos.cantidad;
+           //verifica si puede agregar mas productos segun el inventario disponible
            if(apply > available){
              Swal.fire({
                icon: 'error',
                title: 'Ya tienes la cantidad máxima en el carrito',
                text: 'Solo hay: ' + available + ' en stock',
              })
+             break;
            }else{
              this.add(this.shopcart);
              break;
@@ -109,6 +113,7 @@ export class ProductComponent implements OnInit {
         }
       }else{
         this.add(this.shopcart);
+        this.shopcartService.cantItemsControl(1);
       }
     
     });

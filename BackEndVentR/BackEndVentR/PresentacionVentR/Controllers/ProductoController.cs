@@ -12,18 +12,57 @@ namespace PresentacionVentR.Controllers
     public class ProductoController : Controller
     {
        private ApiProducto apiProducto = new ApiProducto();
-
+        private EnvioDatoProveedor apiProveedor = new EnvioDatoProveedor();
         // GET: ProductoController
 
 
-        [HttpGet]
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> ProductoProveedorView()
         {
-            
-            var respuesta = await apiProducto.listarProductoAsync();
+
+            var respuesta = await apiProveedor.listarPersonaAsync();
 
             return View(respuesta);
         }
+        [HttpPost]
+        public async Task<ActionResult> Buscar(string IdProveedor)
+        {
+            HttpContext.Session.SetString("IdProveedor", IdProveedor);
+            var respuesta = await apiProducto.listarProductoPorProveedor(Convert.ToInt32(IdProveedor));
+            return View("Index",respuesta);
+        }
+
+        public async Task<IActionResult> DesactivarProducto(int idProducto)
+        {
+
+            if (await apiProducto.DesactivarProducto(idProducto))
+            {
+                return View("Index", await apiProducto.listarProductoPorProveedor(
+                    Convert.ToInt32(HttpContext.Session.GetString("IdProveedor"))));
+            }
+
+            return View("Error", new ErrorViewModel { RequestId = "3" });
+
+        }
+
+        public async Task<IActionResult> Index() {
+            return View("Index", await apiProducto.listarProductoPorProveedor(
+        Convert.ToInt32(HttpContext.Session.GetString("IdProveedor"))));
+        }
+
+        public async Task<IActionResult> ActivarProducto(int idProducto)
+        {
+
+            if (await apiProducto.ActivarProducto(idProducto))
+            {
+                return View("Index", await apiProducto.listarProductoPorProveedor(
+                    Convert.ToInt32(HttpContext.Session.GetString("IdProveedor"))));
+            }
+
+            return View("Error", new ErrorViewModel { RequestId = "3" });
+
+
+        }
+
         // GET: ProductoController/Details/5
         [HttpGet]
         public async Task<IActionResult> Details(int id)
@@ -32,67 +71,10 @@ namespace PresentacionVentR.Controllers
             return View(respuesta);
         }
 
-        // GET: ProductoController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
 
-        // POST: ProductoController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
 
-        // GET: ProductoController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
 
-        // POST: ProductoController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
 
-        // GET: ProductoController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
 
-        // POST: ProductoController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }

@@ -63,6 +63,15 @@
                         @Html.DisplayFor(modelItem => item.cantidad)
                     </td>
                     <td>
+                        @if (item.activo)
+                        {
+                            @Html.ActionLink("Desactivar", "DesactivarProducto", new { idProducto = item.idProducto })
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Activar", "ActivarProducto", new { idProducto = item.idProducto })
+                        }
+                        |
                         @Html.ActionLink("Detalle", "Details", new { id = item.idProducto })
                     </td>
                 </tr>

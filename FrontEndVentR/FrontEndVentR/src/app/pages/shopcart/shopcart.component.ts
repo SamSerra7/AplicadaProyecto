@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductModel } from '../../models/products.model';
-import { ProdutsService } from '../../services/produts.service';
 import { Router } from '@angular/router';
-import { ShopcartService } from '../../services/shopcart.service';
+
 import Swal from 'sweetalert2';
+
 import { ShopCartModel } from '../../models/shopcart.model';
-import { Observable } from 'rxjs';
+
+import { ShopcartService } from '../../services/shopcart.service';
+import { ProdutsService } from '../../services/produts.service';
 
 @Component({
   selector: 'app-shopcart',

@@ -61,5 +61,67 @@ namespace PresentacionVentR.EnvioDato
         }
 
 
+        public async Task<IEnumerable<Producto>> listarProductoPorProveedor(int idProveedor)
+        {
+            using (var httpClient = new HttpClient())
+            {
+                string url = string.Concat(Constantes.Constantes.urlProducto, "/ListarProductoPorProveedor/"+idProveedor);
+
+                List<Producto> listaProductos = new List<Producto>();
+                using (var response = await httpClient.GetAsync(url))
+                {
+
+                    var apiResponse = await response.Content.ReadAsStringAsync();
+
+                    var respuesta = JsonConvert.DeserializeObject<List<Producto>>(apiResponse);
+
+                    foreach (Producto prod in respuesta)
+                    {
+                        listaProductos.Add(
+                         new Producto(prod.idProducto,
+                             prod.nombre,
+                             prod.urlImg,
+                             prod.detalle,
+                             prod.cantidad,
+                             prod.activo
+                       )
+                         );
+                    }
+                    return listaProductos;
+                }
+            }
+        }
+
+        public async Task<Boolean> DesactivarProducto(int IdProducto)
+        {
+            bool resp = false;
+            using (var httpClient = new HttpClient())
+            {
+
+                using (var response = await httpClient.GetAsync(Constantes.Constantes.urlProducto + "/DesactivarProducto/" + IdProducto))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    resp = JsonConvert.DeserializeObject<bool>(apiResponse);
+                }
+            }
+            return resp;
+        }
+
+        public async Task<Boolean> ActivarProducto(int IdProducto)
+        {
+            bool resp = false;
+            using (var httpClient = new HttpClient())
+            {
+
+                using (var response = await httpClient.GetAsync(Constantes.Constantes.urlProducto + "/ActivarProducto/" + IdProducto))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    resp = JsonConvert.DeserializeObject<bool>(apiResponse);
+                }
+            }
+            return resp;
+        }
+
+
     }
 }

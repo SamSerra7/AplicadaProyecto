@@ -1,12 +1,24 @@
-<app-navbar></app-navbar>
-
-<div class="container mb-5">
-    <br>
-    <br>
-    <h1>Perfil de usuario</h1>
-
-    <hr>
-    <pre>
-        {{ user | json}}
-    </pre>
+<div class="m-2 row text-center animated fadeInDown">
+    <div class="col-12">
+        <br>
+        <br>
+        <h1>Perfil de usuario</h1>
+        <hr>
+        <div class="card mb-3 p-5" style="max-width: 540px;">
+            <div class="row no-gutters">
+                <div class="col-md-4">
+                    <img src="../../../assets/images/profile.png" alt="{{user.correo}}" class="rounded-circle">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">{{user.correo}}</h5>
+                        <p class="card-text">Id de usuario: {{user.id_Usuario}}</p>
+                        <p class="card-text">Contraseña: {{user.contrasennia}}</p>
+                        <p *ngIf="user.id_Rol == 1" class="card-text"><small class="text-muted">Rol: Cliente</small></p>
+                        <p *ngIf="user.id_Rol == 2" class="card-text"><small class="text-muted">Rol: Administrativo</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

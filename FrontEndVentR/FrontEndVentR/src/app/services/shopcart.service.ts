@@ -3,7 +3,6 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
 import { ShopCartModel } from '../models/shopcart.model';
-import { ProductModel } from '../models/products.model';
 
 
 const endpoint = 'http://localhost:59292/api/';
