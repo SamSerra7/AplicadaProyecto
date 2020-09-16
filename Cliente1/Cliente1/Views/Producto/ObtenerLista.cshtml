@@ -185,10 +185,7 @@
                         data: JSON.stringify(data),
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
-                        success: (res) => { alert("Exito " + res); },
-                        error: (e) => {
-                            alert("Llave incorrecta o error: " + e.responseText)
-                        }
+                        success: (res) => { alert("Exito " + res); }
                     });
                 })
         }
