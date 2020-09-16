@@ -34,9 +34,9 @@ namespace Cliente1.Models
         }
 
 
-        public Producto(int id_produto, int id_proveedor,int cantidad)
+        public Producto(int id_producto, int id_proveedor,int cantidad)
         {
-            this.id_producto = id_produto;
+            this.id_producto = id_producto;
            
             this.cantidad = cantidad;
             this.id_proveedor = id_proveedor;

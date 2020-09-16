@@ -52,7 +52,73 @@ namespace Dato
             return productos;
         }
 
+        //Lista todos los productos que hay en BD, independientemente del estado
+        public List<Producto> listar_todos_productos()
+        {
 
+            List<Producto> productos = new List<Producto>();
+
+            using (NpgsqlConnection con = conexion.GetConexion())
+            {
+                con.Open();
+                string sql = "SELECT id_producto,nombre,precio,url_img,detalle,cantidad,activo FROM products.producto";
+
+
+
+                using (var command = new NpgsqlCommand(sql, con))
+                {
+                    using (NpgsqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            productos.Add(new Producto(
+                                reader.GetInt32(0), 
+                                reader.GetString(1),
+                                 reader.GetDecimal(2),
+                                 reader.GetString(3),
+                                 reader.GetString(4), 
+                                 reader.GetInt16(5), 
+                                 reader.GetBoolean(6))
+                                                                   
+                            );
+                        }
+
+                    }
+                }
+            }
+            return productos;
+        }
+
+        public Producto listar_todos_productos_id(int idProducto)
+        {
+
+            Producto productos = new Producto();
+
+            using (NpgsqlConnection con = conexion.GetConexion())
+            {
+                con.Open();
+                string sql = "SELECT id_producto, nombre, precio, url_img, detalle, cantidad, activo, id_proveedor FROM products.producto WHERE id_producto = @id_producto; ";
+
+
+                using (var command = new NpgsqlCommand(sql, con))
+                {
+                    command.Parameters.AddWithValue("@id_producto", idProducto);
+                    using (NpgsqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            productos =new Producto(reader.GetInt32(0), reader.GetString(1), reader.GetDecimal(2),
+                                                             reader.GetString(3),
+                                                                reader.GetString(4), reader.GetInt32(5), reader.GetBoolean(6))
+
+                            ;
+                        }
+
+                    }
+                }
+            }
+            return productos;
+        }
         /// <summary>
         /// Samuel Serrano
         /// Método que obtiene un producto específico de la base de datos (por ID)
@@ -155,6 +221,38 @@ namespace Dato
             return productos;
         }
 
+        public List<Producto> listarProductosPorProveedor(int idProveedor)
+        {
+
+            List<Producto> productos = new List<Producto>();
+
+            using (NpgsqlConnection con = conexion.GetConexion())
+            {
+                con.Open();
+                string sql = "SELECT * FROM products.pa_listarProductosPorProveedor(@idProveedor)";
+
+
+                using (var command = new NpgsqlCommand(sql, con))
+                {
+                    command.Parameters.AddWithValue(":idProveedor", idProveedor);
+
+
+                    using (NpgsqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            productos.Add(new Producto(reader.GetInt32(0), reader.GetString(1),
+                                                            reader.GetDecimal(2), reader.GetString(3),
+                                                                reader.GetString(4), reader.GetBoolean(5),
+                                                                    reader.GetInt32(6))
+                            );
+                        }
+        
+                    }
+                }
+            }
+            return productos;
+        }
 
         //Desactiva un producto por su id
         public Boolean DesactivarProducto(int IdProducto)
@@ -264,18 +362,19 @@ namespace Dato
             using (NpgsqlConnection con = conexion.GetConexion())
             {
                 con.Open();
-                string sql = "CALL products.pa_agregar_producto(@p_nombre,@p_precio, @p_url,@p_detalle, " +
+                string sql = "CALL products.pa_agregar_productos_proveedores(@p_nombre,@p_precio, @p_url,@p_detalle, " +
                     "@p_cantidad, @p_id_proveedor,@p_id_producto_proveedor);";
 
-                using (var command = new NpgsqlCommand(sql, con))
+
+                foreach (var elemento in producto)
+                {
+                    using (var command = new NpgsqlCommand(sql, con))
                 {
 
 
-                    foreach (var elemento in producto)
-                    {
 
                         command.Parameters.AddWithValue(":p_nombre", elemento.Nombre);
-                        command.Parameters.AddWithValue(":p_precio", (decimal) elemento.Precio);
+                        command.Parameters.AddWithValue(":p_precio", (Decimal) elemento.Precio);
                         command.Parameters.AddWithValue(":p_url", elemento.UrlImg);
                         command.Parameters.AddWithValue(":p_detalle", elemento.Detalle);
                         command.Parameters.AddWithValue(":p_cantidad", elemento.Cantidad);

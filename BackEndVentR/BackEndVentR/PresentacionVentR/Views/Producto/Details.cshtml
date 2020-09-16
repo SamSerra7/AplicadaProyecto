@@ -1,0 +1,58 @@
+﻿@model PresentacionVentR.Models.Producto
+
+@{
+    ViewData["Title"] = "Details";
+   
+}
+
+
+
+<div>
+    <hr />
+    <h4>Detalles del producto</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.idProducto)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.idProducto)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.nombre)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+        <dt class="col-sm-2">
+
+            @Html.DisplayNameFor(model => model.urlImg)
+        </dt>
+        <dd class="col-sm-10">
+          
+            <img src="@Html.DisplayFor(model => model.urlImg)" width="50" height="50" />
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.detalle)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.detalle)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.activo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.activo)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.cantidad)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.cantidad)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Index">Regresar</a>
+</div>
